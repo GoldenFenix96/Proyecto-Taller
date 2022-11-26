@@ -165,15 +165,97 @@ public class JICiudades extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
+        int idCiudad = Integer.parseInt(tblCiudades.getValueAt(tblCiudades.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select NombreCiudad, CP, NombreEstado from ciudad, estado where idCiudad = '" + idCiudad + "'"
+                    + "and Estado_idEstado = idEstado");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                txtCiudad.setText(rs.getString("NombreCiudad"));
+                txtCP.setText(rs.getString("CP"));
+                cmbEstado.setSelectedItem(rs.getString("NombreEstado"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error en cargar ciudad " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+         int idCiudad = Integer.parseInt(tblCiudades.getValueAt(tblCiudades.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "delete from ciudad where idCiudad = '" + idCiudad + "'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "La ciudad seleccionada fue dado de baja");
+
+        } catch (SQLException er) {
+            System.err.println("Error en eliminar ciudad " + er);
+             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       
+        int validacion = 0;
+        int idCiudad = Integer.parseInt(tblCiudades.getValueAt(tblCiudades.getSelectedRow(), 0).toString());
+        String nombreCiudad, CP;
+        nombreCiudad = txtCiudad.getText().trim();
+        CP = txtCP.getText().trim();
+        idEstado = cmbEstado.getSelectedIndex() + 1;
+        
+        if (nombreCiudad.equals("")) {
+            txtCiudad.setBackground(Color.red);
+            validacion++;
+        }
+         if (CP.equals("")) {
+            txtCP.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+            try {
+                
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                "select NombreCiudad from ciudad where NombreCiudad = '"+ nombreCiudad +"' and not idCiudad = '"+idCiudad+"'");
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    txtCiudad.setBackground(Color.red);
+                    JOptionPane.showMessageDialog(null, "Nombre de ciudad no disponible");
+                    cn.close();
+                }else{
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                    "update ciudad set NombreCiudad=?, CP=?, Estado_idEstado=? where idCiudad = '" + idCiudad + "'");
+                    pest.setString(1, nombreCiudad);
+                    pest.setString(2, CP);
+                    pest.setInt(3, idEstado);
+                    
+                    pest.executeUpdate();
+                    cn2.close();
+                    
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                }
+                actualizarTabla();
+                
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar la ciudad " +e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
