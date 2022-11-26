@@ -1,11 +1,47 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class JICiudades extends javax.swing.JInternalFrame {
 
+    int idEstado;
+    DefaultTableModel model = new DefaultTableModel();
+    
     public JICiudades() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Ciudades");
+        
+        tblCiudades = new JTable(model);
+        jScrollPane1.setViewportView(tblCiudades);
+
+        model.addColumn("ID de la Ciudad");
+        model.addColumn("Nombre de la Ciudad");
+        model.addColumn("Código Postal");
+        model.addColumn("Estado");
+        
+        actualizarTabla();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreEstado from estado");
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()){
+                cmbEstado.addItem(rs.getString("NombreEstado"));
+            }
+            cn.close();
+            
+        } catch (SQLException e) {
+             System.err.println("Error al llenar los estados. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -15,17 +51,17 @@ public class JICiudades extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtCiudad = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCiudades = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCP = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -43,43 +79,47 @@ public class JICiudades extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre de la Ciudad:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 75, 190, 25));
+        txtCiudad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtCiudad.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 75, 190, 25));
 
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
-
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
 
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton4.setText("Actualizar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnActualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
+
+        tblCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,7 +130,7 @@ public class JICiudades extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCiudades);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 720, 170));
 
@@ -99,17 +139,16 @@ public class JICiudades extends javax.swing.JInternalFrame {
         jLabel4.setText("Código Postal:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 75, 190, 25));
+        txtCP.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtCP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 75, 190, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estado:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 145, 230, 25));
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 145, 190, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,33 +164,106 @@ public class JICiudades extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+       
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int validacion = 0;
+        String nombreCiudad, CP;
+        
+        nombreCiudad = txtCiudad.getText().trim();
+        CP = txtCP.getText().trim();
+        idEstado = cmbEstado.getSelectedIndex() + 1;
+        
+         if (nombreCiudad.equals("")) {
+            txtCiudad.setBackground(Color.red);
+            validacion++;
+        }
+         if (CP.equals("")) {
+            txtCP.setBackground(Color.red);
+            validacion++;
+        }
+         
+        if (validacion == 0) {
+            
+             try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "insert into ciudad values (?,?,?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, nombreCiudad);
+                pst.setString(3, CP);
+                pst.setInt(4, idEstado);
+
+                pst.executeUpdate();
+                cn.close();
+
+                txtCiudad.setText("");
+                txtCP.setText("");
+                cmbEstado.setSelectedIndex(0);
+                
+                
+                JOptionPane.showMessageDialog(null, "Registro de Ciudad Exitoso");
+        } catch (SQLException e) {
+             System.err.println("Error en Registrar Ciudad." + e);
+             JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            
+        }
+             actualizarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+         
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[4];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idCiudad, NombreCiudad, CP, NombreEstado from ciudad, estado where Estado_idEstado = idEstado");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblCiudades;
+    private javax.swing.JTextField txtCP;
+    private javax.swing.JTextField txtCiudad;
     // End of variables declaration//GEN-END:variables
 }

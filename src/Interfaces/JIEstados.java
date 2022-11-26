@@ -228,8 +228,6 @@ public class JIEstados extends javax.swing.JInternalFrame {
 
                 txtNombre.setText("");
 
-                txtNombre.setBackground(Color.green);
-
                 JOptionPane.showMessageDialog(null, "Registro de Estado Exitoso");
 
             } catch (SQLException e) {
