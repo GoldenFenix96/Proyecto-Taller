@@ -1,11 +1,27 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class JIEstados extends javax.swing.JInternalFrame {
+
+    DefaultTableModel model = new DefaultTableModel();
 
     public JIEstados() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Estados");
+
+        tblEstados = new JTable(model);
+        jScrollPane1.setViewportView(tblEstados);
+
+        model.addColumn("ID del Estado");
+        model.addColumn("Nombre del Estado");
+        actualizarTabla();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -15,13 +31,13 @@ public class JIEstados extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEstados = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -39,10 +55,9 @@ public class JIEstados extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre del Estado:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 280, 25));
+        txtNombre.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 280, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -80,7 +95,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEstados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,7 +106,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEstados);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 720, 190));
 
@@ -110,21 +125,145 @@ public class JIEstados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
+        int idEstado = Integer.parseInt(tblEstados.getValueAt(tblEstados.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select NombreEstado from estado where idEstado = '" + idEstado + "'");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                txtNombre.setText(rs.getString("NombreEstado"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error en cargar estado " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        int idEstado = Integer.parseInt(tblEstados.getValueAt(tblEstados.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "delete from estado where idEstado = '" + idEstado + "'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "El estado seleccionado fue dado de baja");
+
+        } catch (SQLException er) {
+            System.err.println("Error en eliminar cientifico " + er);
+             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int validacion = 0;
+        int idEstado = Integer.parseInt(tblEstados.getValueAt(tblEstados.getSelectedRow(), 0).toString());
+        String nombre;
+        nombre = txtNombre.getText().trim();
         
+         if (nombre.equals("")) {
+            txtNombre.setBackground(Color.red);
+            validacion++;
+        }
+         
+         if (validacion == 0) {
+             try {
+                 Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                "select NombreEstado from estado where NombreEstado = '"+ nombre +"' and not idEstado = '"+idEstado+"'");
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    txtNombre.setBackground(Color.red);
+                    JOptionPane.showMessageDialog(null, "Nombre de estado no disponible");
+                    cn.close();
+                }else{
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                    "update estado set NombreEstado=? where idEstado = '" + idEstado + "'");
+                    pest.setString(1, nombre);
+                    pest.executeUpdate();
+                    cn2.close();
+                    
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                }
+                actualizarTabla();
+             } catch (SQLException e) {
+                 System.err.println("Error al actualizar estado" +e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+             }
+        } else {
+             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
+        int validacion = 0;
+        String nombre;
+
+        nombre = txtNombre.getText().trim();
+
+        if (nombre.equals("")) {
+            txtNombre.setBackground(Color.red);
+            validacion++;
+        }
+        if (validacion == 0) {
+
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "insert into estado values (?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, nombre);
+
+                pst.executeUpdate();
+
+                cn.close();
+
+                txtNombre.setText("");
+
+                txtNombre.setBackground(Color.green);
+
+                JOptionPane.showMessageDialog(null, "Registro de Estado Exitoso");
+
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar Estado." + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            }
+            actualizarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[2];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select * from estado");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 2; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -135,7 +274,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblEstados;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
