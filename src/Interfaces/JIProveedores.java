@@ -2,8 +2,6 @@ package Interfaces;
 
 import java.awt.Color;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,12 +10,12 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
     int idCiudad;
     DefaultTableModel model = new DefaultTableModel();
-    
+
     public JIProveedores() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Proveedores");
-        
+
         tblProveedores = new JTable(model);
         jScrollPane1.setViewportView(tblProveedores);
 
@@ -27,27 +25,27 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         model.addColumn("Ciudad");
         model.addColumn("Telefono");
         model.addColumn("Correo");
-        
+
         actualizarTabla();
-        
-         try {
+
+        try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreCiudad from ciudad");
             ResultSet rs = pst.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 cmbCiudad.addItem(rs.getString("NombreCiudad"));
             }
             cn.close();
-            
+
         } catch (SQLException e) {
-             System.err.println("Error al llenar los estados. " + e);
+            System.err.println("Error al llenar los estados. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,7 +153,6 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         txtCorreo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 250, 25));
 
-        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
         txtDireccion.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 240, 25));
@@ -235,28 +232,64 @@ public class JIProveedores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
+        int idProveedor = Integer.parseInt(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreProveedor, DirecciónP, NombreCiudad, CP, NombreEstado,"
+                    + " TelefonoP, CorreoP, RFCP from proveedor, ciudad, estado  where idProveedor = '" + idProveedor + "' and Ciudad_idCiudad = idCiudad "
+                    + "and Estado_idEstado = idEstado");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txtNombrePro.setText(rs.getString("NombreProveedor"));
+                txtDireccion.setText(rs.getString("DirecciónP"));
+                cmbCiudad.setSelectedItem(rs.getString("NombreCiudad"));
+                txtCP.setText(rs.getString("CP"));
+                txtEstado.setText(rs.getString("NombreEstado"));
+                txtTelefono.setText(rs.getString("NombreEstado"));
+                txtCorreo.setText(rs.getString("CorreoP"));
+                txtRFC.setText(rs.getString("RFCP"));
+
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar ciudad " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        int idProveedor = Integer.parseInt(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "delete from proveedor where idProveedor = '" + idProveedor + "'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "El proveedor seleccionado fue dado de baja");
+
+        } catch (SQLException er) {
+            System.err.println("Error en eliminar ciudad " + er);
+            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
-    }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int validacion = 0;
         String nombrePro, direccion, telefono, correo, rfc;
-        
+        int idProveedor = Integer.parseInt(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
+
         nombrePro = txtNombrePro.getText().trim();
         direccion = txtDireccion.getText().trim();
         telefono = txtTelefono.getText().trim();
         correo = txtCorreo.getText().trim();
         rfc = txtRFC.getText().trim();
         idCiudad = cmbCiudad.getSelectedIndex() + 1;
-        
+
         if (nombrePro.equals("")) {
             txtNombrePro.setBackground(Color.red);
             validacion++;
@@ -278,9 +311,82 @@ public class JIProveedores extends javax.swing.JInternalFrame {
             validacion++;
         }
         
+         if (validacion == 0) {
+            try {
+                
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                "select NombreProveedor from proveedor where NombreProveedor = '"+ nombrePro +"' and not idProveedor = '"+idProveedor+"'");
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    txtNombrePro.setBackground(Color.red);
+                    JOptionPane.showMessageDialog(null, "Nombre de proveedor no disponible");
+                    cn.close();
+                }else{
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                    "update proveedor set NombreProveedor=?, DireccionP=?, Ciudad_idCiudad=?, TelefonoP=?, CorreoP=?, RFCP=? "
+                            + "where idProveedor = '" + idProveedor + "'");
+                    pest.setString(1, nombrePro);
+                    pest.setString(2, direccion);
+                    pest.setInt(3, idCiudad);
+                    pest.setString(4, telefono);
+                    pest.setString(5, correo);
+                    pest.setString(6, rfc);
+                    
+                    pest.executeUpdate();
+                    cn2.close();
+                    
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                }
+                actualizarTabla();
+                
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar el proveedor " +e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int validacion = 0;
+        String nombrePro, direccion, telefono, correo, rfc;
+
+        nombrePro = txtNombrePro.getText().trim();
+        direccion = txtDireccion.getText().trim();
+        telefono = txtTelefono.getText().trim();
+        correo = txtCorreo.getText().trim();
+        rfc = txtRFC.getText().trim();
+        idCiudad = cmbCiudad.getSelectedIndex() + 1;
+
+        if (nombrePro.equals("")) {
+            txtNombrePro.setBackground(Color.red);
+            validacion++;
+        }
+        if (direccion.equals("")) {
+            txtDireccion.setBackground(Color.red);
+            validacion++;
+        }
+        if (telefono.equals("")) {
+            txtTelefono.setBackground(Color.red);
+            validacion++;
+        }
+        if (correo.equals("")) {
+            txtCorreo.setBackground(Color.red);
+            validacion++;
+        }
+        if (rfc.equals("")) {
+            txtRFC.setBackground(Color.red);
+            validacion++;
+        }
+
         if (validacion == 0) {
-             Connection cn = Conexion.conectar();
-                PreparedStatement pst;
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst;
             try {
                 pst = cn.prepareStatement(
                         "insert into proveedor values (?,?,?,?,?,?,?)");
@@ -301,39 +407,39 @@ public class JIProveedores extends javax.swing.JInternalFrame {
                 txtRFC.setText("");
                 txtTelefono.setText("");
                 cmbCiudad.setSelectedIndex(0);
-                
+
                 JOptionPane.showMessageDialog(null, "Registro de Proveedor Exitoso");
             } catch (SQLException e) {
-               System.err.println("Error en Registrar Proveedor." + e);
-               JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+                System.err.println("Error en Registrar Proveedor." + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
             }
             actualizarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
         int idCiudad = cmbCiudad.getSelectedIndex() + 1;
-        
+
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select CP, NombreEstado from ciudad, estado where idCiudad = '"+idCiudad+"' and "
+            PreparedStatement pst = cn.prepareStatement("select CP, NombreEstado from ciudad, estado where idCiudad = '" + idCiudad + "' and "
                     + "Estado_idEstado = idEstado");
             ResultSet rs = pst.executeQuery();
-            
+
             if (rs.next()) {
                 txtCP.setText(rs.getString("CP"));
                 txtEstado.setText(rs.getString("NombreEstado"));
             }
             cn.close();
-            
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             System.err.println("Error en cargar datos " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
-        
+
     }//GEN-LAST:event_cmbCiudadActionPerformed
 
     public void actualizarTabla() {
