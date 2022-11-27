@@ -201,7 +201,6 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
         
-        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
