@@ -1,11 +1,51 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class JIProveedores extends javax.swing.JInternalFrame {
 
+    int idCiudad;
+    DefaultTableModel model = new DefaultTableModel();
+    
     public JIProveedores() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Proveedores");
+        
+        tblProveedores = new JTable(model);
+        jScrollPane1.setViewportView(tblProveedores);
+
+        model.addColumn("ID del Proveedor");
+        model.addColumn("Nombre del Proveedor");
+        model.addColumn("Dirección");
+        model.addColumn("Ciudad");
+        model.addColumn("Telefono");
+        model.addColumn("Correo");
+        
+        actualizarTabla();
+        
+         try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreCiudad from ciudad");
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()){
+                cmbCiudad.addItem(rs.getString("NombreCiudad"));
+            }
+            cn.close();
+            
+        } catch (SQLException e) {
+             System.err.println("Error al llenar los estados. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -15,27 +55,27 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombrePro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbCiudad = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tblProveedores = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -54,10 +94,9 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 25));
+        txtNombrePro.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtNombrePro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtNombrePro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 25));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,67 +108,68 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         jLabel4.setText("Ciudad:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 135, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 132, 250, 25));
+        cmbCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCiudadActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 132, 250, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Código Postal:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 135, -1, -1));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 240, 25));
+        txtCP.setEditable(false);
+        txtCP.setBackground(new java.awt.Color(255, 255, 255));
+        txtCP.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtCP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 240, 25));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Estado:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 195, -1, -1));
 
-        jTextField3.setEditable(false);
-        jTextField3.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField3.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 250, 25));
+        txtEstado.setEditable(false);
+        txtEstado.setBackground(new java.awt.Color(255, 255, 255));
+        txtEstado.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtEstado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 250, 25));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Teléfono:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 195, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 240, 25));
+        txtTelefono.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtTelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 240, 25));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Correo:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 255, -1, -1));
 
-        jTextField5.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField5.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 250, 25));
+        txtCorreo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtCorreo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 250, 25));
 
-        jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField6.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 240, 25));
+        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        txtDireccion.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 240, 25));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("RFC:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 255, -1, -1));
 
-        jTextField7.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField7.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 240, 25));
+        txtRFC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtRFC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 240, 25));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -140,40 +180,45 @@ public class JIProveedores extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProveedores);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 710, 120));
 
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
-
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
 
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton4.setText("Actualizar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, -1, -1));
+
+        btnActualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,25 +234,138 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int validacion = 0;
+        String nombrePro, direccion, telefono, correo, rfc;
+        
+        nombrePro = txtNombrePro.getText().trim();
+        direccion = txtDireccion.getText().trim();
+        telefono = txtTelefono.getText().trim();
+        correo = txtCorreo.getText().trim();
+        rfc = txtRFC.getText().trim();
+        idCiudad = cmbCiudad.getSelectedIndex() + 1;
+        
+        if (nombrePro.equals("")) {
+            txtNombrePro.setBackground(Color.red);
+            validacion++;
+        }
+        if (direccion.equals("")) {
+            txtDireccion.setBackground(Color.red);
+            validacion++;
+        }
+        if (telefono.equals("")) {
+            txtTelefono.setBackground(Color.red);
+            validacion++;
+        }
+        if (correo.equals("")) {
+            txtCorreo.setBackground(Color.red);
+            validacion++;
+        }
+        if (rfc.equals("")) {
+            txtRFC.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+             Connection cn = Conexion.conectar();
+                PreparedStatement pst;
+            try {
+                pst = cn.prepareStatement(
+                        "insert into proveedor values (?,?,?,?,?,?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, nombrePro);
+                pst.setString(3, direccion);
+                pst.setInt(4, idCiudad);
+                pst.setString(5, telefono);
+                pst.setString(6, correo);
+                pst.setString(7, rfc);
+
+                pst.executeUpdate();
+                cn.close();
+
+                txtNombrePro.setText("");
+                txtCorreo.setText("");
+                txtDireccion.setText("");
+                txtRFC.setText("");
+                txtTelefono.setText("");
+                cmbCiudad.setSelectedIndex(0);
+                
+                JOptionPane.showMessageDialog(null, "Registro de Proveedor Exitoso");
+            } catch (SQLException e) {
+               System.err.println("Error en Registrar Proveedor." + e);
+               JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            }
+            actualizarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
+        int idCiudad = cmbCiudad.getSelectedIndex() + 1;
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select CP, NombreEstado from ciudad, estado where idCiudad = '"+idCiudad+"' and "
+                    + "Estado_idEstado = idEstado");
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                txtCP.setText(rs.getString("CP"));
+                txtEstado.setText(rs.getString("NombreEstado"));
+            }
+            cn.close();
+            
+        } catch (Exception e) {
+            System.err.println("Error en cargar datos " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+        
+    }//GEN-LAST:event_cmbCiudadActionPerformed
+
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[6];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select "
+                    + "idProveedor, NombreProveedor, DirecciónP, NombreCiudad, TelefonoP, CorreoP from proveedor, ciudad  where Ciudad_idCiudad = idCiudad");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 6; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<String> cmbCiudad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -219,13 +377,13 @@ public class JIProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tblProveedores;
+    private javax.swing.JTextField txtCP;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstado;
+    private javax.swing.JTextField txtNombrePro;
+    private javax.swing.JTextField txtRFC;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
