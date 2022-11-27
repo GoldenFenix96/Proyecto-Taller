@@ -3,6 +3,8 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
@@ -60,7 +62,7 @@ public class Login extends javax.swing.JFrame {
 
         txtUser.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         txtUser.setForeground(new java.awt.Color(204, 204, 204));
-        txtUser.setText("Ingrese su nombre de usuario:");
+        txtUser.setToolTipText("Ingrese su nombre de usuario:");
         txtUser.setBorder(null);
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -134,7 +136,7 @@ public class Login extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -192,8 +194,30 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseExited
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        this.dispose();
-        new Menu().setVisible(true);
+        String usuario = txtUser.getText().trim();
+        String pass= txtPass.getText().trim();
+        
+        if(usuario.isEmpty() || pass.isEmpty()){
+            JOptionPane.showMessageDialog(null, " Rellene los campos");
+        } else {
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = null;
+                pst =cn.prepareStatement("select  Usuario, Contraseña from empleados where Usuario='" + usuario + "' and Contraseña ='" + pass + "'"); 
+                ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+               this.dispose();
+                new Menu().setVisible(true);  
+             
+            } else{
+                 JOptionPane.showMessageDialog(null,  " usuario o contraseña incorrecto");
+            }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+                  JOptionPane.showMessageDialog(null,  " error");
+            }
+        }          
+    
     }//GEN-LAST:event_jPanel2MouseClicked
 
     /**
