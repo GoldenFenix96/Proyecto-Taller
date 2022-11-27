@@ -136,7 +136,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
                 txtNombre.setText(rs.getString("NombreEstado"));
             }
             cn.close();
-
+            actualizarTabla();
         } catch (SQLException e) {
             System.err.println("Error en cargar estado " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
@@ -159,6 +159,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
 
         }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
