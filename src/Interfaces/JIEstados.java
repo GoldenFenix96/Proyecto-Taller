@@ -172,7 +172,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
         int idEstado = Integer.parseInt(tblEstados.getValueAt(tblEstados.getSelectedRow(), 0).toString());
         String nombre;
         nombre = txtNombre.getText().trim();
-        System.out.println(idEstado);
+        
         if (nombre.equals("")) {
             txtNombre.setBackground(Color.red);
             validacion++;
