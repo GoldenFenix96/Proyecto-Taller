@@ -94,7 +94,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         jPanel1.add(lblExistencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 233, -1, -1));
 
         cmbUDM.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbUDM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pieza", "Caja", "Bote", "Bolsa" }));
         jPanel1.add(cmbUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 160, -1));
 
         lblProveedor.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -103,7 +102,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 293, -1, -1));
 
         cmbProveedores.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nissan" }));
         jPanel1.add(cmbProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 160, -1));
 
         lblCategorias.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -112,7 +110,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         jPanel1.add(lblCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 353, -1, -1));
 
         cmbCategorias.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Llantas", "Refacciones" }));
         jPanel1.add(cmbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 160, -1));
 
         lblPrecioCompra.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -149,7 +146,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 160, 140));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 160, 140));
 
         btnBuscar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnBuscar.setText("Buscar Imagen");
