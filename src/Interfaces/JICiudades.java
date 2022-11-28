@@ -81,6 +81,11 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
         txtCiudad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCiudad.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCiudadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 75, 190, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -141,6 +146,11 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
         txtCP.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCPKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 75, 190, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -148,6 +158,7 @@ public class JICiudades extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
+        cmbEstado.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 145, 190, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,6 +320,18 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiudadKeyTyped
+        if (txtCiudad.getText().length() >= 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCiudadKeyTyped
+
+    private void txtCPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPKeyTyped
+        if (txtCP.getText().length() >= 5) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCPKeyTyped
 
     public void actualizarTabla() {
 

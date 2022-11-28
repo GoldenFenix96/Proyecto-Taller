@@ -57,6 +57,11 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
 
         txtEstatusPro.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtEstatusPro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtEstatusPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEstatusProKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEstatusPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 280, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -246,6 +251,12 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtEstatusProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstatusProKeyTyped
+        if (txtEstatusPro.getText().length() >= 15) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEstatusProKeyTyped
 
         public void actualizarTabla() {
 

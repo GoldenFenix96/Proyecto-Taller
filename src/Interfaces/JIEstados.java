@@ -57,6 +57,11 @@ public class JIEstados extends javax.swing.JInternalFrame {
 
         txtNombre.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 280, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -241,6 +246,12 @@ public class JIEstados extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if (txtNombre.getText().length() >= 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     public void actualizarTabla() {
 

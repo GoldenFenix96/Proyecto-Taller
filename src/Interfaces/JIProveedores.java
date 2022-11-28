@@ -94,6 +94,11 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
         txtNombrePro.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNombrePro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNombrePro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombrePro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 25));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -106,6 +111,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         jLabel4.setText("Ciudad:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 135, -1, -1));
 
+        cmbCiudad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         cmbCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCiudadActionPerformed(evt);
@@ -142,6 +148,11 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
         txtTelefono.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtTelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 240, 25));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -151,10 +162,20 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
         txtCorreo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCorreo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 250, 25));
 
         txtDireccion.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 240, 25));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -164,6 +185,11 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
         txtRFC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtRFC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 240, 25));
 
         tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -447,6 +473,36 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_cmbCiudadActionPerformed
+
+    private void txtNombreProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProKeyTyped
+        if (txtNombrePro.getText().length() >= 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreProKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if (txtDireccion.getText().length() >= 150) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        if (txtTelefono.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        if (txtCorreo.getText().length() >= 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        if (txtRFC.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
 
     public void actualizarTabla() {
 

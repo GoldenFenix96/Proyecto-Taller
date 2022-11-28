@@ -60,6 +60,11 @@ public class JICategorias extends javax.swing.JInternalFrame {
 
         txtCategoria.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCategoria.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCategoriaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 200, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -69,6 +74,11 @@ public class JICategorias extends javax.swing.JInternalFrame {
 
         txtNomen.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNomen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNomen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomenKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNomen, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 125, 200, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -138,7 +148,7 @@ public class JICategorias extends javax.swing.JInternalFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
-        
+
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select NombreCategoria, Nomenclatura from categorias where idCategorias= '" + idCategoria + "'");
@@ -154,18 +164,18 @@ public class JICategorias extends javax.swing.JInternalFrame {
             System.err.println("Error en cargar categoria " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
-        
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
-        
+
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("delete from categorias where idCategorias= '" + idCategoria + "'");
             pst.executeQuery();
             cn.close();
-            
+
             JOptionPane.showMessageDialog(null, "La Categoria seleccionada fue dada de baja");
 
         } catch (SQLException e) {
@@ -178,10 +188,10 @@ public class JICategorias extends javax.swing.JInternalFrame {
         int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
         String nombre, nomenclatura;
         int validacion = 0;
-        
+
         nombre = txtCategoria.getText().trim();
         nomenclatura = txtNomen.getText().trim();
-        
+
         if (nombre.equals("")) {
             txtCategoria.setBackground(Color.red);
             validacion++;
@@ -190,39 +200,39 @@ public class JICategorias extends javax.swing.JInternalFrame {
             txtNomen.setBackground(Color.red);
             validacion++;
         }
-        
+
         if (validacion == 0) {
             try {
-                
-                    Connection cn2 = Conexion.conectar();
-                    PreparedStatement pest = cn2.prepareStatement(
-                    "update categorias set NombreCategoria=?, Nomenclatura=? where idCategorias = '" + idCategoria+ "'");
-                    pest.setString(1, nombre);
-                    pest.setString(2, nomenclatura);
-                    pest.executeUpdate();
-                    cn2.close();
-                    
-                    JOptionPane.showMessageDialog(null, "Modificación correcta");
-                    txtCategoria.setText("");
-                    txtNomen.setText("");
+
+                Connection cn2 = Conexion.conectar();
+                PreparedStatement pest = cn2.prepareStatement(
+                        "update categorias set NombreCategoria=?, Nomenclatura=? where idCategorias = '" + idCategoria + "'");
+                pest.setString(1, nombre);
+                pest.setString(2, nomenclatura);
+                pest.executeUpdate();
+                cn2.close();
+
+                JOptionPane.showMessageDialog(null, "Modificación correcta");
+                txtCategoria.setText("");
+                txtNomen.setText("");
                 actualizarTabla();
-             } catch (SQLException e) {
-                 System.err.println("Error al actualizar categoria" +e);
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar categoria" + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
-             }
-        }else{
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int validacion = 0;
         String nombre, nomenclatura;
-        
+
         nombre = txtCategoria.getText().trim();
         nomenclatura = txtNomen.getText().trim();
-        
+
         if (nombre.equals("")) {
             txtCategoria.setBackground(Color.red);
             validacion++;
@@ -231,7 +241,7 @@ public class JICategorias extends javax.swing.JInternalFrame {
             txtNomen.setBackground(Color.red);
             validacion++;
         }
-        
+
         if (validacion == 0) {
             try {
                 Connection cn = Conexion.conectar();
@@ -255,13 +265,24 @@ public class JICategorias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
             }
             actualizarTabla();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCategoriaKeyTyped
+        if (txtCategoria.getText().length() >= 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCategoriaKeyTyped
+
+    private void txtNomenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomenKeyTyped
+        if (txtNomen.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomenKeyTyped
 
     public void actualizarTabla() {
 
@@ -285,7 +306,7 @@ public class JICategorias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

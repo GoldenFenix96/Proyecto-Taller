@@ -56,6 +56,11 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
 
         txtUDM.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtUDM.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtUDM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUDMKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 115, 230, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -240,6 +245,12 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtUDMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUDMKeyTyped
+        if (txtUDM.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUDMKeyTyped
 
     public void actualizarTabla() {
 
