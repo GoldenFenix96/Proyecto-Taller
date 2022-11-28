@@ -10,12 +10,12 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
     int idEstado;
     DefaultTableModel model = new DefaultTableModel();
-    
+
     public JICiudades() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Ciudades");
-        
+
         tblCiudades = new JTable(model);
         jScrollPane1.setViewportView(tblCiudades);
 
@@ -23,25 +23,25 @@ public class JICiudades extends javax.swing.JInternalFrame {
         model.addColumn("Nombre de la Ciudad");
         model.addColumn("Código Postal");
         model.addColumn("Estado");
-        
+
         actualizarTabla();
-        
+
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreEstado from estado");
             ResultSet rs = pst.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 cmbEstado.addItem(rs.getString("NombreEstado"));
             }
             cn.close();
-            
+
         } catch (SQLException e) {
-             System.err.println("Error al llenar los estados. " + e);
+            System.err.println("Error al llenar los estados. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -187,7 +187,7 @@ public class JICiudades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         int idCiudad = Integer.parseInt(tblCiudades.getValueAt(tblCiudades.getSelectedRow(), 0).toString());
+        int idCiudad = Integer.parseInt(tblCiudades.getValueAt(tblCiudades.getSelectedRow(), 0).toString());
 
         try {
             Connection cn = Conexion.conectar();
@@ -199,7 +199,7 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
         } catch (SQLException er) {
             System.err.println("Error en eliminar ciudad " + er);
-             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -211,73 +211,76 @@ public class JICiudades extends javax.swing.JInternalFrame {
         nombreCiudad = txtCiudad.getText().trim();
         CP = txtCP.getText().trim();
         idEstado = cmbEstado.getSelectedIndex() + 1;
-        
+
         if (nombreCiudad.equals("")) {
             txtCiudad.setBackground(Color.red);
             validacion++;
         }
-         if (CP.equals("")) {
+        if (CP.equals("")) {
             txtCP.setBackground(Color.red);
             validacion++;
         }
-        
+
         if (validacion == 0) {
             try {
-                
+
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                "select NombreCiudad from ciudad where NombreCiudad = '"+ nombreCiudad +"' and not idCiudad = '"+idCiudad+"'");
+                        "select NombreCiudad from ciudad where NombreCiudad = '" + nombreCiudad + "' and not idCiudad = '" + idCiudad + "'");
                 ResultSet rs = pst.executeQuery();
-                
+
                 if (rs.next()) {
                     txtCiudad.setBackground(Color.red);
                     JOptionPane.showMessageDialog(null, "Nombre de ciudad no disponible");
                     cn.close();
-                }else{
+                } else {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pest = cn2.prepareStatement(
-                    "update ciudad set NombreCiudad=?, CP=?, Estado_idEstado=? where idCiudad = '" + idCiudad + "'");
+                            "update ciudad set NombreCiudad=?, CP=?, Estado_idEstado=? where idCiudad = '" + idCiudad + "'");
                     pest.setString(1, nombreCiudad);
                     pest.setString(2, CP);
                     pest.setInt(3, idEstado);
-                    
+
                     pest.executeUpdate();
                     cn2.close();
-                    
+
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtCiudad.setText("");
+                    txtCP.setText("");
+                    cmbEstado.setSelectedIndex(0);
                 }
                 actualizarTabla();
-                
+
             } catch (SQLException e) {
-                System.err.println("Error al actualizar la ciudad " +e);
+                System.err.println("Error al actualizar la ciudad " + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int validacion = 0;
         String nombreCiudad, CP;
-        
+
         nombreCiudad = txtCiudad.getText().trim();
         CP = txtCP.getText().trim();
         idEstado = cmbEstado.getSelectedIndex() + 1;
-        
-         if (nombreCiudad.equals("")) {
+
+        if (nombreCiudad.equals("")) {
             txtCiudad.setBackground(Color.red);
             validacion++;
         }
-         if (CP.equals("")) {
+        if (CP.equals("")) {
             txtCP.setBackground(Color.red);
             validacion++;
         }
-         
+
         if (validacion == 0) {
-            
-             try {
+
+            try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
                         "insert into ciudad values (?,?,?,?)");
@@ -292,20 +295,19 @@ public class JICiudades extends javax.swing.JInternalFrame {
                 txtCiudad.setText("");
                 txtCP.setText("");
                 cmbEstado.setSelectedIndex(0);
-                
-                
+
                 JOptionPane.showMessageDialog(null, "Registro de Ciudad Exitoso");
-        } catch (SQLException e) {
-             System.err.println("Error en Registrar Ciudad." + e);
-             JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
-            
-        }
-             actualizarTabla();
-        }else{
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar Ciudad." + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+
+            }
+            actualizarTabla();
+        } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
-         
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void actualizarTabla() {
@@ -330,7 +332,7 @@ public class JICiudades extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

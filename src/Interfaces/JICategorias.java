@@ -1,11 +1,28 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class JICategorias extends javax.swing.JInternalFrame {
+
+    DefaultTableModel model = new DefaultTableModel();
 
     public JICategorias() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Categorias de Productos");
+
+        tblCategorias = new JTable(model);
+        jScrollPane1.setViewportView(tblCategorias);
+
+        model.addColumn("ID de la Categoria");
+        model.addColumn("Nombre de la Categoria");
+        model.addColumn("Nomenclatura");
+        actualizarTabla();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -15,15 +32,15 @@ public class JICategorias extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCategoria = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtNomen = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCategorias = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -41,53 +58,56 @@ public class JICategorias extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre de la Categoria:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 130, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 200, 25));
+        txtCategoria.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtCategoria.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 125, 200, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nomenclatura:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 125, 200, 25));
+        txtNomen.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtNomen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtNomen, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 125, 200, 25));
 
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, -1));
-
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
 
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton4.setText("Actualizar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnActualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, -1));
+
+        tblCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,7 +118,7 @@ public class JICategorias extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCategorias);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 720, 190));
 
@@ -116,31 +136,169 @@ public class JICategorias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select NombreCategoria, Nomenclatura from categorias where idCategorias= '" + idCategoria + "'");
+            ResultSet rs = pst.executeQuery();
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            if (rs.next()) {
+                txtCategoria.setText(rs.getString("NombreCategoria"));
+                txtNomen.setText(rs.getString("Nomenclatura"));
+            }
+            cn.close();
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        } catch (SQLException e) {
+            System.err.println("Error en cargar categoria " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("delete from categorias where idCategorias= '" + idCategoria + "'");
+            pst.executeQuery();
+            cn.close();
+            
+            JOptionPane.showMessageDialog(null, "La Categoria seleccionada fue dada de baja");
+
+        } catch (SQLException e) {
+            System.err.println("Error en eliminar categoria " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int idCategoria = Integer.parseInt(tblCategorias.getValueAt(tblCategorias.getSelectedRow(), 0).toString());
+        String nombre, nomenclatura;
+        int validacion = 0;
+        
+        nombre = txtCategoria.getText().trim();
+        nomenclatura = txtNomen.getText().trim();
+        
+        if (nombre.equals("")) {
+            txtCategoria.setBackground(Color.red);
+            validacion++;
+        }
+        if (nomenclatura.equals("")) {
+            txtNomen.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+            try {
+                
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                    "update categorias set NombreCategoria=?, Nomenclatura=? where idCategorias = '" + idCategoria+ "'");
+                    pest.setString(1, nombre);
+                    pest.setString(2, nomenclatura);
+                    pest.executeUpdate();
+                    cn2.close();
+                    
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtCategoria.setText("");
+                    txtNomen.setText("");
+                actualizarTabla();
+             } catch (SQLException e) {
+                 System.err.println("Error al actualizar categoria" +e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int validacion = 0;
+        String nombre, nomenclatura;
+        
+        nombre = txtCategoria.getText().trim();
+        nomenclatura = txtNomen.getText().trim();
+        
+        if (nombre.equals("")) {
+            txtCategoria.setBackground(Color.red);
+            validacion++;
+        }
+        if (nomenclatura.equals("")) {
+            txtNomen.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "insert into categorias values (?,?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, nombre);
+                pst.setString(3, nomenclatura);
+
+                pst.executeUpdate();
+
+                cn.close();
+
+                txtCategoria.setText("");
+                txtNomen.setText("");
+
+                JOptionPane.showMessageDialog(null, "Registro de Categoria Exitoso");
+
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar Categoria." + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            }
+            actualizarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[3];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select * from categorias");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 3; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblCategorias;
+    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtNomen;
     // End of variables declaration//GEN-END:variables
 }

@@ -153,11 +153,11 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
             pst.executeQuery();
             cn.close();
             
-            JOptionPane.showMessageDialog(null, "El esatus del producto seleccionado fue dado de baja");
+            JOptionPane.showMessageDialog(null, "El estatus del producto seleccionado fue dado de baja");
             
             actualizarTabla();
         } catch (SQLException e) {
-            System.err.println("Error en cargar estatus de producto " + e);
+            System.err.println("Error en eliminar estatus de producto " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -194,6 +194,7 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
                     cn2.close();
                     
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtEstatusPro.setText("");
                 }
                 actualizarTabla();
              } catch (SQLException e) {
@@ -246,28 +247,28 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    public void actualizarTabla() {
+        public void actualizarTabla() {
 
-        model.setRowCount(0);
-        Object[] fila = new Object[2];
-        try {
-            Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select * from estatusproducto");
+            model.setRowCount(0);
+            Object[] fila = new Object[2];
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement("select * from estatusproducto");
 
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                for (int i = 0; i < 2; i++) {
-                    fila[i] = rs.getObject(i + 1);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    for (int i = 0; i < 2; i++) {
+                        fila[i] = rs.getObject(i + 1);
+                    }
+                    model.addRow(fila);
                 }
-                model.addRow(fila);
-            }
-            cn.close();
+                cn.close();
 
-        } catch (SQLException e) {
-            System.err.println("Error al llenar tabla. " + e);
-            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+            } catch (SQLException e) {
+                System.err.println("Error al llenar tabla. " + e);
+                JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+            }
         }
-    }
     
     
 

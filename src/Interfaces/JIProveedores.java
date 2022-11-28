@@ -310,23 +310,23 @@ public class JIProveedores extends javax.swing.JInternalFrame {
             txtRFC.setBackground(Color.red);
             validacion++;
         }
-        
-         if (validacion == 0) {
+
+        if (validacion == 0) {
             try {
-                
+
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                "select NombreProveedor from proveedor where NombreProveedor = '"+ nombrePro +"' and not idProveedor = '"+idProveedor+"'");
+                        "select NombreProveedor from proveedor where NombreProveedor = '" + nombrePro + "' and not idProveedor = '" + idProveedor + "'");
                 ResultSet rs = pst.executeQuery();
-                
+
                 if (rs.next()) {
                     txtNombrePro.setBackground(Color.red);
                     JOptionPane.showMessageDialog(null, "Nombre de proveedor no disponible");
                     cn.close();
-                }else{
+                } else {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pest = cn2.prepareStatement(
-                    "update proveedor set NombreProveedor=?, DireccionP=?, Ciudad_idCiudad=?, TelefonoP=?, CorreoP=?, RFCP=? "
+                            "update proveedor set NombreProveedor=?, DireccionP=?, Ciudad_idCiudad=?, TelefonoP=?, CorreoP=?, RFCP=? "
                             + "where idProveedor = '" + idProveedor + "'");
                     pest.setString(1, nombrePro);
                     pest.setString(2, direccion);
@@ -334,22 +334,28 @@ public class JIProveedores extends javax.swing.JInternalFrame {
                     pest.setString(4, telefono);
                     pest.setString(5, correo);
                     pest.setString(6, rfc);
-                    
+
                     pest.executeUpdate();
                     cn2.close();
-                    
+
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtNombrePro.setText("");
+                    txtCorreo.setText("");
+                    txtDireccion.setText("");
+                    txtRFC.setText("");
+                    txtTelefono.setText("");
+                    cmbCiudad.setSelectedIndex(0);
                 }
                 actualizarTabla();
-                
+
             } catch (SQLException e) {
-                System.err.println("Error al actualizar el proveedor " +e);
+                System.err.println("Error al actualizar el proveedor " + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

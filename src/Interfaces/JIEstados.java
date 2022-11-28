@@ -156,10 +156,10 @@ public class JIEstados extends javax.swing.JInternalFrame {
 
         } catch (SQLException er) {
             System.err.println("Error en eliminar estado " + er);
-             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
 
         }
-        
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -167,40 +167,41 @@ public class JIEstados extends javax.swing.JInternalFrame {
         int idEstado = Integer.parseInt(tblEstados.getValueAt(tblEstados.getSelectedRow(), 0).toString());
         String nombre;
         nombre = txtNombre.getText().trim();
-        
-         if (nombre.equals("")) {
+
+        if (nombre.equals("")) {
             txtNombre.setBackground(Color.red);
             validacion++;
         }
-         
-         if (validacion == 0) {
-             try {
-                 Connection cn = Conexion.conectar();
+
+        if (validacion == 0) {
+            try {
+                Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                "select NombreEstado from estado where NombreEstado = '"+ nombre +"' and not idEstado = '"+idEstado+"'");
+                        "select NombreEstado from estado where NombreEstado = '" + nombre + "' and not idEstado = '" + idEstado + "'");
                 ResultSet rs = pst.executeQuery();
-                
+
                 if (rs.next()) {
                     txtNombre.setBackground(Color.red);
                     JOptionPane.showMessageDialog(null, "Nombre de estado no disponible");
                     cn.close();
-                }else{
+                } else {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pest = cn2.prepareStatement(
-                    "update estado set NombreEstado=? where idEstado = '" + idEstado + "'");
+                            "update estado set NombreEstado=? where idEstado = '" + idEstado + "'");
                     pest.setString(1, nombre);
                     pest.executeUpdate();
                     cn2.close();
-                    
+
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtNombre.setText("");
                 }
                 actualizarTabla();
-             } catch (SQLException e) {
-                 System.err.println("Error al actualizar estado" +e);
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar estado" + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
-             }
+            }
         } else {
-             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 

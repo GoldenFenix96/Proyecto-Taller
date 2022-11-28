@@ -191,6 +191,7 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
                     cn2.close();
                     
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtUDM.setText("");
                 }
                 actualizarTabla();
              } catch (SQLException e) {
