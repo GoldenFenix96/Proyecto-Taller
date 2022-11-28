@@ -326,7 +326,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
                 } else {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pest = cn2.prepareStatement(
-                            "update proveedor set NombreProveedor=?, DireccionP=?, Ciudad_idCiudad=?, TelefonoP=?, CorreoP=?, RFCP=? "
+                            "update proveedor set NombreProveedor=?, DirecciónP=?, Ciudad_idCiudad=?, TelefonoP=?, CorreoP=?, RFCP=? "
                             + "where idProveedor = '" + idProveedor + "'");
                     pest.setString(1, nombrePro);
                     pest.setString(2, direccion);
