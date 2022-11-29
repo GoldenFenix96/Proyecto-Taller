@@ -158,7 +158,7 @@ public class JIPuestos extends javax.swing.JInternalFrame {
             pst.executeUpdate();
             cn.close();
             JOptionPane.showMessageDialog(null, "El puesto seleccionado fue dado de baja");
-
+            actualizarTabla();
         } catch (SQLException er) {
             System.err.println("Error en eliminar puesto " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");

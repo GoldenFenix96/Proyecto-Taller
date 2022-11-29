@@ -43,8 +43,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -73,7 +71,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
         jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 25));
@@ -83,7 +80,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel4.setText("Apellido Materno:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 125, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
         jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 200, 25));
@@ -93,7 +89,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel5.setText("Correo:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 175, -1, -1));
 
-        jTextField3.setBackground(new java.awt.Color(0, 153, 102));
         jTextField3.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 250, 25));
@@ -103,14 +98,13 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel6.setText("Dirección:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 175, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(0, 153, 102));
         jTextField4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 25));
 
         jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 296, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jButton2.setText("Consultar");
@@ -119,7 +113,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 296, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jButton3.setText("Eliminar");
@@ -128,7 +122,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 296, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jButton4.setText("Actualizar");
@@ -137,12 +131,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 296, -1, -1));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 320, 30));
-
-        jButton5.setFont(new java.awt.Font("Roboto Black", 1, 20)); // NOI18N
-        jButton5.setText("Buscar");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,14 +146,13 @@ public class JIClientes extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 720, 90));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 720, 150));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Apellido Paterno:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 75, -1, -1));
 
-        jTextField6.setBackground(new java.awt.Color(0, 153, 102));
         jTextField6.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 250, 25));
@@ -174,7 +162,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel8.setText("Teléfono:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 125, -1, -1));
 
-        jTextField7.setBackground(new java.awt.Color(0, 153, 102));
         jTextField7.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 250, 25));
@@ -184,6 +171,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel9.setText("Nivel de Confianza:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 225, -1, -1));
 
+        jComboBox1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 190, 25));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -191,7 +179,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
         jLabel10.setText("Limite de Credito:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 225, -1, -1));
 
-        jTextField8.setBackground(new java.awt.Color(0, 153, 102));
         jTextField8.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 250, 25));
@@ -228,7 +215,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -246,7 +232,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;

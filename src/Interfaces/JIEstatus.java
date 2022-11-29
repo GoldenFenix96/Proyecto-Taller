@@ -158,7 +158,7 @@ public class JIEstatus extends javax.swing.JInternalFrame {
             pst.executeUpdate();
             cn.close();
             JOptionPane.showMessageDialog(null, "El estatus seleccionado fue dado de baja");
-
+            actualizarTabla();
         } catch (SQLException er) {
             System.err.println("Error en eliminar estatus " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");

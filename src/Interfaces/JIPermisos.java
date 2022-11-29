@@ -157,7 +157,7 @@ public class JIPermisos extends javax.swing.JInternalFrame {
             pst.executeUpdate();
             cn.close();
             JOptionPane.showMessageDialog(null, "El permiso seleccionado fue dado de baja");
-
+            actualizarTabla();
         } catch (SQLException er) {
             System.err.println("Error en eliminar permiso " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");

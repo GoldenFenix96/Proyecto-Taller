@@ -173,9 +173,9 @@ public class JICategorias extends javax.swing.JInternalFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("delete from categorias where idCategorias= '" + idCategoria + "'");
-            pst.executeQuery();
+            pst.executeUpdate();
             cn.close();
-
+            actualizarTabla();
             JOptionPane.showMessageDialog(null, "La Categoria seleccionada fue dada de baja");
 
         } catch (SQLException e) {

@@ -155,9 +155,9 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
          try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("delete from estatusproducto where idEstatusP= '" + idEstatus + "'");
-            pst.executeQuery();
+            pst.executeUpdate();
             cn.close();
-            
+            actualizarTabla();
             JOptionPane.showMessageDialog(null, "El estatus del producto seleccionado fue dado de baja");
             
             actualizarTabla();

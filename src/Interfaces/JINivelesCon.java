@@ -1,5 +1,8 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,13 +15,15 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         this.setSize(794, 548);
         this.setTitle("Niveles de Confianza");
         
-        jTable1 = new JTable(model);
-            jScrollPane1.setViewportView(jTable1);
+        tblNiveles = new JTable(model);
+            jScrollPane1.setViewportView(tblNiveles);
             
             model.addColumn("ID");
             model.addColumn("Descripción");
             model.addColumn("Límite Mínimo");
             model.addColumn("Límite Máximo");
+            
+            actualizarTabla();
             
     }
 
@@ -29,17 +34,17 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNivel = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtLimMini = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtLimMax = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblNiveles = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -56,65 +61,67 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Descripción de Nivel de Confianza:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 85, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 210, 25));
+        txtNivel.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtNivel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 210, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Límite Minimo de Credito:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 140, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 250, 25));
+        txtLimMini.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtLimMini.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtLimMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 135, 250, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Límite Máximo de Credito:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 195, -1, -1));
 
-        jTextField3.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField3.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 250, 25));
+        txtLimMax.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtLimMax.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(txtLimMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 250, 25));
 
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Agregar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
-
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
 
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton4.setText("Actualizar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnActualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, -1, -1));
+
+        tblNiveles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,7 +132,7 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblNiveles);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 710, 140));
 
@@ -143,33 +150,178 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        int idIdCon = Integer.parseInt(tblNiveles.getValueAt(tblNiveles.getSelectedRow(), 0).toString());
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select * from nc_cliente where idNC_Cliente = '"+idIdCon+"'");
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txtNivel.setText(rs.getString("DescripciónConfianza"));
+                txtLimMini.setText(rs.getString("LimiteMin"));
+                txtLimMax.setText(rs.getString("LimiteMax"));
+            }
+            cn.close();
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        } catch (SQLException e) {
+            System.err.println("Error en cargar nivel confianza " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
 
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int idIdCon = Integer.parseInt(tblNiveles.getValueAt(tblNiveles.getSelectedRow(), 0).toString());
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("delete from nc_cliente where idNC_Cliente = '"+idIdCon+"'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "El nivel de confianza seleccionado fue dado de baja");
+            actualizarTabla();
+        } catch (SQLException e) {
+            System.err.println("Error en eliminar nivel confianza " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int validacion = 0;
+        String nivel, limMax, limMin;
+        int idIdCon = Integer.parseInt(tblNiveles.getValueAt(tblNiveles.getSelectedRow(), 0).toString());
+        
+        nivel = txtNivel.getText().trim();
+        limMax = txtLimMax.getText().trim();
+        limMin = txtLimMini.getText().trim();
+        
+        if (nivel.equals("")) {
+            txtNivel.setBackground(Color.red);
+            validacion++;
+        }
+        if (limMax.equals("")) {
+            txtLimMini.setBackground(Color.red);
+            validacion++;
+        }
+        if (limMin.equals("")) {
+            txtLimMax.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+            try {
+                 Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                            "update nc_cliente set DescripciónConfianza=?, LimiteMin=?, LimiteMax=? where idNC_Cliente = '" + idIdCon + "'");
+                    pest.setString(1, nivel);
+                    pest.setInt(2, Integer.parseInt(limMin));
+                    pest.setInt(3, Integer.parseInt(limMax));
+
+                    pest.executeUpdate();
+                    cn2.close();
+
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtNivel.setText("");
+                    txtLimMax.setText("");
+                    txtLimMini.setText("");
+                    actualizarTabla();
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar nivel de confianza " + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+         int validacion = 0;
+        String nivel, limMax, limMin;
+        
+        nivel = txtNivel.getText().trim();
+        limMax = txtLimMax.getText().trim();
+        limMin = txtLimMini.getText().trim();
+        
+        if (nivel.equals("")) {
+            txtNivel.setBackground(Color.red);
+            validacion++;
+        }
+        if (limMax.equals("")) {
+            txtLimMini.setBackground(Color.red);
+            validacion++;
+        }
+        if (limMin.equals("")) {
+            txtLimMax.setBackground(Color.red);
+            validacion++;
+        }
+        if (validacion == 0) {
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "insert into nc_cliente values (?,?,?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, nivel);
+                pst.setInt(3, Integer.parseInt(limMin));
+                pst.setInt(4, Integer.parseInt(limMax));
+
+                pst.executeUpdate();
+                cn.close();
+
+                txtNivel.setText("");
+                txtLimMini.setText("");
+                txtLimMax.setText("");
+
+                JOptionPane.showMessageDialog(null, "Registro de Nivel de Confianza Exitoso");
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar Nivel de Confianza ." + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            }
+            actualizarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[4];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select * from nc_cliente");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tblNiveles;
+    private javax.swing.JTextField txtLimMax;
+    private javax.swing.JTextField txtLimMini;
+    private javax.swing.JTextField txtNivel;
     // End of variables declaration//GEN-END:variables
 }

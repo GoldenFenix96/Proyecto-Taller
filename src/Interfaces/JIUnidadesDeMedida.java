@@ -153,7 +153,7 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("delete from unidaddemedida where idUnidaddeMedida= '" + idUDM + "'");
-            pst.executeQuery();
+            pst.executeUpdate();
             cn.close();
             JOptionPane.showMessageDialog(null, "La Unidad de Medida seleccionada fue dada de baja");
             

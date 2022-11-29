@@ -158,7 +158,7 @@ public class JIEstados extends javax.swing.JInternalFrame {
             pst.executeUpdate();
             cn.close();
             JOptionPane.showMessageDialog(null, "El estado seleccionado fue dado de baja");
-
+            actualizarTabla();
         } catch (SQLException er) {
             System.err.println("Error en eliminar estado " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
