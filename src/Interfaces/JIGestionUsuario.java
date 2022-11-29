@@ -1,30 +1,78 @@
 package Interfaces;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class JIGestionUsuario extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel();
-    
+    String user;
+    public static int usuario_update = 0;
+
     public JIGestionUsuario() {
         initComponents();
         this.setSize(794, 548);
         this.setTitle("Gestión de Usuarios");
-        
-        tblUsuarios = new JTable(model);
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select idEmpleados, NombreEmpleado, APaterno,"
+                    + "AMaterno, Usuario, NombrePermisos, NombreEstatus from empleados, permisos, estatus where Permisos_idPermisos = idPermisos and "
+                    + "Estatus_idEstatus = idEstatus");
+
+            ResultSet rs = pst.executeQuery();
+
+            tblUsuarios = new JTable(model);
             jScrollPane1.setViewportView(tblUsuarios);
-            
-            model.addColumn("ID Empleado");
+
+            model.addColumn("ID");
             model.addColumn("Nombre");
             model.addColumn("Apellido Paterno");
             model.addColumn("Apellido Materno");
             model.addColumn("Username");
             model.addColumn("Permisos");
             model.addColumn("Estatus");
-        
+
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+
+                for (int i = 0; i < 7; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+
+        tblUsuarios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = tblUsuarios.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    usuario_update = (int) model.getValueAt(fila_point, columna_point);
+
+                    ModificarUsuarios MU = new ModificarUsuarios();
+                    MU.setVisible(true);
+
+                }
+
+            }
+        });
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

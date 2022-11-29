@@ -150,7 +150,7 @@ public class JINuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         cmbPermisos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jPanel1.add(cmbPermisos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 150, 25));
+        jPanel1.add(cmbPermisos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 160, 25));
 
         jLabel11.setFont(new java.awt.Font("Roboto Black", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +158,7 @@ public class JINuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
         cmbPuestos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jPanel1.add(cmbPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 150, 25));
+        jPanel1.add(cmbPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 160, 25));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
