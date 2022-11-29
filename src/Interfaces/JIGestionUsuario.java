@@ -53,7 +53,7 @@ public class JIGestionUsuario extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
-
+        
         tblUsuarios.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -70,7 +70,7 @@ public class JIGestionUsuario extends javax.swing.JInternalFrame {
 
             }
         });
-
+        
     }
 
     @SuppressWarnings("unchecked")

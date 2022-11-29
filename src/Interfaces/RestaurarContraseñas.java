@@ -1,29 +1,29 @@
 package Interfaces;
+
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
-/**
- *
- * @author Roberto Carlos Sanchez de la Cruz
- */
 public class RestaurarContraseñas extends javax.swing.JFrame {
-    
-    String user = "", user_update = "";
-    
+
+    int idUsuario;
+
     public RestaurarContraseñas() {
         initComponents();
-        
+
         this.setSize(400, 330);
         this.setResizable(false);
-        this.setTitle("Cambio de Contraseña para " + user_update);
+        this.setTitle("Cambio de Contraseña ");
         this.setLocationRelativeTo(null);
+        idUsuario = JIGestionUsuario.usuario_update;
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Taller P.png"));
@@ -45,7 +45,7 @@ public class RestaurarContraseñas extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
         txtPassconfir = new javax.swing.JPasswordField();
-        jButton_RestaurarPass = new javax.swing.JButton();
+        btnRestaurar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,31 +69,36 @@ public class RestaurarContraseñas extends javax.swing.JFrame {
         jLabel8.setText("Confirmar Password:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        txtPass.setBackground(new java.awt.Color(0, 153, 102));
-        txtPass.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtPass.setForeground(new java.awt.Color(255, 255, 255));
-        txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPass.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtPass.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, -1));
-
-        txtPassconfir.setBackground(new java.awt.Color(0, 153, 102));
-        txtPassconfir.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txtPassconfir.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassconfir.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPassconfir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtPassconfir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 240, -1));
-
-        jButton_RestaurarPass.setBackground(new java.awt.Color(0, 153, 102));
-        jButton_RestaurarPass.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
-        jButton_RestaurarPass.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_RestaurarPass.setText("Restaurar contraseña");
-        jButton_RestaurarPass.setBorder(null);
-        jButton_RestaurarPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RestaurarPassActionPerformed(evt);
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassKeyTyped(evt);
             }
         });
-        jPanel1.add(jButton_RestaurarPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 240, 35));
+        jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, -1));
+
+        txtPassconfir.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtPassconfir.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPassconfir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtPassconfir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassconfirKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtPassconfir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 240, -1));
+
+        btnRestaurar.setBackground(new java.awt.Color(255, 255, 255));
+        btnRestaurar.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        btnRestaurar.setText("Restaurar contraseña");
+        btnRestaurar.setBorder(null);
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRestaurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 240, 35));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,12 +119,63 @@ public class RestaurarContraseñas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_RestaurarPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RestaurarPassActionPerformed
-       
-        
-        
-        
-    }//GEN-LAST:event_jButton_RestaurarPassActionPerformed
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+
+        String password, confirmacion;
+
+        password = txtPass.getText().trim();
+        confirmacion = txtPassconfir.getText().trim();
+
+        if (!password.equals("") && !confirmacion.equals("")) {
+
+            if (password.equals(confirmacion)) {
+                try {
+
+                    Connection cn = Conexion.conectar();
+                    PreparedStatement pst = cn.prepareStatement(
+                            "update empleados set Contraseña=? where idEmpleados = '" + idUsuario + "'");
+
+                    pst.setString(1, password);
+
+                    pst.executeUpdate();
+                    cn.close();
+
+                    txtPass.setBackground(Color.green);
+                    txtPassconfir.setBackground(Color.green);
+
+                    JOptionPane.showMessageDialog(null, "Restauración exitosa.");
+
+                    this.dispose();
+
+                } catch (SQLException e) {
+                    System.err.println("Error en restaurar password " + e);
+                }
+
+            } else {
+                txtPassconfir.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            }
+
+        } else {
+            txtPass.setBackground(Color.red);
+            txtPassconfir.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "No se admiten contraseñas vacias.");
+        }
+
+
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+        if (txtPass.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPassKeyTyped
+
+    private void txtPassconfirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassconfirKeyTyped
+        if (txtPassconfir.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPassconfirKeyTyped
 
     /**
      * @param args the command line arguments
@@ -160,7 +216,7 @@ public class RestaurarContraseñas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_RestaurarPass;
+    private javax.swing.JButton btnRestaurar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
