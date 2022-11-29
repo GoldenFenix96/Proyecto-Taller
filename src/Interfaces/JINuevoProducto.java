@@ -29,7 +29,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error al llenar los estados. " + e);
+            System.err.println("Error al llenar las unidades de medida. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
 
@@ -45,7 +45,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error al llenar los estados. " + e);
+            System.err.println("Error al llenar los proveedores. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
 
@@ -61,7 +61,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error al llenar los estados. " + e);
+            System.err.println("Error al llenar las categorias. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
 
@@ -177,11 +177,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecioC.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPrecioC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPrecioC.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioCKeyTyped(evt);
-            }
-        });
         jPanel1.add(txtPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 200, -1));
 
         lblPrecioVenta.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -192,11 +187,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioV.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecioV.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPrecioV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPrecioV.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioVKeyTyped(evt);
-            }
-        });
         jPanel1.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 200, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -253,22 +243,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_txtProductoKeyTyped
-
-    private void txtPrecioCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCKeyTyped
-
-        if (txtPrecioC.getText().length() >= 5) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtPrecioCKeyTyped
-
-    private void txtPrecioVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVKeyTyped
-
-        if (txtPrecioV.getText().length() >= 5) {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_txtPrecioVKeyTyped
 
     private void txtExistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaKeyTyped
        
