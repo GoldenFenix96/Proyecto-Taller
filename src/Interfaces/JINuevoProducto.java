@@ -261,8 +261,8 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     private void btnAgregarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProActionPerformed
 
         int validacion = 0;
-    
-    String CB, NP, Ex, PC, PV;
+
+        String CB, NP, Ex, PC, PV;
     
     CB = txtCodigo.getText().trim();
     NP = txtProducto.getText().trim();
