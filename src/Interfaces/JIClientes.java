@@ -592,7 +592,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select "
                     + "idClientes, NombreC, APaternoC, AMaternoC, Telefono, DescripciónConfianza, LimiteCredito"
-                    + " from clientes, nc_cliente, lc_cliente  where NC_Cliente_idNC_Cliente = idNC_Cliente and LC_Cliente_idNC_Cliente = idNC_Cliente");
+                    + " from clientes, nc_cliente, lc_cliente  where NC_Cliente_idNC_Cliente = idNC_Cliente and idNC_Cliente = LC_Cliente_idNC_Cliente");
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

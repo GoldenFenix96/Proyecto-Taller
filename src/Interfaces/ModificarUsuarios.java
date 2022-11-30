@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class ModificarUsuarios extends javax.swing.JFrame {
 
@@ -16,6 +17,8 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         this.setResizable(false);
         this.setSize(800, 500);
         this.setTitle("Modificar Usuarios");
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         IdUsuario = JIGestionUsuario.usuario_update;
 
