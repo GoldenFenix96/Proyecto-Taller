@@ -93,6 +93,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtNombre.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 250, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -102,6 +107,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtAmaterno.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtAmaterno.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtAmaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAmaternoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtAmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 200, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -111,6 +121,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtCorreo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCorreo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 250, 25));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -120,6 +135,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtDireccion.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 25));
 
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -180,6 +200,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtApaterno.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtApaterno.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtApaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApaternoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtApaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 250, 25));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -189,6 +214,11 @@ public class JIClientes extends javax.swing.JInternalFrame {
 
         txtTelefono.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtTelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 250, 25));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -517,6 +547,42 @@ public class JIClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
     }//GEN-LAST:event_cmbNivCActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if (txtNombre.getText().length() >= 25) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtApaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApaternoKeyTyped
+        if (txtApaterno.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApaternoKeyTyped
+
+    private void txtAmaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmaternoKeyTyped
+       if (txtAmaterno.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAmaternoKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        if (txtTelefono.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        if (txtCorreo.getText().length() >= 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if (txtDireccion.getText().length() >= 150) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
 
     public void actualizarTabla() {
 

@@ -65,6 +65,11 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
 
         txtNivel.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNivel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNivel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNivelKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 210, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -284,6 +289,12 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtNivelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNivelKeyTyped
+        if (txtNivel.getText().length() >= 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNivelKeyTyped
 
     public void actualizarTabla() {
 
