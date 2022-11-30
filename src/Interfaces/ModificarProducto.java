@@ -113,7 +113,7 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     }
 
-    @Override
+   @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Taller P.png"));
         return retValue;
