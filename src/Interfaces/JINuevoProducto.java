@@ -1,10 +1,14 @@
 package Interfaces;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.io.File;
 import java.sql.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class JINuevoProducto extends javax.swing.JInternalFrame {
@@ -89,7 +93,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioC = new javax.swing.JTextField();
         lblPrecioVenta = new javax.swing.JLabel();
         txtPrecioV = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        imagen = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnAgregarPro = new javax.swing.JButton();
 
@@ -190,9 +194,9 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 200, -1));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 160, 140));
+        imagen.setBackground(new java.awt.Color(255, 255, 255));
+        imagen.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 160, 140));
 
         btnBuscar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar Archivo.png"))); // NOI18N
@@ -256,6 +260,19 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         File archivo;
+        JFileChooser flcAbrirArchivo = new JFileChooser();
+        flcAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de Imagen","jpg","jpeg","png"));
+        int respuesta = flcAbrirArchivo.showOpenDialog(this);
+        
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+            
+            archivo = flcAbrirArchivo.getSelectedFile();
+            txtProducto.setText(archivo.getAbsolutePath());
+            Image foto = getToolkit().getImage(txtProducto.getText());
+            foto = foto.getScaledInstance(160, 140, 1);
+            imagen.setIcon(new ImageIcon(foto));
+            
+        }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -346,7 +363,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbCategorias;
     private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JComboBox<String> cmbUDM;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel imagen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCategorias;
     private javax.swing.JLabel lblCodigo;
