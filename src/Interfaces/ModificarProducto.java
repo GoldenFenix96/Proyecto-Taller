@@ -71,7 +71,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblCodigo.setText("Código de Barras:");
         jPanel1.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        txtCodigo.setBackground(new java.awt.Color(0, 153, 102));
         txtCodigo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(255, 255, 255));
         txtCodigo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -88,7 +87,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblProducto.setText("Nombre del Producto:");
         jPanel1.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 133, -1, -1));
 
-        txtProducto.setBackground(new java.awt.Color(0, 153, 102));
         txtProducto.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtProducto.setForeground(new java.awt.Color(255, 255, 255));
         txtProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -105,7 +103,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblExistencia.setText("Existencia:");
         jPanel1.add(lblExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 173, -1, -1));
 
-        txtExistencia.setBackground(new java.awt.Color(0, 153, 102));
         txtExistencia.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtExistencia.setForeground(new java.awt.Color(255, 255, 255));
         txtExistencia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -146,7 +143,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblPrecioCompra.setText("Precio Compra:");
         jPanel1.add(lblPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 333, -1, -1));
 
-        txtPrecioC.setBackground(new java.awt.Color(0, 153, 102));
         txtPrecioC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecioC.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -163,7 +159,6 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblPrecioVenta.setText("Precio Venta:");
         jPanel1.add(lblPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 373, -1, -1));
 
-        txtPrecioV.setBackground(new java.awt.Color(0, 153, 102));
         txtPrecioV.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecioV.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

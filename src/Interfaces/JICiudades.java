@@ -146,6 +146,11 @@ public class JICiudades extends javax.swing.JInternalFrame {
 
         txtCP.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPActionPerformed(evt);
+            }
+        });
         txtCP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCPKeyTyped(evt);
@@ -159,6 +164,11 @@ public class JICiudades extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
         cmbEstado.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 145, 190, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,6 +342,14 @@ public class JICiudades extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtCPKeyTyped
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
+    private void txtCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPActionPerformed
 
     public void actualizarTabla() {
 

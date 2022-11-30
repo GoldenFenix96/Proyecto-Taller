@@ -1,10 +1,16 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class JIAutos extends javax.swing.JInternalFrame {
-
+    int idCliente;
    DefaultTableModel model = new DefaultTableModel();
     
     public JIAutos() {
@@ -12,15 +18,38 @@ public class JIAutos extends javax.swing.JInternalFrame {
         this.setSize(794, 548);
         this.setTitle("Autos");
         
-        jTable1 = new JTable(model);
-            jScrollPane1.setViewportView(jTable1);
+        tblAutos = new JTable(model);
+            jScrollPane1.setViewportView(tblAutos);
             
             model.addColumn("Modelo");
-            model.addColumn("Marca");
             model.addColumn("Serie");
-            model.addColumn("Color");
             model.addColumn("Motor");
+            model.addColumn("Transmisiones");
+            model.addColumn("Direcciones");
+            model.addColumn("Redimiento");
+            model.addColumn("Color");
+            model.addColumn("Marca");
+            model.addColumn("precio");
             model.addColumn("Cliente");
+            
+             actualizarTabla();
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreC from clientes");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbCliente.addItem(rs.getString("NombreC"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar los Clientes. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+            
             
     }
 
@@ -34,37 +63,39 @@ public class JIAutos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSerie = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtMotor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtTrans = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtCaballo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtColor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        consultar = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        actualizar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAutos = new javax.swing.JTable();
         jTextField10 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbCliente = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        txtRendimiento = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -74,30 +105,28 @@ public class JIAutos extends javax.swing.JInternalFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtSerie.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtSerie.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtSerieActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 160, 25));
+        jPanel1.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 160, 25));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Serie:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 115, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtModelo.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtModelo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtModeloActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 160, 25));
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 160, 25));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,132 +138,145 @@ public class JIAutos extends javax.swing.JInternalFrame {
         jLabel3.setText("Motor:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 155, -1, -1));
 
-        jTextField3.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtMotor.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtMotor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtMotorActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 25));
+        jPanel1.add(txtMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Trasmisiones:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 195, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtTrans.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtTrans.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTrans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtTransActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 160, 25));
+        jPanel1.add(txtTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 160, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Dirreccion:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 235, -1, -1));
 
-        jTextField5.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtDireccion.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtDireccionActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 160, 25));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 160, 25));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Redimiento:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 275, -1, -1));
+        jLabel6.setText("Caballo fuerza");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
-        jTextField6.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        txtCaballo.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtCaballo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCaballo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                txtCaballoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 160, 25));
+        jPanel1.add(txtCaballo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 160, 25));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Color:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 75, -1, -1));
 
-        jTextField7.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtColor.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtColor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtColorActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 160, 25));
+        jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 160, 25));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Marca:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 115, -1, -1));
 
-        jTextField8.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txtMarca.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtMarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txtMarcaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 160, 25));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 160, 25));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Precio:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 155, -1, -1));
 
-        jTextField9.setBackground(new java.awt.Color(0, 153, 102));
-        jTextField9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecio.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtPrecio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txtPrecioActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 25));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 25));
 
         jLabel10.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Autos");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Consultar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 240, -1, -1));
+        consultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        consultar.setText("Consultar");
+        consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 240, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton2.setText("Agregar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
+        agregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 240, -1, -1));
+        eliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 240, -1, -1));
 
-        jButton4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton4.setText("Actualizar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 240, -1, -1));
+        actualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        actualizar.setText("Actualizar");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 240, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(102, 255, 102));
         jLabel11.setToolTipText("");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 160, 150));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -245,7 +287,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAutos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 730, 110));
         jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 330, 30));
@@ -256,16 +298,30 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         jButton6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jButton6.setText("Buscar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 240, -1, -1));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Cliente:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 200, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jComboBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 195, 160, 25));
+        cmbCliente.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        cmbCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(cmbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 195, 160, 25));
+
+        jLabel13.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Redimiento:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 275, -1, -1));
+
+        txtRendimiento.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        txtRendimiento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtRendimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRendimientoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtRendimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 160, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -281,55 +337,240 @@ public class JIAutos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_txtSerieActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtModeloActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMotorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtMotorActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtTransActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtDireccionActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void txtCaballoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaballoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_txtCaballoActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtColorActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txtMarcaActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_txtPrecioActionPerformed
 
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+          int validacion = 0;
+        String modelo, serie, motor,trasmisiones,direccion,rendimiento,color,marca,precio,cliente,caballo;
+      
+        modelo = txtModelo.getText().trim();
+        serie = txtSerie.getText().trim();
+        motor = txtMotor.getText().trim();
+        trasmisiones = txtTrans.getText().trim();
+        direccion = txtDireccion.getText().trim();
+        rendimiento = txtRendimiento.getText().trim();
+        color = txtColor.getText().trim();
+        marca = txtMarca.getText().trim();
+        precio = txtPrecio.getText().trim();
+        caballo = txtCaballo.getText().trim();
+        
+        
+        idCliente = cmbCliente.getSelectedIndex() + 1;
+
+        if (modelo.equals("")) {
+            txtModelo.setBackground(Color.red);
+            validacion++;
+        }
+        if (serie.equals("")) {
+            txtSerie.setBackground(Color.red);
+            validacion++;
+        }
+        if (motor.equals("")) {
+            txtMotor.setBackground(Color.red);
+            validacion++;
+        }
+        if (trasmisiones.equals("")) {
+            txtTrans.setBackground(Color.red);
+            validacion++;
+        }
+        if (direccion.equals("")) {
+            txtDireccion.setBackground(Color.red);
+            validacion++;
+        }
+        if (rendimiento.equals("")) {
+            txtRendimiento.setBackground(Color.red);
+            validacion++;
+        }
+        if (color.equals("")) {
+            txtColor.setBackground(Color.red);
+            validacion++;
+        }
+
+        if (marca.equals("")) {
+            txtMarca.setBackground(Color.red);
+            validacion++;
+        }
+        if (precio.equals("")) {
+            txtPrecio.setBackground(Color.red);
+            validacion++;
+        }
+
+        if (validacion == 0) {
+
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "insert into ciudad values (?,?,?,?,?,?,?,?,?,?)");
+                pst.setString(1, "0");
+                pst.setString(2, serie);
+                pst.setString(3, "01/10/2000");
+                pst.setString(4, motor);
+                pst.setString(5, rendimiento);
+                pst.setString(6, caballo);
+                pst.setString(8, color);
+                pst.setString(9, direccion);
+                pst.setString(10, trasmisiones);
+                
+                pst.executeUpdate();
+                cn.close();
+
+                txtModelo.setText("");
+                txtColor.setText("");
+                txtDireccion.setText("");
+                txtMarca.setText("");
+                txtMotor.setText("");
+                txtPrecio.setText("");
+                txtRendimiento.setText("");
+                txtSerie.setText("");
+                txtTrans.setText("");
+                
+         
+                
+                cmbCliente.setSelectedIndex(0);
+
+                JOptionPane.showMessageDialog(null, "Registro de Auto Exitoso");
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar auto" + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+
+            }
+            actualizarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarActionPerformed
+        // TODO add your handling code here:
+        
+         int idAutos = Integer.parseInt(tblAutos.getValueAt(tblAutos.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idAuto, NumeroSerie, año, NumeroMotor, Rendimiento, CaballosdeFuerza, Color, Direccion, Trasmision from autos where idAutos = '" + idAutos );
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                txtSerie.setText(rs.getString("NumeroSerie"));
+                txtMotor.setText(rs.getString("NumeroMotor"));
+                txtRendimiento.setText(rs.getString("Rendimiento"));
+                txtCaballo.setText(rs.getString("CaballosdeFuerza"));
+                txtColor.setText(rs.getString("Color"));
+                txtDireccion.setText(rs.getString("Direccion"));
+                txtTrans.setText(rs.getString("Transmisión"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error en cargar Auto " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+        
+        
+        
+    }//GEN-LAST:event_consultarActionPerformed
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_actualizarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void txtRendimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRendimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRendimientoActionPerformed
+
+    
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[4];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idCiudad, NombreCiudad, CP, NombreEstado from ciudad, estado where Estado_idEstado = idEstado");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton actualizar;
+    private javax.swing.JButton agregar;
+    private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JButton consultar;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -340,16 +581,17 @@ public class JIAutos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tblAutos;
+    private javax.swing.JTextField txtCaballo;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtMotor;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtRendimiento;
+    private javax.swing.JTextField txtSerie;
+    private javax.swing.JTextField txtTrans;
     // End of variables declaration//GEN-END:variables
 }

@@ -74,7 +74,6 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblCantidad.setText("Cantidad:");
         jPanel1.add(LblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        txtCantidad.setBackground(new java.awt.Color(204, 204, 204));
         txtCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 165, 130, 25));
 
@@ -84,7 +83,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         jPanel1.add(LblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, -1, -1));
 
         txtUDM.setEditable(false);
-        txtUDM.setBackground(new java.awt.Color(204, 204, 204));
+        txtUDM.setBackground(new java.awt.Color(255, 255, 255));
         txtUDM.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 165, 190, 25));
 
@@ -133,7 +132,6 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblTotal.setText("Total a pagar:");
         jPanel1.add(LblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, -1, -1));
 
-        txtTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 385, 150, 30));
 
