@@ -1,6 +1,7 @@
 package Interfaces;
 
 import java.awt.Color;
+import java.io.File;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -254,7 +255,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        
+        File archivo;
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 

@@ -22,7 +22,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         initComponents();
        
         setSize(794, 548);
-        setTitle("Venta de productos - Sesion de " + user);
+        setTitle("Venta de productos");
         setResizable(false);
 
     }

@@ -5,7 +5,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
     public JINuevaCompra() {
         initComponents();
         setSize(794, 548);
-        setTitle("Nueva Orden de Compra - Sesion de ");
+        setTitle("Nueva Orden de Compra");
         
     }
 
