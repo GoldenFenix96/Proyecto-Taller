@@ -289,7 +289,6 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     PV = txtPrecioV.getText().trim();
     
     idUnidadMedida = cmbUDM.getSelectedIndex() + 1;
-    idProveedor = cmbProveedores.getSelectedIndex() +1;
     idCategoria = cmbCategorias.getSelectedIndex() +1;
     
     if (CB.equals("")) {
@@ -312,7 +311,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
             txtPrecioV.setBackground(Color.red);
             validacion++;
         }
-        
+        consultarID();
         if (validacion == 0) {
             Connection cn = Conexion.conectar();
             PreparedStatement pst;
@@ -343,7 +342,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
                 txtPrecioC.setText("");
                 txtPrecioV.setText("");
                 
-
+                
                 JOptionPane.showMessageDialog(null, "Registro de Producto Exitoso");
             } catch (SQLException e) {
                 System.err.println("Error en Registrar Producto." + e);
@@ -356,6 +355,25 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnAgregarProActionPerformed
 
+    public void consultarID(){
+        String proveedor;
+        
+        proveedor = cmbProveedores.getSelectedItem().toString();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idProveedor from proveedor where NombreProveedor = '" + proveedor + "'");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                idProveedor = rs.getInt("idProveedor");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar datos: ID Ciudad " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarPro;

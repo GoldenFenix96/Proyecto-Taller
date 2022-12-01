@@ -336,7 +336,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
             txtRFC.setBackground(Color.red);
             validacion++;
         }
-
+        consultarID();
         if (validacion == 0) {
             try {
 
@@ -415,7 +415,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
             txtRFC.setBackground(Color.red);
             validacion++;
         }
-
+        consultarID();
         if (validacion == 0) {
             Connection cn = Conexion.conectar();
             PreparedStatement pst;
@@ -453,8 +453,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
-        int idCiudad = cmbCiudad.getSelectedIndex() + 1;
-
+        consultarID();
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select CP, NombreEstado from ciudad, estado where idCiudad = '" + idCiudad + "' and "
@@ -525,6 +524,26 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+    }
+    
+    public void consultarID(){
+        String ciudad;
+        
+        ciudad = cmbCiudad.getSelectedItem().toString();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idCiudad from ciudad, estado where NombreCiudad = '" + ciudad + "'");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                idCiudad = rs.getInt("idCiudad");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar datos: ID Ciudad " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
     }
 
