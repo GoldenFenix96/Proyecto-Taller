@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    public static String usuario = "";
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -194,7 +196,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseExited
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        String usuario = txtUser.getText().trim();
+        usuario = txtUser.getText().trim();
         String pass= txtPass.getText().trim();
         
         if(usuario.isEmpty() || pass.isEmpty()){
@@ -202,8 +204,8 @@ public class Login extends javax.swing.JFrame {
         } else {
             try {
                 Connection cn = Conexion.conectar();
-                PreparedStatement pst = null;
-                pst =cn.prepareStatement("select  Usuario, Contraseña from empleados where Usuario='" + usuario + "' and Contraseña ='" + pass + "'"); 
+                PreparedStatement pst = cn.prepareStatement("select Usuario, Contraseña "
+                        + "from empleados where Usuario='" + usuario + "' and Contraseña ='" + pass + "'"); 
                 ResultSet rs = pst.executeQuery();
             if(rs.next()){
                this.dispose();

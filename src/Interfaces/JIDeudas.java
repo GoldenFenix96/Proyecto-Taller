@@ -55,6 +55,7 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel3.setText("Cliente:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
 
+        jComboBox1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, 25));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -62,7 +63,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel7.setText("Número de Pagos:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 75, -1, -1));
 
-        jTextField6.setBackground(new java.awt.Color(0, 153, 102));
         jTextField6.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 250, 25));
@@ -72,7 +72,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel4.setText("Número de Pagos Actual:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 125, -1, -1));
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 102));
         jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, 25));
@@ -81,6 +80,8 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Última Fecha de Pago:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 125, -1, -1));
+
+        jDateChooser1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 220, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -88,7 +89,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel5.setText("Última Cantidad Pagada:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 175, -1, -1));
 
-        jTextField3.setBackground(new java.awt.Color(0, 153, 102));
         jTextField3.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 150, 25));
@@ -98,7 +98,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel6.setText("Cantidad Restante:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 175, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(0, 153, 102));
         jTextField4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 220, 25));
@@ -108,7 +107,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel9.setText("Límite de Credito:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 225, -1, -1));
 
-        jTextField8.setBackground(new java.awt.Color(0, 153, 102));
         jTextField8.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 200, 25));
@@ -118,7 +116,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel10.setText("Nivel de Confianza:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 225, -1, -1));
 
-        jTextField9.setBackground(new java.awt.Color(0, 153, 102));
         jTextField9.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 220, 25));

@@ -193,7 +193,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(AutosC);
 
-        jMenuItem6.setText("Alta de Marcas");
+        jMenuItem6.setText("Marcas");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
