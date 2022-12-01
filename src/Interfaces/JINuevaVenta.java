@@ -63,7 +63,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error en cargar cientificos " + e);
+            System.err.println("Error en cargar clientes " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
 
@@ -366,7 +366,22 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                              JOptionPane.QUESTION_MESSAGE));
                     }while(nvc<1 || nvc>2);
                     if (nvc == 1) {
-                        
+                        try {
+                        Connection cn2 = Conexion.conectar();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                                "insert into venta values (?,?,?,?,?,?,?)");
+                        pst2.setString(1, "0");
+                        pst2.setDate(2, fechaVenta);
+                        pst2.setTime(3, horaVenta);
+                        pst2.setString(4, "16%");
+                        pst2.setFloat(5, total);
+                        pst2.setFloat(6, total);
+                        pst2.setFloat(7, 0);
+                        pst2.executeUpdate();
+                        cn2.close();
+                        }catch(SQLException e){
+                            
+                        }
                     } else {
                         pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara el cliente",
                             "Billete", JOptionPane.QUESTION_MESSAGE));
