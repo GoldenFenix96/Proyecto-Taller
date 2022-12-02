@@ -1,37 +1,124 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Roberto Carlos Sanchez de la Cruz
- */
 public class ModificarProducto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModificarProducto
-     */
+    int IDPro, IdProducto, idUnidadMedida, idProveedor, idCategoria, idEstatus;
+
     public ModificarProducto() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setSize(800, 500);
         this.setTitle("Modificar Productos");
-        
+
+        IdProducto = JIExistencias.producto_update;
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreUDM from unidaddemedida");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbUDM.addItem(rs.getString("NombreUDM"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar las unidades de medida. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreProveedor from proveedor");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbProveedores.addItem(rs.getString("NombreProveedor"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar los proveedores. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreCategoria from categorias");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbCategorias.addItem(rs.getString("NombreCategoria"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar las categorias. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreE from estatusproducto");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbEstatus.addItem(rs.getString("NombreE"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar los estatus. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select CodigoBarras, NombreProducto, Existencia, NombreUDM, NombreProveedor, NombreCategoria, PrecioCompra, "
+                    + "PrecioVenta, NombreE, imagenP from productos, unidaddemedida, proveedor, categorias, estatusproducto "
+                    + "where idProductos = '" + IdProducto + "' and UnidaddeMedida_idUnidaddeMedida = idUnidaddeMedida "
+                    + "and Proveedor_idProveedor = idProveedor and Categorias_idCategorias = idCategorias "
+                    + "and EstatusProducto_idEstatusP = idEstatusP");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                txtCodigo.setText(rs.getString("CodigoBarras"));
+                txtProducto.setText(rs.getString("NombreProducto"));
+                txtExistencia.setText(rs.getString("Existencia"));
+                cmbUDM.setSelectedItem(rs.getString("NombreUDM"));
+                cmbProveedores.setSelectedItem(rs.getString("NombreProveedor"));
+                cmbCategorias.setSelectedItem(rs.getString("NombreCategoria"));
+                txtPrecioC.setText(rs.getString("PrecioCompra"));
+                txtPrecioV.setText(rs.getString("PrecioVenta"));
+                cmbEstatus.setSelectedItem(rs.getString("NombreE"));
+
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar empleado " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+
     }
-    
-    @Override
+
+   @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Taller P.png"));
         return retValue;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,11 +142,10 @@ public class ModificarProducto extends javax.swing.JFrame {
         txtPrecioV = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         lblExistencia2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbEstatus = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        CboxMP = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,15 +158,13 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel1.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         txtCodigo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtCodigo.setForeground(new java.awt.Color(255, 255, 255));
         txtCodigo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtCodigo.setEnabled(false);
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 87, 160, -1));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 87, 210, -1));
 
         lblProducto.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblProducto.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,15 +172,13 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel1.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 133, -1, -1));
 
         txtProducto.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtProducto.setForeground(new java.awt.Color(255, 255, 255));
         txtProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtProducto.setEnabled(false);
         txtProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProductoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 233, -1));
+        jPanel1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
 
         lblExistencia.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblExistencia.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,39 +186,35 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel1.add(lblExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 173, -1, -1));
 
         txtExistencia.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtExistencia.setForeground(new java.awt.Color(255, 255, 255));
         txtExistencia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 160, -1));
+        jPanel1.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 210, -1));
 
         lblExistencia1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblExistencia1.setForeground(new java.awt.Color(255, 255, 255));
         lblExistencia1.setText("Unidad de Medida:");
         jPanel1.add(lblExistencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 213, -1, -1));
 
-        cmbUDM.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbUDM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pieza", "Caja", "Bote", "Bolsa" }));
-        cmbUDM.setEnabled(false);
-        jPanel1.add(cmbUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 160, -1));
+        cmbUDM.setEditable(true);
+        cmbUDM.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 210, -1));
 
         lblProveedor.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblProveedor.setForeground(new java.awt.Color(255, 255, 255));
         lblProveedor.setText("Proveedores:");
         jPanel1.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 253, -1, -1));
 
-        cmbProveedores.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nissan" }));
-        cmbProveedores.setEnabled(false);
-        jPanel1.add(cmbProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 160, -1));
+        cmbProveedores.setEditable(true);
+        cmbProveedores.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 210, -1));
 
         lblCategorias.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblCategorias.setForeground(new java.awt.Color(255, 255, 255));
         lblCategorias.setText("Categorias:");
         jPanel1.add(lblCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 293, -1, -1));
 
-        cmbCategorias.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cmbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Llantas", "Refacciones" }));
-        cmbCategorias.setEnabled(false);
-        jPanel1.add(cmbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 160, -1));
+        cmbCategorias.setEditable(true);
+        cmbCategorias.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 210, -1));
 
         lblPrecioCompra.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblPrecioCompra.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,15 +222,13 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel1.add(lblPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 333, -1, -1));
 
         txtPrecioC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtPrecioC.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPrecioC.setEnabled(false);
         txtPrecioC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioCKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 160, -1));
+        jPanel1.add(txtPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 210, -1));
 
         lblPrecioVenta.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblPrecioVenta.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,64 +236,51 @@ public class ModificarProducto extends javax.swing.JFrame {
         jPanel1.add(lblPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 373, -1, -1));
 
         txtPrecioV.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtPrecioV.setForeground(new java.awt.Color(255, 255, 255));
         txtPrecioV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPrecioV.setEnabled(false);
         txtPrecioV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioVKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 160, -1));
+        jPanel1.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 210, -1));
 
         btnBuscar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
-        btnBuscar.setText("Buscar Imagen");
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar Archivo.png"))); // NOI18N
+        btnBuscar.setBorder(null);
         btnBuscar.setPreferredSize(new java.awt.Dimension(50, 23));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 110, 90));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 120, 120));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 160, 140));
 
-        jButton1.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
-        jButton1.setText("Modificar Producto");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
+        btnModificar.setBorder(null);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, 130, 100));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 130, 120));
 
         lblExistencia2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         lblExistencia2.setForeground(new java.awt.Color(255, 255, 255));
         lblExistencia2.setText("Estatus del Producto:");
         jPanel1.add(lblExistencia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 413, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Baja" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 160, -1));
+        cmbEstatus.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 210, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modificar Producto");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
-
-        CboxMP.setBackground(new java.awt.Color(29, 81, 81));
-        CboxMP.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        CboxMP.setForeground(new java.awt.Color(255, 255, 255));
-        CboxMP.setText("Modificar Producto");
-        CboxMP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CboxMPActionPerformed(evt);
-            }
-        });
-        jPanel1.add(CboxMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,14 +298,14 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
 
-        if (txtCodigo.getText().length() > 12) {
+        if (txtCodigo.getText().length() >= 12) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void txtProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyTyped
 
-        if (txtProducto.getText().length() > 45) {
+        if (txtProducto.getText().length() >= 45) {
             evt.consume();
         }
 
@@ -250,7 +313,7 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     private void txtPrecioCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCKeyTyped
 
-        if (txtPrecioC.getText().length() > 5) {
+        if (txtPrecioC.getText().length() >= 5) {
             evt.consume();
         }
 
@@ -258,7 +321,7 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     private void txtPrecioVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioVKeyTyped
 
-        if (txtPrecioV.getText().length() > 5) {
+        if (txtPrecioV.getText().length() >= 5) {
             evt.consume();
         }
 
@@ -268,17 +331,102 @@ public class ModificarProducto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int validacion = 0;
+        String CB, NP, Ex, PC, PV;
+        
+        CB = txtCodigo.getText().trim();
+        NP = txtProducto.getText().trim();
+        Ex = txtExistencia.getText().trim();
+        PC = txtPrecioC.getText().trim();
+        PV = txtPrecioV.getText().trim();
 
-    private void CboxMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboxMPActionPerformed
-         if (CboxMP.isSelected()) {
-            txtCodigo.setEnabled(true);
-        } else{
-            txtCodigo.setEnabled(false);
+        idUnidadMedida = cmbUDM.getSelectedIndex() + 1;
+        idProveedor = cmbProveedores.getSelectedIndex() + 1;
+        idCategoria = cmbCategorias.getSelectedIndex() + 1;
+        idEstatus = cmbEstatus.getSelectedIndex() + 1;
+        
+         if (CB.equals("")) {
+            txtCodigo.setBackground(Color.red);
+            validacion++;
         }
-    }//GEN-LAST:event_CboxMPActionPerformed
+        if (NP.equals("")) {
+            txtProducto.setBackground(Color.red);
+            validacion++;
+        }
+        if (Ex.equals("")) {
+            txtExistencia.setBackground(Color.red);
+            validacion++;
+        }
+        if (PC.equals("")) {
+            txtPrecioC.setBackground(Color.red);
+            validacion++;
+        }
+        if (PV.equals("")) {
+            txtPrecioV.setBackground(Color.red);
+            validacion++;
+        }
+        
+        if (validacion == 0) {
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select NombreProducto from productos where NombreProducto = '" + NP + "' and not idProductos = '" + IdProducto + "'");
+
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    txtProducto.setBackground(Color.red);
+                    JOptionPane.showMessageDialog(null, "Nombre de producto no disponible");
+                    cn.close();
+                } else {
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pst2 = cn2.prepareStatement(
+                            "update productos set CodigoBarras = ? ,NombreProducto = ?, Existencia = ?, UnidaddeMedida_idUnidaddeMedida = ?,"
+                            + " Proveedor_idProveedor = ?, Categorias_idCategorias = ?, PrecioCompra = ?, PrecioVenta = ?, EstatusProducto_idEstatusP = ?, "
+                                    + "imagenP = ? where idProductos = '" + IdProducto + "'");
+                    pst2.setString(1, CB);
+                    pst2.setString(2, NP);
+                    pst2.setString(3, Ex);
+                    pst2.setInt(4, idUnidadMedida);
+                    pst2.setInt(5, idProveedor);
+                    pst2.setInt(6, idCategoria);
+                    pst2.setFloat(7, Float.parseFloat(PC));
+                    pst2.setFloat(8, Float.parseFloat(PV));
+                    pst2.setInt(9, idEstatus);
+                    pst2.setString(10, "1");
+
+                    pst2.executeUpdate();
+                    cn2.close();
+
+                    txtProducto.setText("");
+                    txtCodigo.setText("");
+                    txtExistencia.setText("");
+                    txtPrecioC.setText("");
+                    txtPrecioV.setText("");
+                    cmbCategorias.setSelectedIndex(0);
+                    cmbProveedores.setSelectedIndex(0);
+                    cmbEstatus.setSelectedIndex(0);
+                    cmbUDM.setSelectedIndex(0);
+
+                    txtCodigo.setBackground(Color.green);
+                    txtExistencia.setBackground(Color.green);
+                    txtPrecioC.setBackground(Color.green);
+                    txtPrecioV.setBackground(Color.green);
+                    txtProducto.setBackground(Color.green);
+
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    this.dispose();
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar " + e);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }
+
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,13 +464,12 @@ public class ModificarProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CboxMP;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbCategorias;
+    private javax.swing.JComboBox<String> cmbEstatus;
     private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JComboBox<String> cmbUDM;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

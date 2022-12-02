@@ -297,7 +297,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El proveedor seleccionado fue dado de baja");
             actualizarTabla();
         } catch (SQLException er) {
-            System.err.println("Error en eliminar ciudad " + er);
+            System.err.println("Error en eliminar proveedor " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
 
         }
@@ -342,7 +342,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
 
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select NombreProveedor from proveedor where NombreProveedor = '" + nombrePro + "' and not idProveedor = '" + idProveedor + "'");
+                        "select * from proveedor where NombreProveedor = '" + nombrePro + "' and not idProveedor = '" + idProveedor + "'");
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {

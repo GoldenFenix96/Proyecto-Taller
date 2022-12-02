@@ -5,7 +5,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
     public JINuevaCompra() {
         initComponents();
         setSize(794, 548);
-        setTitle("Nueva Orden de Compra - Sesion de ");
+        setTitle("Nueva Orden de Compra");
         
     }
 
@@ -36,6 +36,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Taller P.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(29, 81, 81));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

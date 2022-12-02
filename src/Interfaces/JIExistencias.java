@@ -1,5 +1,8 @@
 package Interfaces;
 
+import static Interfaces.JIGestionUsuario.usuario_update;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
@@ -9,6 +12,7 @@ import javax.swing.table.TableColumnModel;
 public class JIExistencias extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel();
+    public static int producto_update = 0;
 
     public JIExistencias() {
         initComponents();
@@ -70,6 +74,23 @@ public class JIExistencias extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar los proveedores. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
+        
+        tblProductos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = tblProductos.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    producto_update = (int) model.getValueAt(fila_point, columna_point);
+
+                    ModificarProducto MP = new ModificarProducto();
+                    MP.setVisible(true);
+
+                }
+
+            }
+        });
 
     }
 

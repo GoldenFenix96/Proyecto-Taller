@@ -21,16 +21,17 @@ public class JIAutos extends javax.swing.JInternalFrame {
         tblAutos = new JTable(model);
             jScrollPane1.setViewportView(tblAutos);
             
-            model.addColumn("Modelo");
+            
             model.addColumn("Serie");
+            model.addColumn("Modelo");
+            model.addColumn("Marca");
+            model.addColumn("Color");
             model.addColumn("Motor");
             model.addColumn("Transmisiones");
             model.addColumn("Direcciones");
             model.addColumn("Redimiento");
-            model.addColumn("Color");
-            model.addColumn("Marca");
-            model.addColumn("precio");
-            model.addColumn("Cliente");
+            model.addColumn("Caballo de fuerza");
+            
             
              actualizarTabla();
 
@@ -40,9 +41,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
                     "select NombreC from clientes");
             ResultSet rs = pst.executeQuery();
 
-            while (rs.next()) {
-                cmbCliente.addItem(rs.getString("NombreC"));
-            }
             cn.close();
 
         } catch (SQLException e) {
@@ -79,8 +77,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
         txtColor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         consultar = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
@@ -91,11 +87,10 @@ public class JIAutos extends javax.swing.JInternalFrame {
         tblAutos = new javax.swing.JTable();
         jTextField10 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        cmbCliente = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         txtRendimiento = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtano = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -205,8 +200,8 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Marca:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 115, -1, -1));
+        jLabel8.setText("Año");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         txtMarca.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         txtMarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -216,20 +211,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 160, 25));
-
-        jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Precio:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 155, -1, -1));
-
-        txtPrecio.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        txtPrecio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 25));
 
         jLabel10.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -278,36 +259,23 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         tblAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
             }
         ));
         jScrollPane1.setViewportView(tblAutos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 730, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 730, 110));
         jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 330, 30));
 
         jButton5.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jButton5.setText("Buscar Auto");
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, 190, 30));
-
-        jButton6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton6.setText("Buscar");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Cliente:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 200, -1, -1));
-
-        cmbCliente.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        cmbCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(cmbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 195, 160, 25));
 
         jLabel13.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -322,6 +290,18 @@ public class JIAutos extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(txtRendimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 160, 25));
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Marca:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 115, -1, -1));
+
+        txtano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtanoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -370,14 +350,10 @@ public class JIAutos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMarcaActionPerformed
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
           int validacion = 0;
-        String modelo, serie, motor,trasmisiones,direccion,rendimiento,color,marca,precio,cliente,caballo;
+        String modelo, serie, motor,trasmisiones,direccion,rendimiento,color,marca,caballo,ano;
       
         modelo = txtModelo.getText().trim();
         serie = txtSerie.getText().trim();
@@ -387,11 +363,8 @@ public class JIAutos extends javax.swing.JInternalFrame {
         rendimiento = txtRendimiento.getText().trim();
         color = txtColor.getText().trim();
         marca = txtMarca.getText().trim();
-        precio = txtPrecio.getText().trim();
         caballo = txtCaballo.getText().trim();
-        
-        
-        idCliente = cmbCliente.getSelectedIndex() + 1;
+        ano = txtano.getText().trim();
 
         if (modelo.equals("")) {
             txtModelo.setBackground(Color.red);
@@ -426,8 +399,8 @@ public class JIAutos extends javax.swing.JInternalFrame {
             txtMarca.setBackground(Color.red);
             validacion++;
         }
-        if (precio.equals("")) {
-            txtPrecio.setBackground(Color.red);
+        if (ano.equals("")) {
+            txtano.setBackground(Color.red);
             validacion++;
         }
 
@@ -438,11 +411,12 @@ public class JIAutos extends javax.swing.JInternalFrame {
                 PreparedStatement pst = cn.prepareStatement(
                         "insert into ciudad values (?,?,?,?,?,?,?,?,?,?)");
                 pst.setString(1, "0");
-                pst.setString(2, serie);
-                pst.setString(3, "01/10/2000");
-                pst.setString(4, motor);
-                pst.setString(5, rendimiento);
-                pst.setString(6, caballo);
+                pst.setString(2, "0");
+                pst.setString(3, serie);
+                pst.setString(4, ano);
+                pst.setString(5, motor);
+                pst.setString(6, rendimiento);
+                pst.setString(7, caballo);
                 pst.setString(8, color);
                 pst.setString(9, direccion);
                 pst.setString(10, trasmisiones);
@@ -455,14 +429,9 @@ public class JIAutos extends javax.swing.JInternalFrame {
                 txtDireccion.setText("");
                 txtMarca.setText("");
                 txtMotor.setText("");
-                txtPrecio.setText("");
                 txtRendimiento.setText("");
                 txtSerie.setText("");
                 txtTrans.setText("");
-                
-         
-                
-                cmbCliente.setSelectedIndex(0);
 
                 JOptionPane.showMessageDialog(null, "Registro de Auto Exitoso");
             } catch (SQLException e) {
@@ -474,10 +443,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
-        
-        
-        
+   
         
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -488,17 +454,21 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select idAuto, NumeroSerie, año, NumeroMotor, Rendimiento, CaballosdeFuerza, Color, Direccion, Trasmision from autos where idAutos = '" + idAutos );
+            PreparedStatement pst = cn.prepareStatement("SELECT NumeroSerie, NombreModelo, NombreMarca, Color, NumeroMotor, Transmisión, Direccion, Rendimiento, CaballosdeFuerza"
+                    + "FROM autos inner join modelo on autos.idAutos = modelo.idModelo "
+                    + "inner join marca on modelo.idModelo = marca.idMarca where autos.idAutos =" + idAutos);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
                 txtSerie.setText(rs.getString("NumeroSerie"));
+                txtModelo.setText(rs.getNString("NombreModelo"));
+                txtMarca.setText(rs.getNString("NombreMarca"));
+                txtColor.setText(rs.getString("Color"));
                 txtMotor.setText(rs.getString("NumeroMotor"));
+                txtTrans.setText(rs.getString("Transmisión"));
+                 txtDireccion.setText(rs.getString("Direccion"));
                 txtRendimiento.setText(rs.getString("Rendimiento"));
                 txtCaballo.setText(rs.getString("CaballosdeFuerza"));
-                txtColor.setText(rs.getString("Color"));
-                txtDireccion.setText(rs.getString("Direccion"));
-                txtTrans.setText(rs.getString("Transmisión"));
             }
             cn.close();
 
@@ -513,17 +483,137 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
         // TODO add your handling code here:
+            int validacion = 0;
+        String modelo, serie, motor,trasmisiones,direccion,rendimiento,color,marca,caballo,ano;
+        int idAutos = Integer.parseInt(tblAutos.getValueAt(tblAutos.getSelectedRow(), 0).toString());
+      
+        modelo = txtModelo.getText().trim();
+        serie = txtSerie.getText().trim();
+        motor = txtMotor.getText().trim();
+        trasmisiones = txtTrans.getText().trim();
+        direccion = txtDireccion.getText().trim();
+        rendimiento = txtRendimiento.getText().trim();
+        color = txtColor.getText().trim();
+        marca = txtMarca.getText().trim();
+        caballo = txtCaballo.getText().trim();
+        ano = txtano.getText().trim();
+
+        if (modelo.equals("")) {
+            txtModelo.setBackground(Color.red);
+            validacion++;
+        }
+        if (serie.equals("")) {
+            txtSerie.setBackground(Color.red);
+            validacion++;
+        }
+        if (motor.equals("")) {
+            txtMotor.setBackground(Color.red);
+            validacion++;
+        }
+        if (trasmisiones.equals("")) {
+            txtTrans.setBackground(Color.red);
+            validacion++;
+        }
+        if (direccion.equals("")) {
+            txtDireccion.setBackground(Color.red);
+            validacion++;
+        }
+        if (rendimiento.equals("")) {
+            txtRendimiento.setBackground(Color.red);
+            validacion++;
+        }
+        if (color.equals("")) {
+            txtColor.setBackground(Color.red);
+            validacion++;
+        }
+
+        if (marca.equals("")) {
+            txtMarca.setBackground(Color.red);
+            validacion++;
+        }
+        if (ano.equals("")) {
+            txtano.setBackground(Color.red);
+            validacion++;
+        }
         
-        
-        
-        
-        
+           if (validacion == 0) {
+            try {
+
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        "select * from autos where NumeroSerie = '" + serie + "' and not idAutos = '" + idAutos + "'");
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+              
+                    txtSerie.setText(rs.getString("NumeroSerie"));
+                    txtModelo.setText(rs.getNString("NombreModelo"));
+                    txtMarca.setText(rs.getNString("NombreMarca"));
+                    txtColor.setText(rs.getString("Color"));
+                    txtMotor.setText(rs.getString("NumeroMotor"));
+                    txtTrans.setText(rs.getString("Transmisión"));
+                    txtDireccion.setText(rs.getString("Direccion"));
+                    txtRendimiento.setText(rs.getString("Rendimiento"));
+                    txtCaballo.setText(rs.getString("CaballosdeFuerza"));
+                    JOptionPane.showMessageDialog(null, "Nombre de Auto no disponible");
+                    cn.close();
+                } else {
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pest = cn2.prepareStatement(
+                            "update autos set NumeroSerie=?,   Año=?, NumeroMotor=?, Rendimiento=?, CaballosdeFuerza=?, Color=? , Direccion =? ,Trasmisió=? "
+                            + "where idAutos = '" + idAutos + "'");
+                //pendiente//
+                    pest.setString(3, serie);
+                    pest.setString(4, ano);
+                    pest.setString(5, motor);
+                    pest.setString(6, rendimiento);
+                    pest.setString(7, caballo);
+                    pest.setString(8, color);
+                    pest.setString(9, direccion);
+                    pest.setString(10, trasmisiones);
+
+                    pest.executeUpdate();
+                    cn2.close();
+
+                    JOptionPane.showMessageDialog(null, "Modificación correcta");
+                    txtSerie.setText(rs.getString("NumeroSerie"));
+                    txtModelo.setText(rs.getNString("NombreModelo"));
+                    txtMarca.setText(rs.getNString("NombreMarca"));
+                    txtColor.setText(rs.getString("Color"));
+                    txtMotor.setText(rs.getString("NumeroMotor"));
+                    txtTrans.setText(rs.getString("Transmisión"));
+                    txtDireccion.setText(rs.getString("Direccion"));
+                    txtRendimiento.setText(rs.getString("Rendimiento"));
+                    txtCaballo.setText(rs.getString("CaballosdeFuerza"));
+                }
+                actualizarTabla();
+
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar el Autos " + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+        }     
     }//GEN-LAST:event_actualizarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
-        
-        
+            int idAuto = Integer.parseInt(tblAutos.getValueAt(tblAutos.getSelectedRow(), 0).toString());
+
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "delete from autos where idAutos = '" + idAuto + "'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "El Auto seleccionado fue dado de baja");
+            actualizarTabla();
+        } catch (SQLException er) {
+            System.err.println("Error en eliminar Autos " + er);
+            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+
+        }
         
         
         
@@ -534,18 +624,23 @@ public class JIAutos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRendimientoActionPerformed
 
-    
+    private void txtanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtanoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtanoActionPerformed
+
     public void actualizarTabla() {
 
         model.setRowCount(0);
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[9];
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select idCiudad, NombreCiudad, CP, NombreEstado from ciudad, estado where Estado_idEstado = idEstado");
+            PreparedStatement pst = cn.prepareStatement("SELECT NumeroSerie, NombreModelo, NombreMarca, Color, NumeroMotor, Transmisión, Direccion, Rendimiento, CaballosdeFuerza"
+                    + "FROM autos inner join modelo on autos.idAutos = modelo.idModelo "
+                    + "inner join marca on modelo.idModelo = marca.idMarca");
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 9; i++) {
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila);
@@ -561,15 +656,12 @@ public class JIAutos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
     private javax.swing.JButton agregar;
-    private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JButton consultar;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -589,9 +681,9 @@ public class JIAutos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtMotor;
-    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtRendimiento;
     private javax.swing.JTextField txtSerie;
     private javax.swing.JTextField txtTrans;
+    private javax.swing.JTextField txtano;
     // End of variables declaration//GEN-END:variables
 }

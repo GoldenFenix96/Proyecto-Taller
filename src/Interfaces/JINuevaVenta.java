@@ -22,7 +22,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         initComponents();
        
         setSize(794, 548);
-        setTitle("Venta de productos - Sesion de " + user);
+        setTitle("Venta de productos");
         setResizable(false);
 
     }
@@ -60,6 +60,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Taller P.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(29, 81, 81));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,6 +141,11 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LblTotal.setText("Total a pagar:");
         jPanel1.add(LblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, -1, -1));
 
+<<<<<<< HEAD
+=======
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(204, 204, 204));
+>>>>>>> 26989a8c9ad85d9b7ab26e37c6d2d098ef0700d7
         txtTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 385, 150, 30));
 
@@ -176,17 +182,22 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LblCantidad1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblCantidad1.setForeground(new java.awt.Color(255, 255, 255));
         LblCantidad1.setText("Cliente:");
-        jPanel1.add(LblCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 175, -1, -1));
+        jPanel1.add(LblCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 175, -1, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 190, 25));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 190, 25));
 
         LblCantidad2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblCantidad2.setForeground(new java.awt.Color(255, 255, 255));
         LblCantidad2.setText("Precio:");
         jPanel1.add(LblCantidad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 175, -1, -1));
 
+<<<<<<< HEAD
+=======
+        txtCantidad1.setEditable(false);
+        txtCantidad1.setBackground(new java.awt.Color(204, 204, 204));
+>>>>>>> 26989a8c9ad85d9b7ab26e37c6d2d098ef0700d7
         txtCantidad1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 130, 25));
+        jPanel1.add(txtCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

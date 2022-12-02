@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 public class ModificarUsuarios extends javax.swing.JFrame {
 
