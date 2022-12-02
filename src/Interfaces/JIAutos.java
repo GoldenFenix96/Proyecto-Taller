@@ -40,7 +40,9 @@ public class JIAutos extends javax.swing.JInternalFrame {
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreC from clientes");
             ResultSet rs = pst.executeQuery();
-
+            while (rs.next()) {
+                cmbProveedores.addItem(rs.getString("NombreProveedor"));
+            }
             cn.close();
 
         } catch (SQLException e) {
@@ -82,7 +84,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
         agregar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         actualizar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAutos = new javax.swing.JTable();
         jTextField10 = new javax.swing.JTextField();
@@ -200,8 +201,8 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Año");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
+        jLabel8.setText("Año:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
 
         txtMarca.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         txtMarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -253,10 +254,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
         });
         jPanel1.add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 240, -1, -1));
 
-        jLabel11.setBackground(new java.awt.Color(102, 255, 102));
-        jLabel11.setToolTipText("");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 160, 150));
-
         tblAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -301,7 +298,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
                 txtanoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 30));
+        jPanel1.add(txtano, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -661,7 +658,6 @@ public class JIAutos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
