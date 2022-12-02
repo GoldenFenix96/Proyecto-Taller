@@ -75,7 +75,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="25" y="90" width="-1" height="-1"/>
+              <AbsoluteConstraints x="60" y="110" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -95,7 +95,11 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+<<<<<<< HEAD
               <AbsoluteConstraints x="170" y="90" width="160" height="25"/>
+=======
+              <AbsoluteConstraints x="200" y="105" width="210" height="25"/>
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
             </Constraint>
           </Constraints>
         </Component>
@@ -111,7 +115,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="140" width="-1" height="-1"/>
+              <AbsoluteConstraints x="150" y="160" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -126,7 +130,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="135" width="160" height="25"/>
+              <AbsoluteConstraints x="200" y="155" width="210" height="25"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -156,7 +160,11 @@
             </Component>
           </SubComponents>
         </Container>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="agregar">
+=======
+        <Component class="javax.swing.JButton" name="btnAgregar">
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="1"/>
@@ -164,7 +172,11 @@
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
           <Events>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarActionPerformed"/>
+=======
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -172,7 +184,11 @@
             </Constraint>
           </Constraints>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="consultar">
+=======
+        <Component class="javax.swing.JButton" name="btnConsultar">
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="1"/>
@@ -180,7 +196,11 @@
             <Property name="text" type="java.lang.String" value="Consultar"/>
           </Properties>
           <Events>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarActionPerformed"/>
+=======
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarActionPerformed"/>
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -188,7 +208,11 @@
             </Constraint>
           </Constraints>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="eliminar">
+=======
+        <Component class="javax.swing.JButton" name="btnEliminar">
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="1"/>
@@ -196,7 +220,11 @@
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
           <Events>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarActionPerformed"/>
+=======
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarActionPerformed"/>
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -204,7 +232,11 @@
             </Constraint>
           </Constraints>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="actualizar">
+=======
+        <Component class="javax.swing.JButton" name="btnActualizar">
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="1"/>
@@ -212,39 +244,15 @@
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="actualizarActionPerformed"/>
+=======
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
+>>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="490" y="230" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Roboto" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Buscar Imagen"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-                <BevelBorder/>
-              </Border>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="420" y="100" width="110" height="70"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Insertar Imagen"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="590" y="70" width="150" height="150"/>
             </Constraint>
           </Constraints>
         </Component>

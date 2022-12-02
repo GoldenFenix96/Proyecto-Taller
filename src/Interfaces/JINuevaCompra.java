@@ -1,11 +1,53 @@
 package Interfaces;
 
+import java.awt.Color;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class JINuevaCompra extends javax.swing.JInternalFrame {
 
+    String user;
+    String idProducto = "";
+    float total;
+    String idUsuario;
+    String idVenta;
+    int nuevaCant, cantidad, existencia, cantidadVieja;
+    DefaultTableModel model = new DefaultTableModel();
+    
     public JINuevaCompra() {
         initComponents();
         setSize(794, 548);
         setTitle("Nueva Orden de Compra");
+        
+         jTable_Compra = new JTable(model);
+        jScrollPane1.setViewportView(jTable_Compra);
+
+        model.addColumn("ID Producto");
+        model.addColumn("Descripción");
+        model.addColumn("Cantidad");
+        model.addColumn("Precio Unitario de Compra");
+        model.addColumn("Subtotal");
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NombreProveedor from proveedor");
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                cmbProductos.addItem(rs.getString("NombreProveedor"));
+
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error en cargar proveedores " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
         
     }
 
@@ -17,17 +59,17 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         LblSKU = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbProveedores = new javax.swing.JComboBox<>();
         btBuscar = new javax.swing.JButton();
         LbDescripción = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbProductos = new javax.swing.JComboBox<>();
         LblCantidad = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         LblCodigo1 = new javax.swing.JLabel();
         txtUDM = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Venta = new javax.swing.JTable();
+        jTable_Compra = new javax.swing.JTable();
         btnBorrar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         LblTotal = new javax.swing.JLabel();
@@ -52,7 +94,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblSKU.setText("Proveedor:");
         jPanel1.add(LblSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 95, 80, -1));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 180, 25));
+        jPanel1.add(cmbProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 180, 25));
 
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
         btBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -68,7 +110,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LbDescripción.setText("Producto:");
         jPanel1.add(LbDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 95, -1, -1));
 
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 210, 25));
+        jPanel1.add(cmbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 210, 25));
 
         LblCantidad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblCantidad.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,7 +139,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 90, 80));
 
-        jTable_Venta.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Compra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -108,7 +150,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable_Venta);
+        jScrollPane1.setViewportView(jTable_Compra);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 740, 120));
 
@@ -191,13 +233,13 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnPagar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cmbProductos;
+    private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_Venta;
+    private javax.swing.JTable jTable_Compra;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtUDM;

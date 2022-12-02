@@ -265,7 +265,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreC, APaternoC, AMaternoC, Telefono, Dirección, Correo, DescripciónConfianza, LimiteCredito "
                     + " from clientes, nc_cliente, lc_cliente  where idClientes = '"+idClientes+"' and NC_Cliente_idNC_Cliente = idNC_Cliente "
-                            + "and LC_Cliente_idNC_Cliente = idNC_Cliente");
+                            + "and idLC_Cliente = idClientes");
            
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -284,10 +284,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
             System.err.println("Error en cargar ciudad " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
-       
-       
-       
-       
        
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -390,7 +386,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pst2;
                     pst2 = cn2.prepareStatement(
-                            "update lc_cliente set LimiteCredito = ?, LC_Cliente_idNC_Cliente = ?");
+                            "update lc_cliente set LimiteCredito = ?, LC_Cliente_idNC_Cliente = ? where idLC_Cliente = '"+idClientes+"'");
                     pst2.setInt(1, Integer.parseInt(limite));
                     pst2.setInt(2, idNivc);
 
@@ -411,8 +407,10 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 txtApaterno.setText("");
                 txtLC.setText("");
                 actualizarTabla();
+                
                 JOptionPane.showMessageDialog(null, "Actualización de Cliente Exitoso");
             } else {
+                
                 JOptionPane.showMessageDialog(null, "El limite ingresado no coincide con el parametro establecido");
             }
             
@@ -472,7 +470,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 PreparedStatement pst;
                 try {
                     pst = cn.prepareStatement(
-                            "insert into clientes values (?,?,?,?,?,?,?,?)");
+                            "insert into clientes values (?,?,?,?,?,?,?,?,?)");
                     pst.setString(1, "0");
                     pst.setString(2, nombre);
                     pst.setString(3, apaterno);
@@ -481,28 +479,12 @@ public class JIClientes extends javax.swing.JInternalFrame {
                     pst.setString(6, direccion);
                     pst.setString(7, correo);
                     pst.setInt(8, idNivc);
+                    pst.setInt(9, Integer.parseInt(limite));
 
                     pst.executeUpdate();
                     cn.close();
                 } catch (SQLException e) {
                     System.err.println("Error en Registrar Cliente." + e);
-                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
-                }
-
-                try {
-                    Connection cn2 = Conexion.conectar();
-                    PreparedStatement pst2;
-                    pst2 = cn2.prepareStatement(
-                            "insert into lc_cliente values (?,?,?)");
-                    pst2.setString(1, "0");
-                    pst2.setInt(2, Integer.parseInt(limite));
-                    pst2.setInt(3, idNivc);
-
-                    pst2.executeUpdate();
-                    cn2.close();
-
-                } catch (SQLException e) {
-                    System.err.println("Error en Registrar Limite de Credito." + e);
                     JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
                 }
 
@@ -592,7 +574,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select "
                     + "idClientes, NombreC, APaternoC, AMaternoC, Telefono, DescripciónConfianza, LimiteCredito"
-                    + " from clientes, nc_cliente, lc_cliente  where NC_Cliente_idNC_Cliente = idNC_Cliente and LC_Cliente_idNC_Cliente = idNC_Cliente");
+                    + " from clientes, nc_cliente where NC_Cliente_idNC_Cliente = idNC_Cliente order by idClientes");
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
