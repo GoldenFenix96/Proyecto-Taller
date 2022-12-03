@@ -1,20 +1,12 @@
 package Interfaces;
 
 import java.awt.Color;
-<<<<<<< HEAD
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-=======
 import java.sql.*;
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class JIMarca extends javax.swing.JInternalFrame {
-      DefaultTableModel model = new DefaultTableModel();
 
     DefaultTableModel model = new DefaultTableModel();
     
@@ -23,20 +15,13 @@ public class JIMarca extends javax.swing.JInternalFrame {
         this.setSize(794, 548);
         this.setTitle("Registros de Marcas");
         
-<<<<<<< HEAD
-          jtbmarca = new JTable(model);
-=======
         jtbmarca = new JTable(model);
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         jScrollPane1.setViewportView(jtbmarca);
 
         model.addColumn("ID del marca");
         model.addColumn("Nombre de la marca");
         actualizarTabla();
-<<<<<<< HEAD
-=======
         
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
     }
 
     @SuppressWarnings("unchecked")
@@ -49,19 +34,10 @@ public class JIMarca extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbmarca = new javax.swing.JTable();
-<<<<<<< HEAD
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        agregar = new javax.swing.JButton();
-        consultar = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
-        actualizar = new javax.swing.JButton();
-=======
         btnAgregar = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         setClosable(true);
         setIconifiable(true);
@@ -77,16 +53,7 @@ public class JIMarca extends javax.swing.JInternalFrame {
 
         texmarca.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         texmarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-<<<<<<< HEAD
-        texmarca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                texmarcaKeyTyped(evt);
-            }
-        });
-        jPanel1.add(texmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 125, 150, 25));
-=======
         jPanel1.add(texmarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 125, 220, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel2.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -95,66 +62,19 @@ public class JIMarca extends javax.swing.JInternalFrame {
 
         jtbmarca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jtbmarca);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 700, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 280, 700, 190));
 
-<<<<<<< HEAD
-        jLabel1.setText("Insertar Imagen");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 150, 150));
-
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jButton1.setText("Buscar Imagen");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 110, 70));
-
-        agregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        agregar.setText("Agregar");
-        agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
-
-        consultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        consultar.setText("Consultar");
-        consultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
-
-        eliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        eliminar.setText("Eliminar");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
-
-        actualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        actualizar.setText("Actualizar");
-        actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
-=======
         btnAgregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +110,6 @@ public class JIMarca extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,61 +125,13 @@ public class JIMarca extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-    private void consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarActionPerformed
-        // TODO add your handling code here:
-        
-          int idMarca = Integer.parseInt(jtbmarca.getValueAt(jtbmarca.getSelectedRow(), 0).toString());
-=======
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         int idMarca = Integer.parseInt(jtbmarca.getValueAt(jtbmarca.getSelectedRow(), 0).toString());
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select NombreMarca from marca where idMarca = '" + idMarca + "'");
             ResultSet rs = pst.executeQuery();
-<<<<<<< HEAD
-
-            if (rs.next()) {
-                texmarca.setText(rs.getString("NombreMarca"));
-            }
-            cn.close();
-
-        } catch (SQLException e) {
-            System.err.println("Error en cargar Marca" + e);
-            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
-        }
-    }//GEN-LAST:event_consultarActionPerformed
-
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-        
-           int idMarca = Integer.parseInt(jtbmarca.getValueAt(jtbmarca.getSelectedRow(), 0).toString());
-
-        try {
-            Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement(
-                    "delete from marca  where idMarca= '" + idMarca + "'");
-            pst.executeUpdate();
-            cn.close();
-            JOptionPane.showMessageDialog(null, "El estatus seleccionado fue dado de baja");
-            actualizarTabla();
-        } catch (SQLException er) {
-            System.err.println("Error en eliminar Marca " + er);
-            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
-
-        }
-     
-    }//GEN-LAST:event_eliminarActionPerformed
-
-    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        // TODO add your handling code here:
-           int idMarca = Integer.parseInt(jtbmarca.getValueAt(jtbmarca.getSelectedRow(), 0).toString());
-        int validacion = 0;
-        String nombre;
-
-=======
 
             if (rs.next()) {
                 texmarca.setText(rs.getString("NombreMarca"));
@@ -296,7 +167,6 @@ public class JIMarca extends javax.swing.JInternalFrame {
         int validacion = 0;
         String nombre;
 
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         nombre = texmarca.getText().trim();
 
         if (nombre.equals("")) {
@@ -308,11 +178,7 @@ public class JIMarca extends javax.swing.JInternalFrame {
             try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-<<<<<<< HEAD
-                        "select NombreMarca from estatus where NombreMarca = '" + nombre + "' and not idMarca = '" + idMarca + "'");
-=======
                         "select NombreMarca from marca where NombreMarca = '" + nombre + "' and not idMarca = '" + idMarca + "'");
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
                 ResultSet rs = pst.executeQuery();
 
                 if (rs.next()) {
@@ -338,21 +204,10 @@ public class JIMarca extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-<<<<<<< HEAD
-        
-        
-        
-    }//GEN-LAST:event_actualizarActionPerformed
-
-    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-             int validacion = 0;
-=======
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int validacion = 0;
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         String nombre;
 
         nombre = texmarca.getText().trim();
@@ -386,25 +241,9 @@ public class JIMarca extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-<<<<<<< HEAD
-        
-        
-        
-    }//GEN-LAST:event_agregarActionPerformed
-
-    private void texmarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_texmarcaKeyTyped
-        // TODO add your handling code here:
-                if (texmarca.getText().length() >= 20) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_texmarcaKeyTyped
-
-       public void actualizarTabla() {
-=======
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void actualizarTabla() {
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         model.setRowCount(0);
         Object[] fila = new Object[2];
@@ -428,19 +267,10 @@ public class JIMarca extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JButton actualizar;
-    private javax.swing.JButton agregar;
-    private javax.swing.JButton consultar;
-    private javax.swing.JButton eliminar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-=======
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

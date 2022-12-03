@@ -103,99 +103,55 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel7.setText("Número de Pagos:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 75, -1, -1));
 
-<<<<<<< HEAD
-        jTextField6.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 230, 25));
-=======
         txtNPagos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNPagos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtNPagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 250, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Número de Pagos Actual:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 125, -1, -1));
 
-<<<<<<< HEAD
-        jTextField2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, 25));
-
-        jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Última Fecha de Pago:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 125, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 220, 25));
-=======
         txtNActual.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNActual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtNActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Última Cantidad Pagada:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 175, -1, -1));
 
-<<<<<<< HEAD
-        jTextField3.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 150, 25));
-=======
         txtUPagada.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtUPagada.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtUPagada, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 150, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cantidad Restante:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
-<<<<<<< HEAD
-        jTextField4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 220, 25));
-=======
         txtCRestante.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCRestante.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 125, 240, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Límite de Credito:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 225, -1, -1));
 
-<<<<<<< HEAD
-        jTextField8.setEditable(false);
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField8.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 200, 25));
-=======
         txtLimiteCredito.setEditable(false);
         txtLimiteCredito.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtLimiteCredito.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtLimiteCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 200, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Credito Restante:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, -1, -1));
 
-<<<<<<< HEAD
-        jTextField9.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 220, 25));
-=======
         txtCreRestante.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCreRestante.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCreRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 175, 240, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         tblDeudas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

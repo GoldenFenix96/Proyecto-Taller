@@ -116,14 +116,9 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LbDescripción.setText("Descripción:");
         jPanel1.add(LbDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 65, -1, -1));
 
-<<<<<<< HEAD
-        txtSKU.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 90, 25));
-=======
         txtIdProducto.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtIdProducto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 90, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
         btBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -136,10 +131,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
         txtNombreProducto.setEditable(false);
         txtNombreProducto.setBackground(new java.awt.Color(255, 255, 255));
-<<<<<<< HEAD
-=======
         txtNombreProducto.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         txtNombreProducto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 240, 25));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 740, -1));
@@ -149,10 +141,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LblCantidad.setText("Cantidad:");
         jPanel1.add(LblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
-<<<<<<< HEAD
-=======
         txtCantidad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         txtCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 115, 110, 25));
 
@@ -163,10 +152,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
         txtUDM.setEditable(false);
         txtUDM.setBackground(new java.awt.Color(255, 255, 255));
-<<<<<<< HEAD
-=======
         txtUDM.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
         txtUDM.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 115, 190, 25));
 
@@ -200,11 +186,8 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LblTotal.setText("Total + IVA:");
         jPanel1.add(LblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, -1, -1));
 
-<<<<<<< HEAD
-=======
         txtTotal.setEditable(false);
         txtTotal.setBackground(new java.awt.Color(204, 204, 204));
->>>>>>> 26989a8c9ad85d9b7ab26e37c6d2d098ef0700d7
         txtTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 385, 150, 30));
 
@@ -251,21 +234,11 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         LblCantidad2.setText("Precio:");
         jPanel1.add(LblCantidad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 175, -1, -1));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        txtCantidad1.setEditable(false);
-        txtCantidad1.setBackground(new java.awt.Color(204, 204, 204));
->>>>>>> 26989a8c9ad85d9b7ab26e37c6d2d098ef0700d7
-        txtCantidad1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 25));
-=======
         txtPrecio.setEditable(false);
         txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 25));
->>>>>>> a1266d7ca31d32a4c31210a1fbe09bafcfca04ef
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

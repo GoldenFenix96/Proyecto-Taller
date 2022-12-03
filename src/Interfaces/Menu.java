@@ -52,6 +52,7 @@ public class Menu extends javax.swing.JFrame {
         AutosC = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         Clientes = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -185,7 +186,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu3.setText("Autos");
 
-        AutosC.setText("Autos - Clientes");
+        AutosC.setText("Autos");
         AutosC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AutosCActionPerformed(evt);
@@ -208,6 +209,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem6);
+
+        jMenuItem9.setText("Autos-Clientes");
+        jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
 
@@ -526,5 +530,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
