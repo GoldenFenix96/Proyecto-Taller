@@ -211,6 +211,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.add(jMenuItem6);
 
         jMenuItem9.setText("Autos-Clientes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
@@ -462,6 +467,12 @@ public class Menu extends javax.swing.JFrame {
         DPEscritorio.add(JIRC);
         JIRC.show();
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        JIAutosClientes JIAC = new JIAutosClientes();
+        DPEscritorio.add(JIAC);
+        JIAC.show();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

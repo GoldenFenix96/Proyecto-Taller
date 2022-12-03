@@ -305,7 +305,7 @@ public class JIProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-            int validacion = 0;
+        int validacion = 0;
         String nombrePro, direccion, telefono, correo, rfc;
         int idProveedor = Integer.parseInt(tblProveedores.getValueAt(tblProveedores.getSelectedRow(), 0).toString());
 
@@ -339,7 +339,6 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         consultarID();
         if (validacion == 0) {
             try {
-
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
                         "select * from proveedor where NombreProveedor = '" + nombrePro + "' and not idProveedor = '" + idProveedor + "'");

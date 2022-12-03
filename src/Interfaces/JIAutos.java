@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class JIAutos extends javax.swing.JInternalFrame {
 
-    int  idModelo;
+    int idModelo;
     DefaultTableModel model = new DefaultTableModel();
 
     public JIAutos() {
@@ -28,10 +28,10 @@ public class JIAutos extends javax.swing.JInternalFrame {
         model.addColumn("Color");
         model.addColumn("Transmisión");
         model.addColumn("Caballos de Fuerza");
-        
+
         actualizarTabla();
 
-         try {
+        try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreModelo from modelo");
@@ -45,8 +45,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar los Modelos. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
-        
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -92,9 +91,9 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtSerie.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtSerie.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtSerie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSerieActionPerformed(evt);
+        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSerieKeyTyped(evt);
             }
         });
         jPanel1.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 230, 25));
@@ -116,6 +115,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtMotor.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtMotor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtMotor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMotorKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 230, 25));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -125,6 +129,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtTrans.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtTrans.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTrans.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTransKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 230, 25));
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -134,6 +143,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtDireccion.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 230, 25));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -143,6 +157,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtCaballo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCaballo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtCaballo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCaballoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCaballo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 230, 25));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -152,6 +171,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtColor.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtColor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtColorKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 230, 25));
 
         jLabel8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -159,6 +183,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
         jLabel8.setText("Año:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 155, -1, -1));
 
+        txtMarca.setEditable(false);
         txtMarca.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtMarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 230, 25));
@@ -226,6 +251,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         txtRendimiento.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtRendimiento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtRendimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRendimientoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtRendimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 230, 25));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -234,6 +264,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 115, -1, -1));
 
         txtano.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        txtano.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtanoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtano, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 230, 25));
 
         cmbModelo.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
@@ -258,17 +293,12 @@ public class JIAutos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtSerieActionPerformed
-
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        
+
         int validacion = 0;
         String serie, motor, trasmisiones, direccion, rendimiento, color, marca, caballo, ano;
         consultarIDModelo();
-        
+
         serie = txtSerie.getText().trim();
         motor = txtMotor.getText().trim();
         trasmisiones = txtTrans.getText().trim();
@@ -314,11 +344,11 @@ public class JIAutos extends javax.swing.JInternalFrame {
         }
 
         if (validacion == 0) {
-            
-         try {
+
+            try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                        "insert into ciudad values (?,?,?,?,?,?,?,?,?,?)");
+                        "insert into autos values (?,?,?,?,?,?,?,?,?,?)");
                 pst.setString(1, "0");
                 pst.setInt(2, idModelo);
                 pst.setString(3, serie);
@@ -343,7 +373,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(null, "Registro de Auto Exitoso");
             } catch (SQLException e) {
-                System.err.println("Error en Registrar auto" + e);
+                System.err.println("Error en Registrar auto " + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
             }
 
@@ -351,8 +381,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
-        
-         
+
 
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -362,9 +391,9 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("SELECT NumeroSerie, NombreModelo, NombreMarca, Color, NumeroMotor, Transmisión, Direccion, Rendimiento, CaballosdeFuerza"
-                    + "FROM autos inner join modelo on autos.idAutos = modelo.idModelo "
-                    + "inner join marca on modelo.idModelo = marca.idMarca where autos.idAutos =" + idAutos);
+            PreparedStatement pst = cn.prepareStatement(
+                    "select NumeroSerie, Año, NumeroMotor, Rendimiento, CaballosdeFuerza, Color, Direccion, Transmisión, NombreModelo, NombreMarca "
+                    + "from autos, modelo, marca where idAutos = '" + idAutos + "' and Modelo_idModelo = idModelo and Marca_idMarca = idMarca ");
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
@@ -377,6 +406,7 @@ public class JIAutos extends javax.swing.JInternalFrame {
                 txtDireccion.setText(rs.getString("Direccion"));
                 txtRendimiento.setText(rs.getString("Rendimiento"));
                 txtCaballo.setText(rs.getString("CaballosdeFuerza"));
+                txtano.setText(rs.getString("Año"));
             }
             cn.close();
 
@@ -441,21 +471,20 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         if (validacion == 0) {
             try {
-
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
                         "select * from autos where NumeroSerie = '" + serie + "' and not idAutos = '" + idAutos + "'");
                 ResultSet rs = pst.executeQuery();
-
+                
                 if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Numero de Serie No disponible");
+                    txtSerie.setBackground(Color.red);
+                    JOptionPane.showMessageDialog(null, "Numero de Serie No Disponible");
                     cn.close();
                 } else {
                     Connection cn2 = Conexion.conectar();
                     PreparedStatement pest = cn2.prepareStatement(
                             "update autos set Modelo_idModelo = ?, NumeroSerie = ?, Año = ?, NumeroMotor = ?, Rendimiento = ?, CaballosdeFuerza = ?, Color = ?, "
-                                    + "Direccion = ? ,Trasmisión = ? "
-                            + "where idAutos = '" + idAutos + "'");
+                            + "Direccion = ? ,Transmisión = ? where idAutos = '" + idAutos + "'");
                     pest.setInt(1, idModelo);
                     pest.setString(2, serie);
                     pest.setString(3, ano);
@@ -470,20 +499,19 @@ public class JIAutos extends javax.swing.JInternalFrame {
                     cn2.close();
 
                     JOptionPane.showMessageDialog(null, "Modificación correcta");
-                    txtSerie.setText(rs.getString("NumeroSerie"));
+                    txtSerie.setText("");
+                    txtMarca.setText("");
+                    txtColor.setText("");
+                    txtMotor.setText("");
+                    txtTrans.setText("");
+                    txtDireccion.setText("");
+                    txtRendimiento.setText("");
+                    txtCaballo.setText("");
                     cmbModelo.setSelectedIndex(0);
-                    txtMarca.setText(rs.getNString("NombreMarca"));
-                    txtColor.setText(rs.getString("Color"));
-                    txtMotor.setText(rs.getString("NumeroMotor"));
-                    txtTrans.setText(rs.getString("Transmisión"));
-                    txtDireccion.setText(rs.getString("Direccion"));
-                    txtRendimiento.setText(rs.getString("Rendimiento"));
-                    txtCaballo.setText(rs.getString("CaballosdeFuerza"));
                 }
                 actualizarTabla();
-
             } catch (SQLException e) {
-                System.err.println("Error al actualizar el Autos " + e);
+                System.err.println("Error al actualizar auto " + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
             }
         } else {
@@ -530,6 +558,53 @@ public class JIAutos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbModeloActionPerformed
 
+    private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
+        if (txtColor.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtColorKeyTyped
+
+    private void txtSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyTyped
+        if (txtSerie.getText().length() >= 25) {
+            evt.consume();
+        }    }//GEN-LAST:event_txtSerieKeyTyped
+
+    private void txtMotorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMotorKeyTyped
+        if (txtMotor.getText().length() >= 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMotorKeyTyped
+
+    private void txtanoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtanoKeyTyped
+        if (txtano.getText().length() >= 4) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtanoKeyTyped
+
+    private void txtTransKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTransKeyTyped
+        if (txtTrans.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTransKeyTyped
+
+    private void txtCaballoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCaballoKeyTyped
+        if (txtCaballo.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCaballoKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if (txtDireccion.getText().length() >= 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtRendimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRendimientoKeyTyped
+        if (txtRendimiento.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRendimientoKeyTyped
+
     public void actualizarTabla() {
 
         model.setRowCount(0);
@@ -553,12 +628,12 @@ public class JIAutos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
     }
-    
-    public void consultarIDModelo(){
+
+    public void consultarIDModelo() {
         String modelo;
-        
+
         modelo = cmbModelo.getSelectedItem().toString();
-        
+
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select idModelo from modelo, estado where NombreModelo = '" + modelo + "'");

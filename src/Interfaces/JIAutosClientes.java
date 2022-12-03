@@ -9,7 +9,7 @@ import javax.swing.table.TableColumnModel;
 public class JIAutosClientes extends javax.swing.JInternalFrame {
 
     String user;
-    int idC, idA;
+    
     DefaultTableModel model = new DefaultTableModel();
 
     public JIAutosClientes() {
@@ -21,18 +21,22 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         tblAutoCli = new JTable(model);
         jScrollPane1.setViewportView(tblAutoCli);
 
-        model.addColumn("ID Cientifico");
-        model.addColumn("Nombre del Cientifico");
-        model.addColumn("ID Proyecto");
-        model.addColumn("Nombre del Proyecto");
+        model.addColumn("ID Auto");
+        model.addColumn("Modelo");
+        model.addColumn("Numero de Serie");
+        model.addColumn("ID Cliente");
+        model.addColumn("Nombre del Cliente");
 
-        TableColumnModel model = tblAutoCli.getColumnModel();
+        TableColumnModel modelo = tblAutoCli.getColumnModel();
 
-        model.getColumn(0).setPreferredWidth(50);
-        model.getColumn(1).setPreferredWidth(150);
-        model.getColumn(2).setPreferredWidth(50);
-        model.getColumn(3).setPreferredWidth(150);
-
+        modelo.getColumn(0).setPreferredWidth(50);
+        modelo.getColumn(1).setPreferredWidth(100);
+        modelo.getColumn(2).setPreferredWidth(80);
+        modelo.getColumn(3).setPreferredWidth(50);
+        modelo.getColumn(4).setPreferredWidth(150);
+        
+        actualizarTabla();
+        
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
@@ -78,10 +82,10 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAutoCli = new javax.swing.JTable();
-        btnAgrCi = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
-        lblWall = new javax.swing.JLabel();
+        btnAgregarAC = new javax.swing.JButton();
+        btnActAC = new javax.swing.JButton();
+        btnEliminarAC = new javax.swing.JButton();
+        btnConsulta = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,14 +94,16 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(29, 81, 81));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(cmbAutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 220, 30));
+        cmbAutos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbAutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 220, 30));
 
-        jPanel1.add(cmbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 250, 30));
+        cmbClientes.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(cmbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 250, 30));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cientifico:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,7 +113,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Proyecto:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
 
         tblAutoCli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,40 +128,47 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblAutoCli);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 700, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 700, 190));
 
-        btnAgrCi.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        btnAgrCi.setText("Agregar Cliente");
-        btnAgrCi.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAgrCi.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        btnAgregarAC.setText("Asignar Auto - Cliente");
+        btnAgregarAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgregarAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgrCiActionPerformed(evt);
+                btnAgregarACActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgrCi, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 160, 30));
+        jPanel1.add(btnAgregarAC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 190, 30));
 
-        btnBorrar.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        btnBorrar.setText("Borrar Cientifico");
-        btnBorrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+        btnActAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        btnActAC.setText("Actualizar Auto - Cliente");
+        btnActAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnActAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarActionPerformed(evt);
+                btnActACActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 180, 30));
+        jPanel1.add(btnActAC, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 190, 30));
 
-        btnAgregar.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        btnAgregar.setText("Agregar Cientifico a Proyecto");
-        btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        btnEliminarAC.setText("Eliminar Auto - Cliente");
+        btnEliminarAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminarAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnEliminarACActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 230, 30));
+        jPanel1.add(btnEliminarAC, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 190, 30));
 
-        lblWall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Azul.png"))); // NOI18N
-        jPanel1.add(lblWall, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 570));
+        btnConsulta.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        btnConsulta.setText("Consultar Auto - Cliente");
+        btnConsulta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 190, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,69 +184,143 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        model.removeRow(tblAutoCli.getSelectedRow());
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-         try {
+    private void btnAgregarACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarACActionPerformed
+        int idC, idA;
+        idC = cmbClientes.getSelectedIndex() + 1;
+        idA = cmbAutos.getSelectedIndex() + 1; 
+        
+        try {
                 Connection conx = Conexion.conectar();
                 PreparedStatement pesnt = conx.prepareStatement(
                     "insert into autos_has_clientes values (?,?)");
-                
-                for (int i = 0; i < tblAutoCli.getRowCount(); i++) {
-                String idAutos, idClientes;
-                idAutos = tblAutoCli.getValueAt(i, 2).toString();
-                idClientes = tblAutoCli.getValueAt(i, 0).toString();
-                
-                pesnt.setString(1, idAutos);
-                pesnt.setString(2, idClientes);
+                pesnt.setInt(1, idA);
+                pesnt.setInt(2, idC);
                 
                 pesnt.executeUpdate();
                 
-                }
+                
                 conx.close();
                 JOptionPane.showMessageDialog(null, "Asignación exitosa de Clientes Autos");
-                dispose();
+                actualizarTabla();
             } catch (SQLException e) {
                 System.err.println("Error al asignar Clientes a Autos " + e);
                 JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador", "Error",JOptionPane.ERROR_MESSAGE);
             }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnAgregarACActionPerformed
 
-    private void btnAgrCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgrCiActionPerformed
-        idC = cmbClientes.getSelectedIndex() + 1;
-        idA = cmbAutos.getSelectedIndex() + 1;
+    private void btnActACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActACActionPerformed
+        int idCliente = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 3).toString());
+       int idAutos = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 0).toString());
+        try {
+                Connection conx = Conexion.conectar();
+                PreparedStatement pesnt = conx.prepareStatement(
+                "update autos_has_clientes set Autos_idAutos = ?, Clientes_idClientes = ? where Autos_idAutos = '"+idAutos+"' "
+                        + "and Clientes_idClientes = '"+idCliente+"'");
+                int idC, idA;
+                 idC = cmbClientes.getSelectedIndex() + 1;
+                    idA = cmbAutos.getSelectedIndex() + 1;
+                
+                pesnt.setInt(1, idA);
+                pesnt.setInt(2, idC);
+                
+                pesnt.executeUpdate();
+                
+                conx.close();
+                JOptionPane.showMessageDialog(null, "Actualización exitosa de Clientes Autos");
+                actualizarTabla();
+            } catch (SQLException e) {
+                System.err.println("Error al actualizar Clientes a Autos " + e);
+                JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador", "Error",JOptionPane.ERROR_MESSAGE);
+            }
+        
+    }//GEN-LAST:event_btnActACActionPerformed
+
+    private void btnEliminarACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarACActionPerformed
+        int idCliente = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 3).toString());
+       int idAutos = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 0).toString());
+       
+       try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "delete from autos_has_clientes where idAutos_idAutos  = '" + idAutos + "' and Clientes_idClientes = '"+idCliente+"'");
+            pst.executeUpdate();
+            cn.close();
+            JOptionPane.showMessageDialog(null, "El proveedor seleccionado fue dado de baja");
+            actualizarTabla();
+        } catch (SQLException er) {
+            System.err.println("Error en eliminar proveedor " + er);
+            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
+        }
+       
+       
+    }//GEN-LAST:event_btnEliminarACActionPerformed
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+       int idCliente = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 3).toString());
+       int idAutos = Integer.parseInt(tblAutoCli.getValueAt(tblAutoCli.getSelectedRow(), 0).toString());
+        
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select idClientes, NombreC, APaternoC, AMaternoC, idAutos, NombreModelo from clientes, autos, modelo "
-                            + "where idClientes = '" + idC + "' and idAutos = '" + idA + "' and Modelo_idModelo = idModelo ");
+            "select NombreModelo from autos, modelo where idAutos = '"+idAutos+"' and Modelo_idModelo = idModelo");
             ResultSet rs = pst.executeQuery();
-
-            Object[] columna = new Object[4];
-            while (rs.next()) {
-
-                columna[0] = rs.getObject(1);
-                columna[1] = rs.getObject(2) + " " + rs.getObject(3) + " " + rs.getObject(4);
-                columna[2] = rs.getObject(5);
-                columna[3] = rs.getObject(6);
-
-                model.addRow(columna);
+            if (rs.next()) {
+                cmbAutos.setSelectedItem(rs.getString("NombreModelo"));
             }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar auto " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+            "select idClientes, NombreC, APaternoC, AMaternoC from clientes where idClientes = '"+idCliente+"'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                cmbClientes.setSelectedItem(rs.getString("idClientes")+" "+rs.getString("NombreC")+" "+rs.getString("APaternoC")+" "+rs.getString("AMaternoC"));
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar cliente " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+       
+    }//GEN-LAST:event_btnConsultaActionPerformed
+
+    public void actualizarTabla() {
+
+        model.setRowCount(0);
+        Object[] fila = new Object[5];
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select "
+                    + "idAutos, NombreModelo, NumeroSerie, idClientes, NombreC, APaternoC, AMaternoC from autos, modelo, clientes, autos_has_clientes where "
+                    + "Autos_idAutos = idAutos and Clientes_idClientes = idClientes and Modelo_idModelo = idModelo ");
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                    fila[4] = rs.getObject(5) +" "+rs.getObject(6)+" "+rs.getObject(7);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
 
         } catch (SQLException e) {
-            System.err.println("¡¡¡Error en cargar Autos y Clientes " + e);
-            JOptionPane.showMessageDialog(null, "¡¡¡Error en cargar, contacte al administrador!!!");
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
-
-    }//GEN-LAST:event_btnAgrCiActionPerformed
-
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgrCi;
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnActAC;
+    private javax.swing.JButton btnAgregarAC;
+    private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnEliminarAC;
     private javax.swing.JComboBox<String> cmbAutos;
     private javax.swing.JComboBox<String> cmbClientes;
     private javax.swing.JLabel jLabel2;
@@ -241,7 +328,6 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblWall;
     private javax.swing.JTable tblAutoCli;
     // End of variables declaration//GEN-END:variables
 }
