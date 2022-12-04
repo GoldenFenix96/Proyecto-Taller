@@ -13,7 +13,7 @@ public class JIExistencias extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel();
     public static int producto_update = 0;
-
+    int idProveedor;
     public JIExistencias() {
         initComponents();
         this.setSize(794, 548);
@@ -236,6 +236,8 @@ public class JIExistencias extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
+        cmbProveedores.setSelectedIndex(0);
+        txtNombrePro.setText("");
     }//GEN-LAST:event_btnBusquedaIDActionPerformed
 
     private void btnBusquedaNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaNomActionPerformed
@@ -263,18 +265,18 @@ public class JIExistencias extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
+        txtID.setText("");
+        cmbProveedores.setSelectedIndex(0);
         
     }//GEN-LAST:event_btnBusquedaNomActionPerformed
 
     private void btnBusquedaProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaProvActionPerformed
-        int idProveedores;
         
-        idProveedores = cmbProveedores.getSelectedIndex() + 1;
-        
+        consultarID();
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select idProductos, CodigoBarras, NombreProducto, Existencia, NombreUDM, PrecioVenta  "
-            + "from productos, unidaddemedida where UnidaddeMedida_idUnidaddeMedida = idUnidaddeMedida and Proveedor_idProveedor = '"+idProveedores+"'");
+            + "from productos, unidaddemedida where UnidaddeMedida_idUnidaddeMedida = idUnidaddeMedida and Proveedor_idProveedor = '"+idProveedor+"'");
             ResultSet rs = pst.executeQuery();
             model.setRowCount(0);
             
@@ -291,9 +293,30 @@ public class JIExistencias extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
+        txtID.setText("");
+        txtNombrePro.setText("");
         
     }//GEN-LAST:event_btnBusquedaProvActionPerformed
 
+    public void consultarID(){
+        String proveedor;
+        
+        proveedor = cmbProveedores.getSelectedItem().toString();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idProveedor from proveedor where NombreProveedor = '" + proveedor + "'");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                idProveedor = rs.getInt("idProveedor");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar datos: ID Proveedor " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblFecha2;

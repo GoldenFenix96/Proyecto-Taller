@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class ModificarProducto extends javax.swing.JFrame {
 
@@ -16,6 +17,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         this.setResizable(false);
         this.setSize(800, 500);
         this.setTitle("Modificar Productos");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         IdProducto = JIExistencias.producto_update;
 

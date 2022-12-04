@@ -14,7 +14,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
 
     float total;
     String idUsuario;
-    String idVenta;
+    String idCompra;
     int idProveedor, idProducto;
     int nuevaCant, cantidad, existencia, cantidadVieja;
     DefaultTableModel model = new DefaultTableModel();
@@ -94,6 +94,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblSKU.setText("Proveedor:");
         jPanel1.add(LblSKU, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 95, 80, -1));
 
+        cmbProveedores.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jPanel1.add(cmbProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 180, 25));
 
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
@@ -110,6 +111,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LbDescripción.setText("Producto:");
         jPanel1.add(LbDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 95, -1, -1));
 
+        cmbProductos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         cmbProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProductosActionPerformed(evt);
@@ -122,6 +124,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblCantidad.setText("Cantidad:");
         jPanel1.add(LblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
+        txtCantidad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 165, 130, 25));
 
@@ -132,6 +135,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
 
         txtPrecioCompra.setEditable(false);
         txtPrecioCompra.setBackground(new java.awt.Color(255, 255, 255));
+        txtPrecioCompra.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtPrecioCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 165, 190, 25));
 
@@ -180,6 +184,7 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
         LblTotal.setText("Total a pagar:");
         jPanel1.add(LblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, -1, -1));
 
+        txtTotal.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtTotal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 385, 150, 30));
 
@@ -273,14 +278,119 @@ public class JINuevaCompra extends javax.swing.JInternalFrame {
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         int pago;
         float cambio;
-        
+
         java.util.Date date = new java.util.Date();
         long d = date.getTime();
-        java.sql.Date fechaVenta = new java.sql.Date(d);
+        java.sql.Date fechaCompra = new java.sql.Date(d);
+
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        java.util.Date time = new java.util.Date();
+        long t = time.getTime();
+        java.sql.Time horaCompra = new java.sql.Time(t);
+
+        pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara la empresa",
+                    "Billete", JOptionPane.QUESTION_MESSAGE));
+            cambio = pago - total;
         
-        
-        
-        
+        try {
+            
+            Connection cn2 = Conexion.conectar();
+            PreparedStatement pst2 = cn2.prepareStatement(
+                    "insert into compras values (?,?,?,?,?,?,?)");
+            pst2.setString(1, "0");
+            pst2.setDate(2, fechaCompra);
+            pst2.setTime(3, horaCompra);
+            pst2.setFloat(4, total);
+            pst2.setString(5, "16%");
+            pst2.setFloat(6, pago);
+            pst2.setFloat(7, cambio);
+            pst2.executeUpdate();
+            cn2.close();
+            txtCantidad.setText("");
+            txtPrecioCompra.setText("");
+            txtTotal.setText("");
+
+            JOptionPane.showMessageDialog(null, "El cambio de la empresa es de: $" + cambio);
+            JOptionPane.showMessageDialog(null, "Registro de compra exitoso");
+            cn2.close();
+
+            try {
+                Connection conex = Conexion.conectar();
+                PreparedStatement prep = conex.prepareStatement(
+                        "select * from compras where HoraCompra = '" + horaCompra + "'");
+                ResultSet resul = prep.executeQuery();
+
+                if (resul.next()) {
+                    idCompra = resul.getString("idCompras");
+                }
+                conex.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cargar el folio de compra " + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
+            }
+
+            try {
+                Connection conx = Conexion.conectar();
+                PreparedStatement pesnt = conx.prepareStatement(
+                        "insert into detallecompra values (?,?,?,?)");
+
+                for (int i = 0; i < jTable_Compra.getRowCount(); i++) {
+                    String clave, cnt, subt;
+                    clave = jTable_Compra.getValueAt(i, 0).toString();
+                    cnt = jTable_Compra.getValueAt(i, 2).toString();
+                    subt = jTable_Compra.getValueAt(i, 4).toString();
+
+                    pesnt.setString(1, clave);
+                    pesnt.setString(2, cnt);
+                    pesnt.setString(3, subt);
+                    pesnt.setString(4, idCompra);
+                    pesnt.executeUpdate();
+
+                }
+                conx.close();
+            } catch (SQLException e) {
+                System.err.println("Error al generar el folio de detalle de compra " + e);
+                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de venta!!, contacte al administrador.");
+            }
+            
+            for (int i = 0; i < jTable_Compra.getRowCount(); i++) {
+                try {
+
+                    Connection cn3 = Conexion.conectar();
+                    PreparedStatement pt = cn3.prepareStatement(
+                            "select * from productos where idProductos = '" + jTable_Compra.getValueAt(i, 0) + "'");
+                    ResultSet rs2 = pt.executeQuery();
+
+                    if (rs2.next()) {
+                        cantidadVieja = Integer.parseInt(rs2.getString(4));
+                    }
+
+                    cn2.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al obtener la existencia del producto");
+                    JOptionPane.showMessageDialog(null, "¡¡ERROR al obtener existencias!!, contacte al administrador.");
+                }
+                try {
+                    Connection con = Conexion.conectar();
+                    PreparedStatement pest = con.prepareStatement(
+                            "update productos set Existencia=? where idProductos = '" + jTable_Compra.getValueAt(i, 0) + "'");
+                    nuevaCant = cantidadVieja + (Integer.parseInt(jTable_Compra.getValueAt(i, 2).toString()));
+                    pest.setInt(1, nuevaCant);
+                    pest.executeUpdate();
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("Error al actualizar existencias " + e);
+                }
+            }
+            this.dispose();
+
+        } catch (SQLException e) {
+            System.err.println("Error en Registrar Compra." + e);
+            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+
+        }
+
+
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void cmbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductosActionPerformed

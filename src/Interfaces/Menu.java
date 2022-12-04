@@ -210,7 +210,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem6);
 
-        jMenuItem9.setText("Autos-Clientes");
+        jMenuItem9.setText("Autos - Clientes");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);

@@ -555,7 +555,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
                         JOptionPane.showMessageDialog(null, "El cambio del cliente es de: $" + cambio);
                         JOptionPane.showMessageDialog(null, "Registro de venta exitoso");
-                        cn.close();
+                        cn2.close();
 
                         try {
                             Connection conex = Conexion.conectar();
