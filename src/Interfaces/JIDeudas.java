@@ -64,8 +64,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         txtCRestante = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtLimiteCredito = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtCreRestante = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDeudas = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
@@ -137,21 +135,12 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Límite de Credito:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 225, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 175, -1, -1));
 
         txtLimiteCredito.setEditable(false);
         txtLimiteCredito.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtLimiteCredito.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtLimiteCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 200, 25));
-
-        jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Credito Restante:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, -1, -1));
-
-        txtCreRestante.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
-        txtCreRestante.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtCreRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 175, 240, 25));
+        jPanel1.add(txtLimiteCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 240, 25));
 
         tblDeudas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,13 +213,12 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select NumerodePagos, NumerodePagoActual, UltimaCantidadPagada, Cantidad_restante, CreditoRestante, idClientes, NombreC, APaternoC, "
-                    + "AMaternoC, LimiteCredito"
+            "select NumerodePagos, NumerodePagoActual, UltimaCantidadPagada, Cantidad_restante, idClientes, NombreC, APaternoC, "
+                    + "AMaternoC, LimiteCredito, CreditoRestante,"
                     + " from detalledeuda, clientes where idDetalleDeuda = '"+idDD+"' and idCliente_detalledeuda = idClientes");
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 txtCRestante.setText(rs.getString("Cantidad_restante"));
-                txtCreRestante.setText(rs.getString("CreditoRestante"));
                 txtLimiteCredito.setText(rs.getString("LimiteCredito"));
                 txtNActual.setText(rs.getString("NumerodePagoActual"));
                 txtNPagos.setText(rs.getString("NumerodePagos"));
@@ -279,9 +267,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
         long d = date.getTime();
         java.sql.Date fecha = new java.sql.Date(d);
         
-        creditorestante = Integer.parseInt(txtLimiteCredito.getText().trim()) - 0;
-        txtCreRestante.setText(String.valueOf(creditorestante));
-        crer = txtCreRestante.getText().trim();
         if (validacion == 0) {
             Connection cn = Conexion.conectar();
             PreparedStatement pst;
@@ -295,13 +280,12 @@ public class JIDeudas extends javax.swing.JInternalFrame {
                 pst.setString(5, utc);
                 pst.setString(6, cr);
                 pst.setInt(7, idCliente);
-                pst.setString(8, crer);
                 
                 pst.executeUpdate();
                 cn.close();
                 
                 txtCRestante.setText("");
-                txtCreRestante.setText("");
+
                 txtLimiteCredito.setText("");
                 txtNActual.setText("");
                 txtNPagos.setText("");
@@ -372,7 +356,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cmbClientes;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -384,7 +367,6 @@ public class JIDeudas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblDeudas;
     private javax.swing.JTextField txtCRestante;
-    private javax.swing.JTextField txtCreRestante;
     private javax.swing.JTextField txtLimiteCredito;
     private javax.swing.JTextField txtNActual;
     private javax.swing.JTextField txtNPagos;

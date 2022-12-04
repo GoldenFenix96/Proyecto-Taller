@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +14,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
     String user;
     String idProducto = "";
     float total;
-    String idUsuario;
+    int idUsuario;
     String idVenta;
     int nuevaCant, cantidad, existencia, cantidadVieja;
     DefaultTableModel model = new DefaultTableModel();
@@ -41,10 +42,10 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                     "select * from empleados where Usuario = '" + user + "' ");
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                idUsuario = rs.getString("idEmpleados");
+                idUsuario = rs.getInt("idEmpleados");
             }
             cn.close();
-
+            
         } catch (SQLException e) {
             System.err.println("Error en buscar ID del empleado." + e);
             JOptionPane.showMessageDialog(null, "¡¡ERROR al buscar!!, contacte al administrador.");
@@ -336,11 +337,11 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        int pago, nvc, idCliente, respNVC=0, saldoLinea;
-        float cambio;
+        int pago, nvc, idCliente, respNVC = 0, saldoLinea, numPagos;
+        float cambio, creditoRes;
         String cliente = cmbCliente.getSelectedItem().toString();
         idCliente = cmbCliente.getSelectedIndex() + 1;
-        
+
         java.util.Date date = new java.util.Date();
         long d = date.getTime();
         java.sql.Date fechaVenta = new java.sql.Date(d);
@@ -350,183 +351,493 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         long t = time.getTime();
         java.sql.Time horaVenta = new java.sql.Time(t);
 
+        java.util.Date date3 = new java.util.Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date3);
+        c.add(Calendar.DATE, 15);
+        date3 = c.getTime();
+        long dat = date3.getTime();
+        java.sql.Date fechaPago = new java.sql.Date(dat);
+        
+
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement("select idNC_Cliente, LimiteCredito from nc_cliente, clientes where idClientes = '"+idCliente+"'"
+            PreparedStatement pst = cn.prepareStatement("select idNC_Cliente, LimiteCredito, CreditoRestante "
+                    + "from nc_cliente, clientes where idClientes = '" + idCliente + "'"
                     + "and NC_Cliente_idNC_Cliente = idNC_Cliente");
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
                 nvc = rs.getInt("idNC_Cliente");
                 saldoLinea = rs.getInt("LimiteCredito");
+                creditoRes = rs.getFloat("CreditoRestante");
                 if (nvc > 1) {
-                    do{
-                    respNVC = Integer.parseInt(JOptionPane.showInputDialog(null, "El cliente " + cliente + " cuenta con una linea de credito : $" + saldoLinea + " \n¿Desea "
-                            + "pagar con la linea de credito?",
-                             JOptionPane.QUESTION_MESSAGE));
-                    }while(nvc<1 || nvc>2);
-                    if (nvc == 1) {
-                        try {
-                        Connection cn2 = Conexion.conectar();
-                        PreparedStatement pst2 = cn2.prepareStatement(
-                                "insert into venta values (?,?,?,?,?,?,?)");
-                        pst2.setString(1, "0");
-                        pst2.setDate(2, fechaVenta);
-                        pst2.setTime(3, horaVenta);
-                        pst2.setString(4, "16%");
-                        pst2.setFloat(5, total);
-                        pst2.setFloat(6, total);
-                        pst2.setFloat(7, 0);
-                        pst2.executeUpdate();
-                        cn2.close();
-                        }catch(SQLException e){
-                            
-                        }
-                    } else {
-                        pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara el cliente",
-                            "Billete", JOptionPane.QUESTION_MESSAGE));
-                    cambio = pago - total;
-                    
-                    try {
-                        Connection cn2 = Conexion.conectar();
-                        PreparedStatement pst2 = cn2.prepareStatement(
-                                "insert into venta values (?,?,?,?,?,?,?)");
-                        pst2.setString(1, "0");
-                        pst2.setDate(2, fechaVenta);
-                        pst2.setTime(3, horaVenta);
-                        pst2.setString(4, "16%");
-                        pst2.setFloat(5, total);
-                        pst2.setFloat(6, pago);
-                        pst2.setFloat(7, cambio);
-                        pst2.executeUpdate();
-                        cn2.close();
-                        txtIdProducto.setText("");
-                        txtNombreProducto.setText("");
-                        txtCantidad.setText("");
-                        txtUDM.setText("");
-                        txtPrecio.setText("");
-                        txtTotal.setText("");
-
-                        txtCantidad.setBackground(Color.green);
-                        txtNombreProducto.setBackground(Color.green);
-                        txtIdProducto.setBackground(Color.green);
-                        txtTotal.setBackground(Color.green);
-                        txtUDM.setBackground(Color.green);
-
-                        JOptionPane.showMessageDialog(null, "El cambio del cliente es de: $" + cambio);
-                        JOptionPane.showMessageDialog(null, "Registro de venta exitoso");
-                        cn.close();
-
-                        try {
-                            Connection conex = Conexion.conectar();
-                            PreparedStatement prep = conex.prepareStatement(
-                                    "select * from venta where HoraVenta = '" + horaVenta + "'");
-                            ResultSet resul = prep.executeQuery();
-
-                            if (resul.next()) {
-                                idVenta = resul.getString("idVenta");
-                            }
-                            conex.close();
-                        } catch (SQLException e) {
-                            System.err.println("Error al cargar el folio de venta " + e);
-                            JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
-                        }
-                        
-                        try {
-                            Connection conexi = Conexion.conectar();
-                            PreparedStatement prestat = conexi.prepareStatement(
-                            "insert into clientes_has_venta values (?,?)");
-                            
-                            prestat.setInt(1, idCliente);
-                            prestat.setString(2, idVenta);
-                            prestat.executeUpdate();
-                        } catch (SQLException e) {
-                            System.err.println("Error al generar el folio de relacion cliente venta " + e);
-                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
-                        }
-                        
-                         try {
-                            Connection cn4 = Conexion.conectar();
-                            PreparedStatement pst4 = cn4.prepareStatement(
-                            "insert into empleados_has_venta values (?,?)");
-                            
-                            pst4.setString(1, idUsuario);
-                            pst4.setString(2, idVenta);
-                            pst4.executeUpdate();
-                        } catch (SQLException e) {
-                            System.err.println("Error al generar el folio de relacion usuario venta " + e);
-                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
-                        }
-                        
-
-                        try {
-                            Connection conx = Conexion.conectar();
-                            PreparedStatement pesnt = conx.prepareStatement(
-                                    "insert into detalleventa values (?,?,?,?)");
-
-                            for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
-                                String clave, cnt, subt;
-                                clave = jTable_Venta.getValueAt(i, 0).toString();
-                                cnt = jTable_Venta.getValueAt(i, 2).toString();
-                                subt = jTable_Venta.getValueAt(i, 4).toString();
-
-                                pesnt.setString(1, clave);
-                                pesnt.setString(2, cnt);
-                                pesnt.setString(3, subt);
-                                pesnt.setString(4, idVenta);
-                                pesnt.executeUpdate();
-
-                            }
-                            conx.close();
-                        } catch (SQLException e) {
-                            System.err.println("Error al generar el folio de detalle de venta " + e);
-                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de venta!!, contacte al administrador.");
-                        }
-
-                        for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                    do {
+                        respNVC = Integer.parseInt(JOptionPane.showInputDialog(null, "El cliente " + cliente + " cuenta con una linea de credito : $" + creditoRes + 
+                                " \n¿Desea pagar con la linea de credito?",
+                                JOptionPane.QUESTION_MESSAGE));
+                    } while (respNVC < 1 || respNVC > 2);
+                    //A partir de abajo es pago con linea de credito
+                    if (respNVC == 1) {
+                        System.out.println("Credito Restante: " + creditoRes);
+                        if (creditoRes >= total) {
                             try {
+                                Connection cn2 = Conexion.conectar();
+                                PreparedStatement pst2 = cn2.prepareStatement(
+                                        "insert into venta values (?,?,?,?,?,?,?)");
+                                pst2.setString(1, "0");
+                                pst2.setDate(2, fechaVenta);
+                                pst2.setTime(3, horaVenta);
+                                pst2.setString(4, "16%");
+                                pst2.setFloat(5, total);
+                                pst2.setFloat(6, total);
+                                pst2.setFloat(7, 0.0f);
+                                pst2.executeUpdate();
+                                cn2.close();
+                                txtIdProducto.setText("");
+                                txtNombreProducto.setText("");
+                                txtCantidad.setText("");
+                                txtUDM.setText("");
+                                txtPrecio.setText("");
+                                txtTotal.setText("");
 
-                                Connection cn3 = Conexion.conectar();
-                                PreparedStatement pt = cn3.prepareStatement(
-                                        "select * from productos where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
-                                ResultSet rs2 = pt.executeQuery();
+                                txtCantidad.setBackground(Color.green);
+                                txtNombreProducto.setBackground(Color.green);
+                                txtIdProducto.setBackground(Color.green);
+                                txtTotal.setBackground(Color.green);
+                                txtUDM.setBackground(Color.green);
 
-                                if (rs2.next()) {
-                                    cantidadVieja = Integer.parseInt(rs2.getString(4));
+                                JOptionPane.showMessageDialog(null, "Registro de venta exitoso");
+                                cn2.close();
+
+                                try {
+                                    Connection conex = Conexion.conectar();
+                                    PreparedStatement prep = conex.prepareStatement(
+                                            "select * from venta where HoraVenta = '" + horaVenta + "'");
+                                    ResultSet resul = prep.executeQuery();
+
+                                    if (resul.next()) {
+                                        idVenta = resul.getString("idVenta");
+                                    }
+                                    conex.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al cargar el folio de venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
                                 }
 
-                                cn2.close();
+                                try {
+                                    Connection conexi = Conexion.conectar();
+                                    PreparedStatement prestat = conexi.prepareStatement(
+                                            "insert into clientes_has_venta values (?,?)");
+
+                                    prestat.setInt(1, idCliente);
+                                    prestat.setString(2, idVenta);
+                                    prestat.executeUpdate();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de relacion cliente venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
+                                }
+
+                                try {
+                                    Connection cn4 = Conexion.conectar();
+                                    PreparedStatement pst4 = cn4.prepareStatement(
+                                            "insert into empleados_has_venta values (?,?)");
+
+                                    pst4.setInt(1, idUsuario);
+                                    pst4.setInt(2, Integer.parseInt(idVenta));
+                                    pst4.executeUpdate();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de relacion usuario venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion usuario venta!!, contacte al administrador.");
+                                }
+
+                                try {
+                                    Connection conx = Conexion.conectar();
+                                    PreparedStatement pesnt = conx.prepareStatement(
+                                            "insert into detalleventa values (?,?,?,?)");
+
+                                    for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                        String clave, cnt, subt;
+                                        clave = jTable_Venta.getValueAt(i, 0).toString();
+                                        cnt = jTable_Venta.getValueAt(i, 2).toString();
+                                        subt = jTable_Venta.getValueAt(i, 4).toString();
+
+                                        pesnt.setString(1, clave);
+                                        pesnt.setString(2, cnt);
+                                        pesnt.setString(3, subt);
+                                        pesnt.setString(4, idVenta);
+                                        pesnt.executeUpdate();
+
+                                    }
+                                    conx.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de detalle de venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de venta!!, contacte al administrador.");
+                                }
+
+                                for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                    try {
+
+                                        Connection cn3 = Conexion.conectar();
+                                        PreparedStatement pt = cn3.prepareStatement(
+                                                "select * from productos where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                        ResultSet rs2 = pt.executeQuery();
+
+                                        if (rs2.next()) {
+                                            cantidadVieja = Integer.parseInt(rs2.getString(4));
+                                        }
+
+                                        cn2.close();
+                                    } catch (SQLException e) {
+                                        System.err.println("Error al obtener la existencia del producto");
+                                        JOptionPane.showMessageDialog(null, "¡¡ERROR al obtener existencias!!, contacte al administrador.");
+                                    }
+                                    try {
+                                        Connection con = Conexion.conectar();
+                                        PreparedStatement pest = con.prepareStatement(
+                                                "update productos set Existencia=? where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                        nuevaCant = cantidadVieja - (Integer.parseInt(jTable_Venta.getValueAt(i, 2).toString()));
+                                        pest.setInt(1, nuevaCant);
+                                        pest.executeUpdate();
+                                        con.close();
+                                    } catch (SQLException e) {
+                                        System.err.println("Error al actualizar existencias " + e);
+                                        JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar existencias de productos !!, contacte al administrador.");
+                                    }
+                                }
+                                // try catch para agregar detalle de deuda de clientes
+                                do {
+                                    numPagos = Integer.parseInt(JOptionPane.showInputDialog(null, "¿A cuantos pagos quincenales desea pagarlo? \n "
+                                            + "Número Máximo de Pagos: 12",
+                                            JOptionPane.QUESTION_MESSAGE));
+                                } while (numPagos < 1 || numPagos > 12);
+                                try {
+                                    Connection cn5 = Conexion.conectar();
+                                    PreparedStatement prst = cn5.prepareStatement(
+                                            "insert into detalledeuda values (?,?,?,?,?,?,?,?,?)");
+                                    prst.setString(1, "0");
+                                    prst.setInt(2, numPagos);
+                                    prst.setInt(3, 0);
+                                    prst.setDate(4, fechaVenta);
+                                    prst.setDate(5, fechaPago);
+                                    prst.setFloat(6, 0.0f);
+                                    prst.setFloat(7, total);
+                                    prst.setInt(8, idCliente);
+                                    prst.setInt(9, Integer.parseInt(idVenta));
+
+                                    prst.executeUpdate();
+                                    cn5.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de detalle de deuda " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de deuda!!, contacte al administrador.");
+                                }
+                                float nCrRes;
+                                nCrRes = (float) creditoRes - total;
+                                try {
+                                    Connection cn6 = Conexion.conectar();
+                                    PreparedStatement pst3 = cn6.prepareStatement(
+                                            "update clientes set CreditoRestante = ? where idClientes = '" + idCliente + "'");
+
+                                    pst3.setFloat(1, nCrRes);
+                                    pst3.executeUpdate();
+                                    cn6.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al actualizar el credito restante del cliente " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar folio credito restante del cliente!!, contacte al administrador.");
+                                }
+                                JOptionPane.showMessageDialog(null, "¡Venta realizada exitosamente, Vuelva Pronto!.");
+                                this.dispose();
+
                             } catch (SQLException e) {
-                                System.err.println("Error al obtener la existencia del producto");
-                                JOptionPane.showMessageDialog(null, "¡¡ERROR al obtener existencias!!, contacte al administrador.");
+                                System.err.println("Error en Registrar venta." + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+
                             }
+
+                            // A partir de abajo es para noticar al cliente que su credito actual es insuficiente para pagar el total por lo que se procede al pago en efectivo   
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El credito restante del cliente es insuficiente para pagar el total de la venta\n\n"
+                                    + "Se procedera al pago en efectivo");
+                            pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara el cliente",
+                                    "Billete", JOptionPane.QUESTION_MESSAGE));
+                            cambio = pago - total;
+
                             try {
-                                Connection con = Conexion.conectar();
-                                PreparedStatement pest = con.prepareStatement(
-                                        "update productos set Existencia=? where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
-                                nuevaCant = cantidadVieja - (Integer.parseInt(jTable_Venta.getValueAt(i, 2).toString()));
-                                pest.setInt(1, nuevaCant);
-                                pest.executeUpdate();
-                                con.close();
+                                Connection cn2 = Conexion.conectar();
+                                PreparedStatement pst2 = cn2.prepareStatement(
+                                        "insert into venta values (?,?,?,?,?,?,?)");
+                                pst2.setString(1, "0");
+                                pst2.setDate(2, fechaVenta);
+                                pst2.setTime(3, horaVenta);
+                                pst2.setString(4, "16%");
+                                pst2.setFloat(5, total);
+                                pst2.setFloat(6, pago);
+                                pst2.setFloat(7, cambio);
+                                pst2.executeUpdate();
+                                cn2.close();
+                                txtIdProducto.setText("");
+                                txtNombreProducto.setText("");
+                                txtCantidad.setText("");
+                                txtUDM.setText("");
+                                txtPrecio.setText("");
+                                txtTotal.setText("");
+
+                                txtCantidad.setBackground(Color.green);
+                                txtNombreProducto.setBackground(Color.green);
+                                txtIdProducto.setBackground(Color.green);
+                                txtTotal.setBackground(Color.green);
+                                txtUDM.setBackground(Color.green);
+
+                                JOptionPane.showMessageDialog(null, "El cambio del cliente es de: $" + cambio);
+                                JOptionPane.showMessageDialog(null, "Registro de venta exitoso");
+                                cn.close();
+
+                                try {
+                                    Connection conex = Conexion.conectar();
+                                    PreparedStatement prep = conex.prepareStatement(
+                                            "select * from venta where HoraVenta = '" + horaVenta + "'");
+                                    ResultSet resul = prep.executeQuery();
+
+                                    if (resul.next()) {
+                                        idVenta = resul.getString("idVenta");
+                                    }
+                                    conex.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al cargar el folio de venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
+                                }
+
+                                try {
+                                    Connection conexi = Conexion.conectar();
+                                    PreparedStatement prestat = conexi.prepareStatement(
+                                            "insert into clientes_has_venta values (?,?)");
+
+                                    prestat.setInt(1, idCliente);
+                                    prestat.setString(2, idVenta);
+                                    prestat.executeUpdate();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de relacion cliente venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
+                                }
+
+                                try {
+                                    Connection cn4 = Conexion.conectar();
+                                    PreparedStatement pst4 = cn4.prepareStatement(
+                                            "insert into empleados_has_venta values (?,?)");
+
+                                    pst4.setInt(1, idUsuario);
+                                    pst4.setInt(2, Integer.parseInt(idVenta));
+                                    pst4.executeUpdate();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de relacion usuario venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion usuario venta!!, contacte al administrador.");
+                                }
+
+                                try {
+                                    Connection conx = Conexion.conectar();
+                                    PreparedStatement pesnt = conx.prepareStatement(
+                                            "insert into detalleventa values (?,?,?,?)");
+
+                                    for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                        String clave, cnt, subt;
+                                        clave = jTable_Venta.getValueAt(i, 0).toString();
+                                        cnt = jTable_Venta.getValueAt(i, 2).toString();
+                                        subt = jTable_Venta.getValueAt(i, 4).toString();
+
+                                        pesnt.setString(1, clave);
+                                        pesnt.setString(2, cnt);
+                                        pesnt.setString(3, subt);
+                                        pesnt.setString(4, idVenta);
+                                        pesnt.executeUpdate();
+
+                                    }
+                                    conx.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al generar el folio de detalle de venta " + e);
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de venta!!, contacte al administrador.");
+                                }
+
+                                for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                    try {
+
+                                        Connection cn3 = Conexion.conectar();
+                                        PreparedStatement pt = cn3.prepareStatement(
+                                                "select * from productos where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                        ResultSet rs2 = pt.executeQuery();
+
+                                        if (rs2.next()) {
+                                            cantidadVieja = Integer.parseInt(rs2.getString(4));
+                                        }
+
+                                        cn2.close();
+                                    } catch (SQLException e) {
+                                        System.err.println("Error al obtener la existencia del producto");
+                                        JOptionPane.showMessageDialog(null, "¡¡ERROR al obtener existencias!!, contacte al administrador.");
+                                    }
+                                    try {
+                                        Connection con = Conexion.conectar();
+                                        PreparedStatement pest = con.prepareStatement(
+                                                "update productos set Existencia=? where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                        nuevaCant = cantidadVieja - (Integer.parseInt(jTable_Venta.getValueAt(i, 2).toString()));
+                                        pest.setInt(1, nuevaCant);
+                                        pest.executeUpdate();
+                                        con.close();
+                                    } catch (SQLException e) {
+                                        System.err.println("Error al actualizar existencias " + e);
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(null, "¡Venta realizada exitosamente, Vuelva Pronto!.");
+                                this.dispose();
+
                             } catch (SQLException e) {
-                                System.err.println("Error al actualizar existencias " + e);
+                                System.err.println("Error en Registrar venta." + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
                             }
                         }
-                        this.dispose();
+                        //A partir de abajo es pago en efectivo pero si el cliente dice que no quiere pagar su linea de credito 
+                    } else {
+                        pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara el cliente",
+                                "Billete", JOptionPane.QUESTION_MESSAGE));
+                        cambio = pago - total;
 
-                    } catch (SQLException e) {
-                        System.err.println("Error en Registrar venta." + e);
-                        JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+                        try {
+                            Connection cn2 = Conexion.conectar();
+                            PreparedStatement pst2 = cn2.prepareStatement(
+                                    "insert into venta values (?,?,?,?,?,?,?)");
+                            pst2.setString(1, "0");
+                            pst2.setDate(2, fechaVenta);
+                            pst2.setTime(3, horaVenta);
+                            pst2.setString(4, "16%");
+                            pst2.setFloat(5, total);
+                            pst2.setFloat(6, pago);
+                            pst2.setFloat(7, cambio);
+                            pst2.executeUpdate();
+                            cn2.close();
+                            txtIdProducto.setText("");
+                            txtNombreProducto.setText("");
+                            txtCantidad.setText("");
+                            txtUDM.setText("");
+                            txtPrecio.setText("");
+                            txtTotal.setText("");
 
+                            txtCantidad.setBackground(Color.green);
+                            txtNombreProducto.setBackground(Color.green);
+                            txtIdProducto.setBackground(Color.green);
+                            txtTotal.setBackground(Color.green);
+                            txtUDM.setBackground(Color.green);
+
+                            JOptionPane.showMessageDialog(null, "El cambio del cliente es de: $" + cambio);
+                            JOptionPane.showMessageDialog(null, "Registro de venta exitoso");
+                            cn.close();
+
+                            try {
+                                Connection conex = Conexion.conectar();
+                                PreparedStatement prep = conex.prepareStatement(
+                                        "select * from venta where HoraVenta = '" + horaVenta + "'");
+                                ResultSet resul = prep.executeQuery();
+
+                                if (resul.next()) {
+                                    idVenta = resul.getString("idVenta");
+                                }
+                                conex.close();
+                            } catch (SQLException e) {
+                                System.err.println("Error al cargar el folio de venta " + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
+                            }
+
+                            try {
+                                Connection conexi = Conexion.conectar();
+                                PreparedStatement prestat = conexi.prepareStatement(
+                                        "insert into clientes_has_venta values (?,?)");
+
+                                prestat.setInt(1, idCliente);
+                                prestat.setString(2, idVenta);
+                                prestat.executeUpdate();
+                            } catch (SQLException e) {
+                                System.err.println("Error al generar el folio de relacion cliente venta " + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
+                            }
+
+                            try {
+                                Connection cn4 = Conexion.conectar();
+                                PreparedStatement pst4 = cn4.prepareStatement(
+                                        "insert into empleados_has_venta values (?,?)");
+
+                                pst4.setInt(1, idUsuario);
+                                pst4.setInt(2, Integer.parseInt(idVenta));
+                                pst4.executeUpdate();
+                            } catch (SQLException e) {
+                                System.err.println("Error al generar el folio de relacion usuario venta " + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion usuario venta!!, contacte al administrador.");
+                            }
+
+                            try {
+                                Connection conx = Conexion.conectar();
+                                PreparedStatement pesnt = conx.prepareStatement(
+                                        "insert into detalleventa values (?,?,?,?)");
+
+                                for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                    String clave, cnt, subt;
+                                    clave = jTable_Venta.getValueAt(i, 0).toString();
+                                    cnt = jTable_Venta.getValueAt(i, 2).toString();
+                                    subt = jTable_Venta.getValueAt(i, 4).toString();
+
+                                    pesnt.setString(1, clave);
+                                    pesnt.setString(2, cnt);
+                                    pesnt.setString(3, subt);
+                                    pesnt.setString(4, idVenta);
+                                    pesnt.executeUpdate();
+
+                                }
+                                conx.close();
+                            } catch (SQLException e) {
+                                System.err.println("Error al generar el folio de detalle de venta " + e);
+                                JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de detalle de venta!!, contacte al administrador.");
+                            }
+
+                            for (int i = 0; i < jTable_Venta.getRowCount(); i++) {
+                                try {
+
+                                    Connection cn3 = Conexion.conectar();
+                                    PreparedStatement pt = cn3.prepareStatement(
+                                            "select * from productos where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                    ResultSet rs2 = pt.executeQuery();
+
+                                    if (rs2.next()) {
+                                        cantidadVieja = Integer.parseInt(rs2.getString(4));
+                                    }
+
+                                    cn2.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al obtener la existencia del producto");
+                                    JOptionPane.showMessageDialog(null, "¡¡ERROR al obtener existencias!!, contacte al administrador.");
+                                }
+                                try {
+                                    Connection con = Conexion.conectar();
+                                    PreparedStatement pest = con.prepareStatement(
+                                            "update productos set Existencia=? where idProductos = '" + jTable_Venta.getValueAt(i, 0) + "'");
+                                    nuevaCant = cantidadVieja - (Integer.parseInt(jTable_Venta.getValueAt(i, 2).toString()));
+                                    pest.setInt(1, nuevaCant);
+                                    pest.executeUpdate();
+                                    con.close();
+                                } catch (SQLException e) {
+                                    System.err.println("Error al actualizar existencias " + e);
+                                }
+                            }
+                            JOptionPane.showMessageDialog(null, "¡Venta realizada exitosamente, Vuelva Pronto!.");
+                            this.dispose();
+                        } catch (SQLException e) {
+                            System.err.println("Error en Registrar venta." + e);
+                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+                        }
                     }
-                    }
-
+                    //A partir de abajo es pago con Efectivo
                 } else {
 
                     pago = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad con la que pagara el cliente",
                             "Billete", JOptionPane.QUESTION_MESSAGE));
                     cambio = pago - total;
-                    
+                    //
                     try {
                         Connection cn2 = Conexion.conectar();
                         PreparedStatement pst2 = cn2.prepareStatement(
@@ -571,12 +882,12 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                             System.err.println("Error al cargar el folio de venta " + e);
                             JOptionPane.showMessageDialog(null, "¡¡ERROR al cargar folio de venta!!, contacte al administrador.");
                         }
-                        
+
                         try {
                             Connection conexi = Conexion.conectar();
                             PreparedStatement prestat = conexi.prepareStatement(
-                            "insert into clientes_has_venta values (?,?)");
-                            
+                                    "insert into clientes_has_venta values (?,?)");
+
                             prestat.setInt(1, idCliente);
                             prestat.setString(2, idVenta);
                             prestat.executeUpdate();
@@ -584,20 +895,19 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                             System.err.println("Error al generar el folio de relacion cliente venta " + e);
                             JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
                         }
-                        
-                         try {
+
+                        try {
                             Connection cn4 = Conexion.conectar();
                             PreparedStatement pst4 = cn4.prepareStatement(
-                            "insert into empleados_has_venta values (?,?)");
-                            
-                            pst4.setString(1, idUsuario);
-                            pst4.setString(2, idVenta);
+                                    "insert into empleados_has_venta values (?,?)");
+
+                            pst4.setInt(1, idUsuario);
+                            pst4.setInt(2, Integer.parseInt(idVenta));
                             pst4.executeUpdate();
                         } catch (SQLException e) {
                             System.err.println("Error al generar el folio de relacion usuario venta " + e);
-                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion cliente venta!!, contacte al administrador.");
+                            JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar folio de relacion usuario venta!!, contacte al administrador.");
                         }
-                        
 
                         try {
                             Connection conx = Conexion.conectar();
@@ -652,6 +962,8 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                                 System.err.println("Error al actualizar existencias " + e);
                             }
                         }
+
+                        JOptionPane.showMessageDialog(null, "¡Venta realizada exitosamente, Vuelva Pronto!.");
                         this.dispose();
 
                     } catch (SQLException e) {
@@ -659,7 +971,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
 
                     }
-
+                    
                 }
             }
 
