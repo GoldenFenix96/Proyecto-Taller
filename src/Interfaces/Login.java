@@ -3,22 +3,24 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
     public static String usuario = "";
-    
+    String contraseña;
+
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Login");
         this.setResizable(false);
         this.setSize(800, 600);
-        
+
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagenes/Taller P.png"));
@@ -63,7 +65,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 220, -1));
 
         txtUser.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        txtUser.setForeground(new java.awt.Color(204, 204, 204));
         txtUser.setToolTipText("Ingrese su nombre de usuario:");
         txtUser.setBorder(null);
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,6 +90,11 @@ public class Login extends javax.swing.JFrame {
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtPassMousePressed(evt);
+            }
+        });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
             }
         });
         jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 260, 30));
@@ -197,30 +203,61 @@ public class Login extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         usuario = txtUser.getText().trim();
-        String pass= txtPass.getText().trim();
-        
-        if(usuario.isEmpty() || pass.isEmpty()){
-            JOptionPane.showMessageDialog(null, " Rellene los campos");
-        } else {
-            try {
-                Connection cn = Conexion.conectar();
-                PreparedStatement pst = cn.prepareStatement("select Usuario, Contraseña "
-                        + "from empleados where Usuario='" + usuario + "' and Contraseña ='" + pass + "'"); 
-                ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-               this.dispose();
-                new Menu().setVisible(true);  
-             
-            } else{
-                 JOptionPane.showMessageDialog(null,  " usuario o contraseña incorrecto");
-            }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-                  JOptionPane.showMessageDialog(null,  " error");
-            }
-        }          
-    
+        contraseña = txtPass.getText().trim();
+
+        if (!usuario.equals("") || !contraseña.equals("")) {
+            try{
+          Connection cn = Conexion.conectar();
+          PreparedStatement pst = cn.prepareStatement(
+                  "select Permisos_idPermisos , Estatus_idEstatus from empleados where Usuario = '" +usuario
+                    + "' and Contraseña = '" + contraseña + "'");
+
+          ResultSet rs = pst.executeQuery();
+         
+          if(rs.next()){
+              
+              int permiso = rs.getInt("Permisos_idPermisos");
+              int estatus = rs.getInt("Estatus_idEstatus");
+              
+              if (permiso == 1 && estatus == 1) {
+                  JOptionPane.showMessageDialog(null, "Entrando al Menú de Administrador");
+                  dispose();
+                  new MenuAdministrador().setVisible(true);
+              } else if(permiso == 2 && estatus == 1){
+                  JOptionPane.showMessageDialog(null, "Entrando al Menú de Empleado");
+                  dispose();
+                  new MenuEmpleados().setVisible(true);
+              } 
+              
+          }else{
+              JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");
+              txtUser.setText("");
+              txtPass.setText("");
+          }
+         
+        }catch(SQLException e){
+            System.err.println("Error en el boton acceder " + e);
+            JOptionPane.showMessageDialog(null, "¡¡Error al iniciar sesion!!, contacte al administrador"); 
+        }
+        }else{
+           JOptionPane.showMessageDialog(null, "Debes llenar todos los campos"); 
+        }
+
     }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            txtPass.requestFocus();
+             if (String.valueOf(txtPass.getPassword()).equals("********")) {
+            txtPass.setText("");
+            txtPass.setForeground(Color.black);
+        }
+        if (txtUser.getText().isEmpty()) {
+            txtUser.setText("Ingrese su nombre de usuario:");
+            txtUser.setForeground(Color.gray);
+        }
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
 
     /**
      * @param args the command line arguments

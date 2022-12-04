@@ -261,7 +261,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         idProducto = txtIdProducto.getText().trim();
 
         if (idProducto.equals("")) {
-            txtIdProducto.setBackground(Color.red);
+            
             validacion++;
         }
 
@@ -296,9 +296,13 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        String cantemp = txtCantidad.getText().trim();
         idProducto = txtIdProducto.getText().trim();
-        try {
+        
+        if (cantemp.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes agregar la cantidad del producto a comprar");
+        } else {
+            try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
                     "select idProductos, NombreProducto, PrecioVenta, Existencia from productos where idProductos ='" + idProducto + "'");
@@ -333,6 +337,8 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
             System.err.println("Error al llenar tabla " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, ¡Contacte al administrador!");
         }
+        }
+        
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -379,7 +385,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                     } while (respNVC < 1 || respNVC > 2);
                     //A partir de abajo es pago con linea de credito
                     if (respNVC == 1) {
-                        System.out.println("Credito Restante: " + creditoRes);
+                       
                         if (creditoRes >= total) {
                             try {
                                 Connection cn2 = Conexion.conectar();

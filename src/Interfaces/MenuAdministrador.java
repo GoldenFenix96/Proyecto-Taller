@@ -5,9 +5,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
-public class Menu extends javax.swing.JFrame {
+public class MenuAdministrador extends javax.swing.JFrame {
 
-    public Menu() {
+    public MenuAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Menú");
@@ -35,39 +35,39 @@ public class Menu extends javax.swing.JFrame {
 
         };
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuArchivos = new javax.swing.JMenu();
         NUsuario = new javax.swing.JMenuItem();
         MUsuario = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        Cerrar = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MPermisos = new javax.swing.JMenuItem();
+        MEstatus = new javax.swing.JMenuItem();
+        MPuestos = new javax.swing.JMenuItem();
+        CerrarSesion = new javax.swing.JMenuItem();
+        MenuProductos = new javax.swing.JMenu();
+        MNuevoProd = new javax.swing.JMenuItem();
+        MExistenciasProd = new javax.swing.JMenuItem();
+        MCategorias = new javax.swing.JMenuItem();
+        MEstatusProd = new javax.swing.JMenuItem();
+        MUDM = new javax.swing.JMenuItem();
+        MenuAutos = new javax.swing.JMenu();
         AutosC = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        Modelos = new javax.swing.JMenuItem();
+        Marcas = new javax.swing.JMenuItem();
+        MAutos_Clientes = new javax.swing.JMenuItem();
+        MenuClientes = new javax.swing.JMenu();
         Clientes = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        MenuCompras = new javax.swing.JMenu();
         NuevaCompra = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        MRegistrosCompras = new javax.swing.JMenuItem();
+        MenuVentas = new javax.swing.JMenu();
         NuevaVenta = new javax.swing.JMenuItem();
         RegistrosVentas = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        MenuProveedores = new javax.swing.JMenu();
+        MProveedores = new javax.swing.JMenuItem();
+        MCiudades = new javax.swing.JMenuItem();
+        MEstados = new javax.swing.JMenuItem();
+        MenuCreditos = new javax.swing.JMenu();
+        MNVC = new javax.swing.JMenuItem();
+        MDeudasCl = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -88,7 +88,7 @@ public class Menu extends javax.swing.JFrame {
 
         getContentPane().add(DPEscritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jMenu1.setText("Archivo");
+        MenuArchivos.setText("Archivo");
 
         NUsuario.setText("Nuevo Usuario");
         NUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
                 NUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(NUsuario);
+        MenuArchivos.add(NUsuario);
 
         MUsuario.setText("Gestión de Usuarios");
         MUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -104,87 +104,87 @@ public class Menu extends javax.swing.JFrame {
                 MUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(MUsuario);
+        MenuArchivos.add(MUsuario);
 
-        jMenuItem13.setText("Permisos");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        MPermisos.setText("Permisos");
+        MPermisos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                MPermisosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem13);
+        MenuArchivos.add(MPermisos);
 
-        jMenuItem14.setText("Estatus");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        MEstatus.setText("Estatus");
+        MEstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                MEstatusActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        MenuArchivos.add(MEstatus);
 
-        jMenuItem15.setText("Puestos");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+        MPuestos.setText("Puestos");
+        MPuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                MPuestosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem15);
+        MenuArchivos.add(MPuestos);
 
-        Cerrar.setText("Cerrar Sesión");
-        Cerrar.addActionListener(new java.awt.event.ActionListener() {
+        CerrarSesion.setText("Cerrar Sesión");
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CerrarActionPerformed(evt);
+                CerrarSesionActionPerformed(evt);
             }
         });
-        jMenu1.add(Cerrar);
+        MenuArchivos.add(CerrarSesion);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(MenuArchivos);
 
-        jMenu2.setText("Productos");
+        MenuProductos.setText("Productos");
 
-        jMenuItem3.setText("Nuevo Producto");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        MNuevoProd.setText("Nuevo Producto");
+        MNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                MNuevoProdActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        MenuProductos.add(MNuevoProd);
 
-        jMenuItem4.setText("Existencias de Productos");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        MExistenciasProd.setText("Existencias de Productos");
+        MExistenciasProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                MExistenciasProdActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        MenuProductos.add(MExistenciasProd);
 
-        jMenuItem8.setText("Categorias");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        MCategorias.setText("Categorias");
+        MCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                MCategoriasActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        MenuProductos.add(MCategorias);
 
-        jMenuItem10.setText("Estatus de los Productos");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        MEstatusProd.setText("Estatus de los Productos");
+        MEstatusProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                MEstatusProdActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem10);
+        MenuProductos.add(MEstatusProd);
 
-        jMenuItem16.setText("Unidades de Medida");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+        MUDM.setText("Unidades de Medida");
+        MUDM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
+                MUDMActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem16);
+        MenuProductos.add(MUDM);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(MenuProductos);
 
-        jMenu3.setText("Autos");
+        MenuAutos.setText("Autos");
 
         AutosC.setText("Autos");
         AutosC.addActionListener(new java.awt.event.ActionListener() {
@@ -192,35 +192,35 @@ public class Menu extends javax.swing.JFrame {
                 AutosCActionPerformed(evt);
             }
         });
-        jMenu3.add(AutosC);
+        MenuAutos.add(AutosC);
 
-        jMenuItem7.setText("Modelos");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        Modelos.setText("Modelos");
+        Modelos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                ModelosActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        MenuAutos.add(Modelos);
 
-        jMenuItem6.setText("Marcas");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        Marcas.setText("Marcas");
+        Marcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                MarcasActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        MenuAutos.add(Marcas);
 
-        jMenuItem9.setText("Autos - Clientes");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        MAutos_Clientes.setText("Autos - Clientes");
+        MAutos_Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                MAutos_ClientesActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        MenuAutos.add(MAutos_Clientes);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(MenuAutos);
 
-        jMenu4.setText("Clientes");
+        MenuClientes.setText("Clientes");
 
         Clientes.setText("Clientes");
         Clientes.addActionListener(new java.awt.event.ActionListener() {
@@ -228,11 +228,11 @@ public class Menu extends javax.swing.JFrame {
                 ClientesActionPerformed(evt);
             }
         });
-        jMenu4.add(Clientes);
+        MenuClientes.add(Clientes);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(MenuClientes);
 
-        jMenu8.setText("Compras");
+        MenuCompras.setText("Compras");
 
         NuevaCompra.setText("Nueva Compra");
         NuevaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -240,19 +240,19 @@ public class Menu extends javax.swing.JFrame {
                 NuevaCompraActionPerformed(evt);
             }
         });
-        jMenu8.add(NuevaCompra);
+        MenuCompras.add(NuevaCompra);
 
-        jMenuItem18.setText("Registros de Compras");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+        MRegistrosCompras.setText("Registros de Compras");
+        MRegistrosCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                MRegistrosComprasActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem18);
+        MenuCompras.add(MRegistrosCompras);
 
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(MenuCompras);
 
-        jMenu5.setText("Ventas");
+        MenuVentas.setText("Ventas");
 
         NuevaVenta.setText("Nueva Venta");
         NuevaVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +260,7 @@ public class Menu extends javax.swing.JFrame {
                 NuevaVentaActionPerformed(evt);
             }
         });
-        jMenu5.add(NuevaVenta);
+        MenuVentas.add(NuevaVenta);
 
         RegistrosVentas.setText("Registros de Ventas");
         RegistrosVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -268,57 +268,57 @@ public class Menu extends javax.swing.JFrame {
                 RegistrosVentasActionPerformed(evt);
             }
         });
-        jMenu5.add(RegistrosVentas);
+        MenuVentas.add(RegistrosVentas);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(MenuVentas);
 
-        jMenu6.setText("Proveedores");
+        MenuProveedores.setText("Proveedores");
 
-        jMenuItem1.setText("Proveedores");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        MProveedores.setText("Proveedores");
+        MProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                MProveedoresActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem1);
+        MenuProveedores.add(MProveedores);
 
-        jMenuItem12.setText("Ciudades");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        MCiudades.setText("Ciudades");
+        MCiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                MCiudadesActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem12);
+        MenuProveedores.add(MCiudades);
 
-        jMenuItem11.setText("Estados");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+        MEstados.setText("Estados");
+        MEstados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
+                MEstadosActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem11);
+        MenuProveedores.add(MEstados);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(MenuProveedores);
 
-        jMenu7.setText("Creditos");
+        MenuCreditos.setText("Creditos");
 
-        jMenuItem2.setText("Niveles de Confianza");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MNVC.setText("Niveles de Confianza");
+        MNVC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MNVCActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem2);
+        MenuCreditos.add(MNVC);
 
-        jMenuItem5.setText("Deudas de Clientes");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        MDeudasCl.setText("Deudas de Clientes");
+        MDeudasCl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                MDeudasClActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem5);
+        MenuCreditos.add(MDeudasCl);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(MenuCreditos);
 
         setJMenuBar(jMenuBar1);
 
@@ -331,16 +331,16 @@ public class Menu extends javax.swing.JFrame {
        NU.show();
     }//GEN-LAST:event_NUsuarioActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void MNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MNuevoProdActionPerformed
        JINuevoProducto JINP = new JINuevoProducto();
         DPEscritorio.add(JINP);
         JINP.show();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_MNuevoProdActionPerformed
 
-    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+    private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
         this.dispose();
         new Login().setVisible(true);
-    }//GEN-LAST:event_CerrarActionPerformed
+    }//GEN-LAST:event_CerrarSesionActionPerformed
 
     private void MUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MUsuarioActionPerformed
         JIGestionUsuario JIGU = new JIGestionUsuario();
@@ -348,11 +348,11 @@ public class Menu extends javax.swing.JFrame {
         JIGU.show();
     }//GEN-LAST:event_MUsuarioActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void MExistenciasProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MExistenciasProdActionPerformed
         JIExistencias JIE = new JIExistencias();
         DPEscritorio.add(JIE);
         JIE.show();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_MExistenciasProdActionPerformed
 
     private void AutosCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutosCActionPerformed
         JIAutos JIA = new JIAutos();
@@ -366,83 +366,83 @@ public class Menu extends javax.swing.JFrame {
         JIC.show();
     }//GEN-LAST:event_ClientesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MNVCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MNVCActionPerformed
         JINivelesCon JINCON = new JINivelesCon();
         DPEscritorio.add(JINCON);
         JINCON.show();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MNVCActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void MDeudasClActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MDeudasClActionPerformed
        JIDeudas JIDe = new JIDeudas();
        DPEscritorio.add(JIDe);
        JIDe.show();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_MDeudasClActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void MarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarcasActionPerformed
         JIMarca JIM = new JIMarca();
         DPEscritorio.add(JIM);
         JIM.show();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_MarcasActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void ModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelosActionPerformed
         JIModelos JIMO = new JIModelos();
         DPEscritorio.add(JIMO);
         JIMO.show();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_ModelosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MProveedoresActionPerformed
         JIProveedores JIPro = new JIProveedores();
         DPEscritorio.add(JIPro);
         JIPro.show();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MProveedoresActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void MCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCategoriasActionPerformed
         JICategorias JICA = new JICategorias();
         DPEscritorio.add(JICA);
         JICA.show();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_MCategoriasActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void MEstatusProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEstatusProdActionPerformed
         JIEstatusProducto JIEP = new JIEstatusProducto();
         DPEscritorio.add(JIEP);
         JIEP.show();
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_MEstatusProdActionPerformed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void MEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEstadosActionPerformed
         JIEstados JIEst = new JIEstados();
         DPEscritorio.add(JIEst);
         JIEst.show();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }//GEN-LAST:event_MEstadosActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void MCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCiudadesActionPerformed
         JICiudades JICi = new JICiudades();
         DPEscritorio.add(JICi);
         JICi.show();
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_MCiudadesActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void MPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MPermisosActionPerformed
         JIPermisos JIPer = new JIPermisos();
         DPEscritorio.add(JIPer);
         JIPer.show();
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_MPermisosActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void MEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEstatusActionPerformed
         JIEstatus JIEstat = new JIEstatus();
         DPEscritorio.add(JIEstat);
         JIEstat.show();
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_MEstatusActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+    private void MPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MPuestosActionPerformed
         JIPuestos JIPues = new JIPuestos();
         DPEscritorio.add(JIPues);
         JIPues.show();
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+    }//GEN-LAST:event_MPuestosActionPerformed
 
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+    private void MUDMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MUDMActionPerformed
         JIUnidadesDeMedida JIUDM = new JIUnidadesDeMedida();
         DPEscritorio.add(JIUDM);
         JIUDM.show();
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
+    }//GEN-LAST:event_MUDMActionPerformed
 
     private void RegistrosVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrosVentasActionPerformed
         JIRegistrosVentas JIRV = new JIRegistrosVentas();
@@ -462,17 +462,17 @@ public class Menu extends javax.swing.JFrame {
         JINC.show();
     }//GEN-LAST:event_NuevaCompraActionPerformed
 
-    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+    private void MRegistrosComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MRegistrosComprasActionPerformed
         JIRegistrosCompras JIRC = new JIRegistrosCompras();
         DPEscritorio.add(JIRC);
         JIRC.show();
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
+    }//GEN-LAST:event_MRegistrosComprasActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void MAutos_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAutos_ClientesActionPerformed
         JIAutosClientes JIAC = new JIAutosClientes();
         DPEscritorio.add(JIAC);
         JIAC.show();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_MAutos_ClientesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -488,59 +488,60 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new MenuAdministrador().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AutosC;
-    private javax.swing.JMenuItem Cerrar;
+    private javax.swing.JMenuItem CerrarSesion;
     private javax.swing.JMenuItem Clientes;
     private javax.swing.JDesktopPane DPEscritorio;
+    private javax.swing.JMenuItem MAutos_Clientes;
+    private javax.swing.JMenuItem MCategorias;
+    private javax.swing.JMenuItem MCiudades;
+    private javax.swing.JMenuItem MDeudasCl;
+    private javax.swing.JMenuItem MEstados;
+    private javax.swing.JMenuItem MEstatus;
+    private javax.swing.JMenuItem MEstatusProd;
+    private javax.swing.JMenuItem MExistenciasProd;
+    private javax.swing.JMenuItem MNVC;
+    private javax.swing.JMenuItem MNuevoProd;
+    private javax.swing.JMenuItem MPermisos;
+    private javax.swing.JMenuItem MProveedores;
+    private javax.swing.JMenuItem MPuestos;
+    private javax.swing.JMenuItem MRegistrosCompras;
+    private javax.swing.JMenuItem MUDM;
     private javax.swing.JMenuItem MUsuario;
+    private javax.swing.JMenuItem Marcas;
+    private javax.swing.JMenu MenuArchivos;
+    private javax.swing.JMenu MenuAutos;
+    private javax.swing.JMenu MenuClientes;
+    private javax.swing.JMenu MenuCompras;
+    private javax.swing.JMenu MenuCreditos;
+    private javax.swing.JMenu MenuProductos;
+    private javax.swing.JMenu MenuProveedores;
+    private javax.swing.JMenu MenuVentas;
+    private javax.swing.JMenuItem Modelos;
     private javax.swing.JMenuItem NUsuario;
     private javax.swing.JMenuItem NuevaCompra;
     private javax.swing.JMenuItem NuevaVenta;
     private javax.swing.JMenuItem RegistrosVentas;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
