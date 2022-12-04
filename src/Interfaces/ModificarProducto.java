@@ -3,9 +3,14 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.sql.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ModificarProducto extends javax.swing.JFrame {
 
@@ -105,7 +110,7 @@ public class ModificarProducto extends javax.swing.JFrame {
                 txtPrecioC.setText(rs.getString("PrecioCompra"));
                 txtPrecioV.setText(rs.getString("PrecioVenta"));
                 cmbEstatus.setSelectedItem(rs.getString("NombreE"));
-
+                
             }
             cn.close();
         } catch (SQLException e) {
@@ -143,11 +148,12 @@ public class ModificarProducto extends javax.swing.JFrame {
         lblPrecioVenta = new javax.swing.JLabel();
         txtPrecioV = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
         lblExistencia2 = new javax.swing.JLabel();
         cmbEstatus = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        Imagen = new javax.swing.JLabel();
+        txtImagen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -255,11 +261,7 @@ public class ModificarProducto extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 120, 120));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 160, 140));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 120, 120));
 
         btnModificar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
@@ -283,6 +285,12 @@ public class ModificarProducto extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modificar Producto");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+
+        Imagen.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 230, 200));
+
+        txtImagen.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(txtImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -330,7 +338,19 @@ public class ModificarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioVKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        File archivo;
+        JFileChooser flcAbrirArchivo = new JFileChooser();
+        flcAbrirArchivo.setFileFilter(new FileNameExtensionFilter("archivo de imagen", "jpg", "jpeg", "png"));
+        int resp = flcAbrirArchivo.showOpenDialog(this);
 
+        if (resp == JFileChooser.APPROVE_OPTION) {
+
+            archivo = flcAbrirArchivo.getSelectedFile();
+            txtImagen.setText(archivo.getAbsolutePath());
+            Image foto = getToolkit().getImage(txtImagen.getText());
+            foto = foto.getScaledInstance(230, 200, 1);
+            Imagen.setIcon(new ImageIcon(foto));
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -466,13 +486,13 @@ public class ModificarProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Imagen;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cmbCategorias;
     private javax.swing.JComboBox<String> cmbEstatus;
     private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JComboBox<String> cmbUDM;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCategorias;
@@ -486,6 +506,7 @@ public class ModificarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtExistencia;
+    private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtPrecioC;
     private javax.swing.JTextField txtPrecioV;
     private javax.swing.JTextField txtProducto;

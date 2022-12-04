@@ -3,7 +3,12 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -93,9 +98,10 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioC = new javax.swing.JTextField();
         lblPrecioVenta = new javax.swing.JLabel();
         txtPrecioV = new javax.swing.JTextField();
-        imagen = new javax.swing.JLabel();
+        Imagen = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnAgregarPro = new javax.swing.JButton();
+        txtImagen = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -194,9 +200,8 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         txtPrecioV.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 200, -1));
 
-        imagen.setBackground(new java.awt.Color(255, 255, 255));
-        imagen.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 160, 140));
+        Imagen.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 230, 200));
 
         btnBuscar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar Archivo.png"))); // NOI18N
@@ -207,7 +212,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 100, 100));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 100, 100));
 
         btnAgregarPro.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnAgregarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
@@ -217,7 +222,10 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
                 btnAgregarProActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 100, 100));
+        jPanel1.add(btnAgregarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, 100, 100));
+
+        txtImagen.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        jPanel1.add(txtImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,48 +258,48 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtProductoKeyTyped
 
     private void txtExistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaKeyTyped
-       
+
         if (txtExistencia.getText().length() >= 5) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtExistenciaKeyTyped
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         File archivo;
         JFileChooser flcAbrirArchivo = new JFileChooser();
-        flcAbrirArchivo.setFileFilter(new FileNameExtensionFilter("Archivo de Imagen","jpg","jpeg","png"));
-        int respuesta = flcAbrirArchivo.showOpenDialog(this);
-        
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            
+        flcAbrirArchivo.setFileFilter(new FileNameExtensionFilter("archivo de imagen", "jpg", "jpeg", "png"));
+        int resp = flcAbrirArchivo.showOpenDialog(this);
+
+        if (resp == JFileChooser.APPROVE_OPTION) {
+
             archivo = flcAbrirArchivo.getSelectedFile();
-            txtProducto.setText(archivo.getAbsolutePath());
-            Image foto = getToolkit().getImage(txtProducto.getText());
-            foto = foto.getScaledInstance(160, 140, 1);
-            imagen.setIcon(new ImageIcon(foto));
-            
+            txtImagen.setText(archivo.getAbsolutePath());
+            Image foto = getToolkit().getImage(txtImagen.getText());
+            foto = foto.getScaledInstance(230, 200, 1);
+            Imagen.setIcon(new ImageIcon(foto));
         }
-        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAgregarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProActionPerformed
 
+        FileInputStream archivoFoto;
+        File nombreFoto;
         int validacion = 0;
 
         String CB, NP, Ex, PC, PV;
-    
-    CB = txtCodigo.getText().trim();
-    NP = txtProducto.getText().trim();
-    Ex = txtExistencia.getText().trim();
-    PC = txtPrecioC.getText().trim();
-    PV = txtPrecioV.getText().trim();
-    
-    idUnidadMedida = cmbUDM.getSelectedIndex() + 1;
-    idCategoria = cmbCategorias.getSelectedIndex() +1;
-    
-    if (CB.equals("")) {
+
+        CB = txtCodigo.getText().trim();
+        NP = txtProducto.getText().trim();
+        Ex = txtExistencia.getText().trim();
+        PC = txtPrecioC.getText().trim();
+        PV = txtPrecioV.getText().trim();
+
+        idUnidadMedida = cmbUDM.getSelectedIndex() + 1;
+        idCategoria = cmbCategorias.getSelectedIndex() + 1;
+
+        if (CB.equals("")) {
             txtCodigo.setBackground(Color.red);
             validacion++;
         }
@@ -318,6 +326,8 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
             try {
                 pst = cn.prepareStatement(
                         "insert into productos values(?,?,?,?,?,?,?,?,?,?,?)");
+                nombreFoto=new File(txtImagen.getText());
+                archivoFoto=new FileInputStream(nombreFoto);
                 pst.setString(1, "0");
                 pst.setString(2, CB);
                 pst.setString(3, NP);
@@ -327,9 +337,9 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
                 pst.setInt(7, idCategoria);
                 pst.setString(8, PC);
                 pst.setString(9, PV);
-                pst.setString(10, "1");
-                pst.setString(11, "1");
-                
+                pst.setInt(10, 1);
+                pst.setBinaryStream(11, archivoFoto, archivoFoto.available());
+
                 pst.executeUpdate();
                 cn.close();
 
@@ -341,25 +351,28 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
                 cmbCategorias.setSelectedIndex(0);
                 txtPrecioC.setText("");
                 txtPrecioV.setText("");
-                
-                
+
                 JOptionPane.showMessageDialog(null, "Registro de Producto Exitoso");
             } catch (SQLException e) {
                 System.err.println("Error en Registrar Producto." + e);
                 JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(JINuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(JINuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }
 
     }//GEN-LAST:event_btnAgregarProActionPerformed
 
-    public void consultarID(){
+    public void consultarID() {
         String proveedor;
-        
+
         proveedor = cmbProveedores.getSelectedItem().toString();
-        
+
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select idProveedor from proveedor where NombreProveedor = '" + proveedor + "'");
@@ -376,12 +389,12 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Imagen;
     private javax.swing.JButton btnAgregarPro;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> cmbCategorias;
     private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JComboBox<String> cmbUDM;
-    private javax.swing.JLabel imagen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCategorias;
     private javax.swing.JLabel lblCodigo;
@@ -393,6 +406,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblProveedor;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtExistencia;
+    private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtPrecioC;
     private javax.swing.JTextField txtPrecioV;
     private javax.swing.JTextField txtProducto;
