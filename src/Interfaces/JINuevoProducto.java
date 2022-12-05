@@ -300,23 +300,18 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
         idCategoria = cmbCategorias.getSelectedIndex() + 1;
 
         if (CB.equals("")) {
-            txtCodigo.setBackground(Color.red);
             validacion++;
         }
         if (NP.equals("")) {
-            txtProducto.setBackground(Color.red);
             validacion++;
         }
         if (Ex.equals("")) {
-            txtExistencia.setBackground(Color.red);
             validacion++;
         }
         if (PC.equals("")) {
-            txtPrecioC.setBackground(Color.red);
             validacion++;
         }
         if (PV.equals("")) {
-            txtPrecioV.setBackground(Color.red);
             validacion++;
         }
         consultarID();

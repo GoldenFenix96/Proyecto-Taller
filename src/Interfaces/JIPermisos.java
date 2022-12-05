@@ -174,7 +174,6 @@ public class JIPermisos extends javax.swing.JInternalFrame {
         nombre = txtPermiso.getText().trim();
 
         if (nombre.equals("")) {
-            txtPermiso.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {
@@ -205,7 +204,6 @@ public class JIPermisos extends javax.swing.JInternalFrame {
         nombre = txtPermiso.getText().trim();
 
         if (nombre.equals("")) {
-            txtPermiso.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

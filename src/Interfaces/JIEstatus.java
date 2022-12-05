@@ -175,7 +175,6 @@ public class JIEstatus extends javax.swing.JInternalFrame {
         nombre = txtEstatus.getText().trim();
 
         if (nombre.equals("")) {
-            txtEstatus.setBackground(Color.red);
             validacion++;
         }
         
@@ -218,7 +217,6 @@ public class JIEstatus extends javax.swing.JInternalFrame {
         nombre = txtEstatus.getText().trim();
 
         if (nombre.equals("")) {
-            txtEstatus.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

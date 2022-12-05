@@ -176,7 +176,6 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
         nombre = txtEstatusPro.getText().trim();
         
         if (nombre.equals("")) {
-            txtEstatusPro.setBackground(Color.red);
             validacion++;
         }
         
@@ -221,7 +220,6 @@ public class JIEstatusProducto extends javax.swing.JInternalFrame {
         nombre = txtEstatusPro.getText().trim();
 
         if (nombre.equals("")) {
-            txtEstatusPro.setBackground(Color.red);
             validacion++;
         }
         

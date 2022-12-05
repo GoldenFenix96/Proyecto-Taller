@@ -314,27 +314,21 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         permisos_cmb = cmbPermisos.getSelectedIndex() + 1;
 
         if (mail.equals("")) {
-            txtEmail.setBackground(Color.red);
             validacion++;
         }
         if (username.equals("")) {
-            txtUser.setBackground(Color.red);
             validacion++;
         }
         if (nombre.equals("")) {
-            txtnombre.setBackground(Color.red);
             validacion++;
         }
         if (apellidoP.equals("")) {
-            txtApellidoP.setBackground(Color.red);
             validacion++;
         }
         if (apellidoM.equals("")) {
-            txtApellidoM.setBackground(Color.red);
             validacion++;
         }
         if (telefono.equals("")) {
-            txtelefono.setBackground(Color.red);
             validacion++;
         }
 

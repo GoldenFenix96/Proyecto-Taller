@@ -310,36 +310,30 @@ public class JIAutos extends javax.swing.JInternalFrame {
         ano = txtano.getText().trim();
 
         if (serie.equals("")) {
-            txtSerie.setBackground(Color.red);
+            
             validacion++;
         }
         if (motor.equals("")) {
-            txtMotor.setBackground(Color.red);
+            
             validacion++;
         }
         if (trasmisiones.equals("")) {
-            txtTrans.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (rendimiento.equals("")) {
-            txtRendimiento.setBackground(Color.red);
             validacion++;
         }
         if (color.equals("")) {
-            txtColor.setBackground(Color.red);
             validacion++;
         }
 
         if (marca.equals("")) {
-            txtMarca.setBackground(Color.red);
             validacion++;
         }
         if (ano.equals("")) {
-            txtano.setBackground(Color.red);
             validacion++;
         }
 
@@ -436,36 +430,28 @@ public class JIAutos extends javax.swing.JInternalFrame {
         ano = txtano.getText().trim();
 
         if (serie.equals("")) {
-            txtSerie.setBackground(Color.red);
             validacion++;
         }
         if (motor.equals("")) {
-            txtMotor.setBackground(Color.red);
             validacion++;
         }
         if (trasmisiones.equals("")) {
-            txtTrans.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (rendimiento.equals("")) {
-            txtRendimiento.setBackground(Color.red);
             validacion++;
         }
         if (color.equals("")) {
-            txtColor.setBackground(Color.red);
             validacion++;
         }
 
         if (marca.equals("")) {
-            txtMarca.setBackground(Color.red);
             validacion++;
         }
         if (ano.equals("")) {
-            txtano.setBackground(Color.red);
             validacion++;
         }
 

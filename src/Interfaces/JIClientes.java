@@ -264,8 +264,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
                     "select NombreC, APaternoC, AMaternoC, Telefono, Dirección, Correo, DescripciónConfianza, LimiteCredito "
-                    + " from clientes, nc_cliente, lc_cliente  where idClientes = '"+idClientes+"' and NC_Cliente_idNC_Cliente = idNC_Cliente "
-                            + "and idLC_Cliente = idClientes");
+                    + " from clientes, nc_cliente  where idClientes = '"+idClientes+"' and NC_Cliente_idNC_Cliente = idNC_Cliente");
            
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -281,7 +280,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             }
             cn.close();
         } catch (SQLException e) {
-            System.err.println("Error en cargar ciudad " + e);
+            System.err.println("Error en cargar cliente " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
        
@@ -300,18 +299,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
             System.err.println("Error en eliminar cliente " + er);
             JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
         }
-        try {
-            Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement(
-                    "delete from lc_cliente where idLC_Cliente = '" + idClientes + "'");
-            pst.executeUpdate();
-            cn.close();
-            JOptionPane.showMessageDialog(null, "El cliente seleccionado fue dado de baja");
-            actualizarTabla();
-        } catch (SQLException er) {
-            System.err.println("Error en eliminar cliente " + er);
-            JOptionPane.showMessageDialog(null, "Error en eliminar, contacte al administrador");
-        }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -329,31 +317,24 @@ public class JIClientes extends javax.swing.JInternalFrame {
         limite = txtLC.getText().trim();
 
         if (nombre.equals("")) {
-            txtNombre.setBackground(Color.red);
             validacion++;
         }
         if (apaterno.equals("")) {
-            txtApaterno.setBackground(Color.red);
             validacion++;
         }
         if (amaterno.equals("")) {
-            txtAmaterno.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (telefono.equals("")) {
-            txtTelefono.setBackground(Color.red);
             validacion++;
         }
         if (correo.equals("")) {
-            txtCorreo.setBackground(Color.red);
             validacion++;
         }
         if (limite.equals("")) {
-            txtLC.setBackground(Color.red);
             validacion++;
         }
         
@@ -364,8 +345,8 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 PreparedStatement pst;
                 try {
                     pst = cn.prepareStatement(
-                            "update clientes set NombreC = ?, APaternoC = ?, AMaternoC = ?, Telefono = ?, Dirección = ?, Correo = ?, NC_Cliente_idNC_Cliente = ? "
-                                    + "where idClientes = '"+idClientes+"'");
+                            "update clientes set NombreC = ?, APaternoC = ?, AMaternoC = ?, Telefono = ?, Dirección = ?, Correo = ?, NC_Cliente_idNC_Cliente = ?, "
+                                    + "LimiteCredito = ? where idClientes = '"+idClientes+"'");
                     pst.setString(1, nombre);
                     pst.setString(2, apaterno);
                     pst.setString(3, amaterno);
@@ -373,6 +354,7 @@ public class JIClientes extends javax.swing.JInternalFrame {
                     pst.setString(5, direccion);
                     pst.setString(6, correo);
                     pst.setInt(7, idNivc);
+                    pst.setString(8, limite);
 
                     pst.executeUpdate();
                     cn.close();
@@ -380,22 +362,6 @@ public class JIClientes extends javax.swing.JInternalFrame {
                 } catch (SQLException e) {
                     System.err.println("Error al actualizar Cliente." + e);
                     JOptionPane.showMessageDialog(null, "¡¡ERROR al actualizar!!, contacte al administrador.");
-                }
-
-                try {
-                    Connection cn2 = Conexion.conectar();
-                    PreparedStatement pst2;
-                    pst2 = cn2.prepareStatement(
-                            "update lc_cliente set LimiteCredito = ?, LC_Cliente_idNC_Cliente = ? where idLC_Cliente = '"+idClientes+"'");
-                    pst2.setInt(1, Integer.parseInt(limite));
-                    pst2.setInt(2, idNivc);
-
-                    pst2.executeUpdate();
-                    cn2.close();
-
-                } catch (SQLException e) {
-                    System.err.println("Error en Actualizar Limite de Credito." + e);
-                    JOptionPane.showMessageDialog(null, "¡¡ERROR al registrar!!, contacte al administrador.");
                 }
 
                 txtNombre.setText("");
@@ -435,31 +401,25 @@ public class JIClientes extends javax.swing.JInternalFrame {
         limite = txtLC.getText().trim();
 
         if (nombre.equals("")) {
-            txtNombre.setBackground(Color.red);
+            
             validacion++;
         }
         if (apaterno.equals("")) {
-            txtApaterno.setBackground(Color.red);
             validacion++;
         }
         if (amaterno.equals("")) {
-            txtAmaterno.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (telefono.equals("")) {
-            txtTelefono.setBackground(Color.red);
             validacion++;
         }
         if (correo.equals("")) {
-            txtCorreo.setBackground(Color.red);
             validacion++;
         }
         if (limite.equals("")) {
-            txtLC.setBackground(Color.red);
             validacion++;
         }
 

@@ -317,23 +317,18 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         idCiudad = cmbCiudad.getSelectedIndex() + 1;
 
         if (nombrePro.equals("")) {
-            txtNombrePro.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (telefono.equals("")) {
-            txtTelefono.setBackground(Color.red);
             validacion++;
         }
         if (correo.equals("")) {
-            txtCorreo.setBackground(Color.red);
             validacion++;
         }
         if (rfc.equals("")) {
-            txtRFC.setBackground(Color.red);
             validacion++;
         }
         consultarID();
@@ -395,23 +390,18 @@ public class JIProveedores extends javax.swing.JInternalFrame {
         idCiudad = cmbCiudad.getSelectedIndex() + 1;
 
         if (nombrePro.equals("")) {
-            txtNombrePro.setBackground(Color.red);
             validacion++;
         }
         if (direccion.equals("")) {
-            txtDireccion.setBackground(Color.red);
             validacion++;
         }
         if (telefono.equals("")) {
-            txtTelefono.setBackground(Color.red);
             validacion++;
         }
         if (correo.equals("")) {
-            txtCorreo.setBackground(Color.red);
             validacion++;
         }
         if (rfc.equals("")) {
-            txtRFC.setBackground(Color.red);
             validacion++;
         }
         consultarID();

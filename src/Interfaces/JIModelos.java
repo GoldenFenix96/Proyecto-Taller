@@ -200,7 +200,6 @@ public class JIModelos extends javax.swing.JInternalFrame {
         idMarca = cmbMarca.getSelectedIndex() + 1;
 
         if (nombreModelo.equals("")) {
-            txtmodelo.setBackground(Color.red);
             validacion++;
         }
         
@@ -249,7 +248,6 @@ public class JIModelos extends javax.swing.JInternalFrame {
         idMarca = cmbMarca.getSelectedIndex() + 1;
 
         if (nombreModelo.equals("")) {
-            txtmodelo.setBackground(Color.red);
             validacion++;
         }
 

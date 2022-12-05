@@ -175,7 +175,6 @@ public class JIEstados extends javax.swing.JInternalFrame {
         nombre = txtNombre.getText().trim();
         
         if (nombre.equals("")) {
-            txtNombre.setBackground(Color.red);
             validacion++;
         }
 
@@ -218,7 +217,6 @@ public class JIEstados extends javax.swing.JInternalFrame {
         nombre = txtNombre.getText().trim();
 
         if (nombre.equals("")) {
-            txtNombre.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

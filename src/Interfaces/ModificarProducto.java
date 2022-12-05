@@ -369,23 +369,18 @@ public class ModificarProducto extends javax.swing.JFrame {
         idEstatus = cmbEstatus.getSelectedIndex() + 1;
         
          if (CB.equals("")) {
-            txtCodigo.setBackground(Color.red);
             validacion++;
         }
         if (NP.equals("")) {
-            txtProducto.setBackground(Color.red);
             validacion++;
         }
         if (Ex.equals("")) {
-            txtExistencia.setBackground(Color.red);
             validacion++;
         }
         if (PC.equals("")) {
-            txtPrecioC.setBackground(Color.red);
             validacion++;
         }
         if (PV.equals("")) {
-            txtPrecioV.setBackground(Color.red);
             validacion++;
         }
         

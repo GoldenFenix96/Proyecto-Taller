@@ -194,11 +194,9 @@ public class JICategorias extends javax.swing.JInternalFrame {
         nomenclatura = txtNomen.getText().trim();
 
         if (nombre.equals("")) {
-            txtCategoria.setBackground(Color.red);
             validacion++;
         }
         if (nomenclatura.equals("")) {
-            txtNomen.setBackground(Color.red);
             validacion++;
         }
 
@@ -235,11 +233,9 @@ public class JICategorias extends javax.swing.JInternalFrame {
         nomenclatura = txtNomen.getText().trim();
 
         if (nombre.equals("")) {
-            txtCategoria.setBackground(Color.red);
             validacion++;
         }
         if (nomenclatura.equals("")) {
-            txtNomen.setBackground(Color.red);
             validacion++;
         }
 

@@ -297,7 +297,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement("select "
                     + "idAutos, NombreModelo, NumeroSerie, idClientes, NombreC, APaternoC, AMaternoC from autos, modelo, clientes, autos_has_clientes where "
-                    + "Autos_idAutos = idAutos and Clientes_idClientes = idClientes and Modelo_idModelo = idModelo ");
+                    + "Autos_idAutos = idAutos and Clientes_idClientes = idClientes and Modelo_idModelo = idModelo");
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

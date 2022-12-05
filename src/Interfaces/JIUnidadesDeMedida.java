@@ -173,7 +173,6 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
         nombre = txtUDM.getText().trim();
 
         if (nombre.equals("")) {
-            txtUDM.setBackground(Color.red);
             validacion++;
         }
         
@@ -217,7 +216,6 @@ public class JIUnidadesDeMedida extends javax.swing.JInternalFrame {
         nombre = txtUDM.getText().trim();
 
         if (nombre.equals("")) {
-            txtUDM.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

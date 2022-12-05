@@ -170,7 +170,6 @@ public class JIMarca extends javax.swing.JInternalFrame {
         nombre = texmarca.getText().trim();
 
         if (nombre.equals("")) {
-            texmarca.setBackground(Color.red);
             validacion++;
         }
         
@@ -213,7 +212,6 @@ public class JIMarca extends javax.swing.JInternalFrame {
         nombre = texmarca.getText().trim();
 
         if (nombre.equals("")) {
-            texmarca.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

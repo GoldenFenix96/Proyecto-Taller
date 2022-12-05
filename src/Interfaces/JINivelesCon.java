@@ -203,15 +203,12 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         limMin = txtLimMini.getText().trim();
         
         if (nivel.equals("")) {
-            txtNivel.setBackground(Color.red);
             validacion++;
         }
         if (limMax.equals("")) {
-            txtLimMini.setBackground(Color.red);
             validacion++;
         }
         if (limMin.equals("")) {
-            txtLimMax.setBackground(Color.red);
             validacion++;
         }
         
@@ -250,15 +247,12 @@ public class JINivelesCon extends javax.swing.JInternalFrame {
         limMin = txtLimMini.getText().trim();
         
         if (nivel.equals("")) {
-            txtNivel.setBackground(Color.red);
             validacion++;
         }
         if (limMax.equals("")) {
-            txtLimMini.setBackground(Color.red);
             validacion++;
         }
         if (limMin.equals("")) {
-            txtLimMax.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

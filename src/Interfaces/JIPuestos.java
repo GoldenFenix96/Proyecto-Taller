@@ -175,7 +175,6 @@ public class JIPuestos extends javax.swing.JInternalFrame {
         nombre = txtPuesto.getText().trim();
 
         if (nombre.equals("")) {
-            txtPuesto.setBackground(Color.red);
             validacion++;
         }
 
@@ -218,7 +217,6 @@ public class JIPuestos extends javax.swing.JInternalFrame {
         nombre = txtPuesto.getText().trim();
 
         if (nombre.equals("")) {
-            txtPuesto.setBackground(Color.red);
             validacion++;
         }
         if (validacion == 0) {

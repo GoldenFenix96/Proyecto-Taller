@@ -380,8 +380,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                 if (nvc > 1) {
                     do {
                         respNVC = Integer.parseInt(JOptionPane.showInputDialog(null, "El cliente " + cliente + " cuenta con una linea de credito : $" + creditoRes + 
-                                " \n¿Desea pagar con la linea de credito?",
-                                JOptionPane.QUESTION_MESSAGE));
+                                " \n¿Desea pagar con la linea de credito?"));
                     } while (respNVC < 1 || respNVC > 2);
                     //A partir de abajo es pago con linea de credito
                     if (respNVC == 1) {
