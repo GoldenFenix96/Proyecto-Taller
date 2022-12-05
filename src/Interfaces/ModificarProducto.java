@@ -114,7 +114,7 @@ public class ModificarProducto extends javax.swing.JFrame {
             }
             cn.close();
         } catch (SQLException e) {
-            System.err.println("Error en cargar empleado " + e);
+            System.err.println("Error en cargar producto " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
 
@@ -156,6 +156,7 @@ public class ModificarProducto extends javax.swing.JFrame {
         txtImagen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
 
         jPanel1.setBackground(new java.awt.Color(29, 81, 81));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

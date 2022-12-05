@@ -426,7 +426,7 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error al llenar tabla desde busqueda por proveedor. " + e);
+            System.err.println("Error al llenar tabla desde busqueda por fechas. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
         cmbImportes.setSelectedIndex(0);
@@ -496,7 +496,7 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.err.println("Error al llenar tabla desde busqueda por proveedor. " + e);
+            System.err.println("Error al llenar tabla desde busqueda por importe. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
         }
         cmbProductos.setSelectedIndex(0);
@@ -687,12 +687,12 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
                 if (rs.next()) {
                     do {
 
-                        tabla.addCell(rs.getString("idCompras"));
-                        tabla.addCell(rs.getString("FechaCompra"));
+                        tabla.addCell(rs.getString("idVenta"));
+                        tabla.addCell(rs.getString("FechaVenta"));
                         tabla.addCell(rs.getString("idProductos") + " - " + rs.getString("NombreProducto"));
-                        tabla.addCell(rs.getString("CantidadComprada"));
-                        tabla.addCell(rs.getString("NombreProveedor"));
-                        tabla.addCell(rs.getString("TotalCompra"));
+                        tabla.addCell(rs.getString("CantidadVendida"));
+                        tabla.addCell(rs.getString("NombreC") + " " + rs.getString("APaternoC") + " " + rs.getString("AMaternoC"));
+                        tabla.addCell(rs.getString("TotalVenta"));
 
                     } while (rs.next());
                     documento.add(tabla);
@@ -844,7 +844,7 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
             }
             cn.close();
         } catch (SQLException e) {
-            System.err.println("Error en cargar datos: ID Productos " + e);
+            System.err.println("Error en cargar datos: Importe de Compra " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
         }
     }
