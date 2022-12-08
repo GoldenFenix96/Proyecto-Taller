@@ -166,19 +166,21 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
 
         LblFecha4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblFecha4.setForeground(new java.awt.Color(255, 255, 255));
-        LblFecha4.setText("Fecha Inicio:");
+        LblFecha4.setText("Inicio:");
         jPanel1.add(LblFecha4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 135, -1, -1));
 
         FechaCompraIn.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(FechaCompraIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 130, 110, 25));
+        FechaCompraIn.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jPanel1.add(FechaCompraIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 140, 25));
 
         LblFecha.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblFecha.setForeground(new java.awt.Color(255, 255, 255));
         LblFecha.setText("Fin:");
-        jPanel1.add(LblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, -1, -1));
+        jPanel1.add(LblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 135, -1, -1));
 
         FechaCompraFin.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(FechaCompraFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 120, 25));
+        FechaCompraFin.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jPanel1.add(FechaCompraFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 130, 140, 25));
 
         LblFecha2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblFecha2.setForeground(new java.awt.Color(255, 255, 255));

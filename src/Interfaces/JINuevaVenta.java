@@ -13,6 +13,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
     String user;
     String idProducto = "";
+    int idProd;
     float total;
     int idUsuario;
     String idVenta;
@@ -99,6 +100,9 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         cmbCliente = new javax.swing.JComboBox<>();
         LblCantidad2 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
+        LblCodigo2 = new javax.swing.JLabel();
+        cmbProductos = new javax.swing.JComboBox<>();
+        btnBusDes = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -130,7 +134,6 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 40, 40));
 
-        txtNombreProducto.setEditable(false);
         txtNombreProducto.setBackground(new java.awt.Color(255, 255, 255));
         txtNombreProducto.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtNombreProducto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -144,18 +147,18 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
         txtCantidad.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtCantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 115, 110, 25));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 115, 60, 25));
 
         LblCodigo1.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         LblCodigo1.setForeground(new java.awt.Color(255, 255, 255));
         LblCodigo1.setText("Unidad de Medida:");
-        jPanel1.add(LblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        jPanel1.add(LblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         txtUDM.setEditable(false);
         txtUDM.setBackground(new java.awt.Color(255, 255, 255));
         txtUDM.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         txtUDM.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(txtUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 115, 190, 25));
+        jPanel1.add(txtUDM, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 115, 80, 25));
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carrito(1).png"))); // NOI18N
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -243,6 +246,28 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         txtPrecio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 25));
 
+        LblCodigo2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        LblCodigo2.setForeground(new java.awt.Color(255, 255, 255));
+        LblCodigo2.setText("Producto:");
+        jPanel1.add(LblCodigo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, -1));
+
+        cmbProductos.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
+        cmbProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProductosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 115, 260, 25));
+
+        btnBusDes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        btnBusDes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBusDes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBusDesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBusDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -259,7 +284,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         int validacion = 0;
-
+        cmbProductos.removeAllItems();
         idProducto = txtIdProducto.getText().trim();
 
         if (idProducto.equals("")) {
@@ -280,6 +305,7 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
                     txtNombreProducto.setText(rs.getString("NombreProducto"));
                     txtUDM.setText(rs.getString("NombreUDM"));
                     txtPrecio.setText(rs.getString("PrecioVenta"));
+                    cmbProductos.addItem(rs.getString("NombreProducto"));
                 } else {
                     JOptionPane.showMessageDialog(null, "Producto no existe");
                 }
@@ -1029,8 +1055,57 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar información, ¡Contacte al administrador!");
         }
 
-
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnBusDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusDesActionPerformed
+        String nombre;
+        cmbProductos.removeAllItems();
+       
+        nombre = txtNombreProducto.getText().trim();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select NombreProducto from productos where NombreProducto like '%"+nombre+"%'");
+            ResultSet rs = pst.executeQuery();
+           
+            while (rs.next()) {
+                cmbProductos.addItem(rs.getString("NombreProducto"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar información, Contacte al Administrador");
+        }
+        
+        
+    }//GEN-LAST:event_btnBusDesActionPerformed
+
+    private void cmbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductosActionPerformed
+        
+        if (cmbProductos.getItemCount() !=0) {
+            consultarID();
+            try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idProductos, NombreProducto, NombreUDM, PrecioVenta from productos, unidaddemedida where "
+                    + "idProductos = '" + idProd + "' and UnidaddeMedida_idUnidaddeMedida = idUnidaddeMedida ");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                txtIdProducto.setText(rs.getString("idProductos"));
+                txtNombreProducto.setText(rs.getString("NombreProducto"));
+                txtPrecio.setText(rs.getString("PrecioVenta"));
+                txtUDM.setText(rs.getString("NombreUDM"));
+           }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error en cargar datos del producto " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+        }
+        
+    }//GEN-LAST:event_cmbProductosActionPerformed
 
     public void calcularTotal() {
 
@@ -1046,6 +1121,26 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
         }
 
     }
+    
+    public void consultarID(){
+        String nombrePro;
+        
+        nombrePro = cmbProductos.getSelectedItem().toString();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement("select idProductos from productos where NombreProducto = '" + nombrePro + "'");
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                idProd = rs.getInt("idProductos");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar datos: ID Producto " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LbDescripción;
@@ -1053,14 +1148,17 @@ public class JINuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel LblCantidad1;
     private javax.swing.JLabel LblCantidad2;
     private javax.swing.JLabel LblCodigo1;
+    private javax.swing.JLabel LblCodigo2;
     private javax.swing.JLabel LblSKU;
     private javax.swing.JLabel LblTotal;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnBusDes;
     private javax.swing.JButton btnPagar;
     private javax.swing.JComboBox<String> cmbCliente;
+    private javax.swing.JComboBox<String> cmbProductos;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
