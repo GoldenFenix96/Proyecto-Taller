@@ -138,7 +138,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Registro de ventas");
+        jLabel1.setText("Historial de Ventas");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         jTable_ventas.setModel(new javax.swing.table.DefaultTableModel(
