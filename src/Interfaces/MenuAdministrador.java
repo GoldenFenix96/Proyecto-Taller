@@ -242,7 +242,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         MenuCompras.add(NuevaCompra);
 
-        MRegistrosCompras.setText("Registros de Compras");
+        MRegistrosCompras.setText("Historial de Compras");
         MRegistrosCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MRegistrosComprasActionPerformed(evt);
@@ -262,7 +262,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         MenuVentas.add(NuevaVenta);
 
-        RegistrosVentas.setText("Registros de Ventas");
+        RegistrosVentas.setText("Historial de Ventas");
         RegistrosVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrosVentasActionPerformed(evt);

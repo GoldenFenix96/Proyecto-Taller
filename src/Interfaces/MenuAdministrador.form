@@ -175,7 +175,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MRegistrosCompras">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registros de Compras"/>
+                <Property name="text" type="java.lang.String" value="Historial de Compras"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MRegistrosComprasActionPerformed"/>
@@ -198,7 +198,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="RegistrosVentas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registros de Ventas"/>
+                <Property name="text" type="java.lang.String" value="Historial de Ventas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrosVentasActionPerformed"/>

@@ -28,7 +28,7 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
     public JIRegistrosCompras() {
         initComponents();
         setSize(794, 548);
-        setTitle("Registro de ventas");
+        setTitle("Historial de Compras");
         setResizable(false);
 
         jTable_compras = new JTable(model);
@@ -139,7 +139,7 @@ public class JIRegistrosCompras extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Registro de Compras");
+        jLabel1.setText("Historial de Compras");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         jTable_compras.setModel(new javax.swing.table.DefaultTableModel(

@@ -27,7 +27,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
     public JIRegistrosVentas() {
         initComponents();
         setSize(794, 548);
-        setTitle("Registro de ventas");
+        setTitle("Historial de ventas");
         setResizable(false);
 
         jTable_ventas = new JTable(model);
