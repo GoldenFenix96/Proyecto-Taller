@@ -188,7 +188,7 @@ public class JINuevoProducto extends javax.swing.JInternalFrame {
 
         btnAgregarPro.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnAgregarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
-        btnAgregarPro.setBorder(null);
+        btnAgregarPro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregarPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProActionPerformed(evt);

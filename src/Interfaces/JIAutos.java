@@ -195,39 +195,43 @@ public class JIAutos extends javax.swing.JInternalFrame {
 
         consultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         consultar.setText("Consultar");
+        consultar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         consultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultarActionPerformed(evt);
             }
         });
-        jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+        jPanel1.add(consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 100, 25));
 
         agregar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         agregar.setText("Agregar");
+        agregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
             }
         });
-        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
+        jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 25));
 
         eliminar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         eliminar.setText("Eliminar");
+        eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, -1, -1));
+        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 100, 25));
 
         actualizar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         actualizar.setText("Actualizar");
+        actualizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
+        jPanel1.add(actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 110, 25));
 
         tblAutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

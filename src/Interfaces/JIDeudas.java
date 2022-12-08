@@ -145,21 +145,23 @@ public class JIDeudas extends javax.swing.JInternalFrame {
 
         btnPagoParcial.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnPagoParcial.setText("Pago de Adeudo");
+        btnPagoParcial.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPagoParcial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPagoParcialActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPagoParcial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
+        jPanel1.add(btnPagoParcial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 140, 25));
 
         btnConsultar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnConsultar.setText("Consultar");
+        btnConsultar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 130, -1));
+        jPanel1.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 130, 25));
 
         txtCliente.setEditable(false);
         txtCliente.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N

@@ -251,7 +251,7 @@ public class ModificarProducto extends javax.swing.JFrame {
 
         btnModificar.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ActualizarProducto.png"))); // NOI18N
-        btnModificar.setBorder(null);
+        btnModificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);

@@ -227,7 +227,9 @@ public class Login extends javax.swing.JFrame {
                   JOptionPane.showMessageDialog(null, "Entrando al Menú de Empleado");
                   dispose();
                   new MenuEmpleados().setVisible(true);
-              } 
+              } else{
+                  JOptionPane.showMessageDialog(null, "El usuario "+usuario+" no esta activo");
+              }
               
           }else{
               JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos");

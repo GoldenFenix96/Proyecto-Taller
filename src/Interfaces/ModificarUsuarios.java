@@ -257,7 +257,7 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         btnActualizar.setBackground(new java.awt.Color(255, 255, 255));
         btnActualizar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         btnActualizar.setText("Actualizar usuario");
-        btnActualizar.setBorder(null);
+        btnActualizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -268,7 +268,7 @@ public class ModificarUsuarios extends javax.swing.JFrame {
         btnRestaurar.setBackground(new java.awt.Color(255, 255, 255));
         btnRestaurar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         btnRestaurar.setText("Restaurar contraseña");
-        btnRestaurar.setBorder(null);
+        btnRestaurar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestaurarActionPerformed(evt);

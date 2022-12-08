@@ -132,7 +132,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         btnAgregarAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         btnAgregarAC.setText("Asignar Auto - Cliente");
-        btnAgregarAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgregarAC.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregarAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarACActionPerformed(evt);
@@ -142,7 +142,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         btnActAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         btnActAC.setText("Actualizar Auto - Cliente");
-        btnActAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnActAC.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnActAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActACActionPerformed(evt);
@@ -152,7 +152,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         btnEliminarAC.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         btnEliminarAC.setText("Eliminar Auto - Cliente");
-        btnEliminarAC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminarAC.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminarAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarACActionPerformed(evt);
@@ -162,7 +162,7 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         btnConsulta.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         btnConsulta.setText("Consultar Auto - Cliente");
-        btnConsulta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConsulta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultaActionPerformed(evt);

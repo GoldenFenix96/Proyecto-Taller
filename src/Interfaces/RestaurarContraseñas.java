@@ -87,7 +87,7 @@ public class RestaurarContraseñas extends javax.swing.JFrame {
         btnRestaurar.setBackground(new java.awt.Color(255, 255, 255));
         btnRestaurar.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnRestaurar.setText("Restaurar contraseña");
-        btnRestaurar.setBorder(null);
+        btnRestaurar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestaurarActionPerformed(evt);

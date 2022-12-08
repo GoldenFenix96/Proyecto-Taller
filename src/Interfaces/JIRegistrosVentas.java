@@ -161,6 +161,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
         LblFecha1.setText("Clientes:");
         jPanel1.add(LblFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
+        cmbClientes.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jPanel1.add(cmbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 65, 190, 25));
 
         LblFecha4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
@@ -188,6 +189,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
         jPanel1.add(cmbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 65, 170, 25));
 
         btnBuscarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        btnBuscarProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProdActionPerformed(evt);
@@ -213,6 +215,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
         jPanel1.add(cmbImportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 140, 25));
 
         btnBuscarImporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        btnBuscarImporte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarImporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarImporteActionPerformed(evt);
@@ -239,6 +242,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
         jPanel1.add(ImprimirFec, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 125, 32, 32));
 
         btnBuscarFec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        btnBuscarFec.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarFec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarFecActionPerformed(evt);
@@ -247,6 +251,7 @@ public class JIRegistrosVentas extends javax.swing.JInternalFrame {
         jPanel1.add(btnBuscarFec, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 125, 32, 32));
 
         btnBuscarClie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
+        btnBuscarClie.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscarClie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarClieActionPerformed(evt);
