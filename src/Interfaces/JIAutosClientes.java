@@ -102,8 +102,8 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cientifico:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, 30));
+        jLabel2.setText("Clientes:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,8 +112,8 @@ public class JIAutosClientes extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Proyecto:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, 30));
+        jLabel4.setText("Autos:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, 30));
 
         tblAutoCli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
